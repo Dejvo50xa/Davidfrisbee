@@ -1,723 +1,458 @@
 import { useState, useEffect, useRef } from "react";
 
+// ── DATA ──────────────────────────────────────────────────────────────────────
+
 const TEAMS = [
-  { name: "Rhino Slam!", note: "US Champions 2024", country: "🇺🇸", years: "2024" },
-  { name: "Gentle", note: "Belgian Club", country: "🇧🇪", years: "" },
-  { name: "Chupacabras", note: "Czech Club", country: "🇨🇿", years: "" },
-  { name: "Fuj", note: "Czech Club", country: "🇨🇿", years: "" },
-  { name: "3sb", note: "Czech Club", country: "🇨🇿", years: "" },
-  { name: "Czech Open", note: "National Team", country: "🇨🇿", years: "2015 · 2019 · 2023" },
-  { name: "Czech Mixed", note: "National Team", country: "🇨🇿", years: "2016 · 2026" },
+  { name: "Rhino Slam!", country: "United States", years: "2024", note: "US National Champions" },
+  { name: "Gentle", country: "Belgium", years: "", note: "Belgian Elite Club" },
+  { name: "Chupacabras", country: "Czech Republic", years: "", note: "Czech Elite Club" },
+  { name: "Fuj", country: "Czech Republic", years: "", note: "Czech Elite Club" },
+  { name: "3sb", country: "Czech Republic", years: "", note: "Czech Elite Club" },
+  { name: "Czech Open", country: "Czech Republic", years: "2015 · 2019 · 2023", note: "National Team" },
+  { name: "Czech Mixed", country: "Czech Republic", years: "2016 · 2026", note: "National Team" },
 ];
 
 const ACHIEVEMENTS = [
-  {
-    medal: "🥉",
-    title: "World Beach Ultimate Championship",
-    detail: "Bronze Medal — World Stage",
-    year: "Beach Worlds",
-  },
-  {
-    medal: "🥈",
-    title: "Windmill Windup",
-    detail: "Silver Medal — Amsterdam",
-    year: "Windmill",
-  },
-  {
-    medal: "🥉",
-    title: "Windmill Windup ×2",
-    detail: "Two Bronze Medals — Amsterdam",
-    year: "Windmill",
-  },
-  {
-    medal: "🏆",
-    title: "Czech National Championships",
-    detail: "Multiple National Titles",
-    year: "Czech",
-  },
-  {
-    medal: "©",
-    title: "Club Captain — 5 Years",
-    detail: "Led European campaign roster",
-    year: "5 Seasons",
-  },
-  {
-    medal: "🌍",
-    title: "WUCC 2025",
-    detail: "World Ultimate Club Championships — August",
-    year: "2025",
-  },
+  { num: "01", title: "World Beach Ultimate Championship", detail: "Bronze Medal" },
+  { num: "02", title: "Windmill Windup Amsterdam", detail: "Silver Medal" },
+  { num: "03", title: "Windmill Windup Amsterdam", detail: "Two Bronze Medals" },
+  { num: "04", title: "Czech National Championships", detail: "Multiple National Titles" },
+  { num: "05", title: "Club Captain", detail: "Five Consecutive Seasons" },
+  { num: "06", title: "WUCC 2025", detail: "World Ultimate Club Championships" },
 ];
 
-const NAV_LINKS = ["Career", "Teams", "Achievements", "WUCC 2025"];
+// ── GLOBE CANVAS ──────────────────────────────────────────────────────────────
 
-function useInView(threshold = 0.12) {
+function Globe() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let animId;
+    let t = 0;
+
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    const R = () => canvas.width < canvas.height ? canvas.width * 0.38 : canvas.height * 0.38;
+
+    // Generate sphere mesh points
+    const LAT = 18, LON = 24;
+    const meshLines = [];
+    for (let i = 0; i <= LAT; i++) {
+      const phi = (i / LAT) * Math.PI;
+      const pts = [];
+      for (let j = 0; j <= LON * 2; j++) {
+        const theta = (j / (LON * 2)) * Math.PI * 2;
+        pts.push({ phi, theta });
+      }
+      meshLines.push(pts);
+    }
+    for (let j = 0; j <= LON; j++) {
+      const theta = (j / LON) * Math.PI * 2;
+      const pts = [];
+      for (let i = 0; i <= LAT * 2; i++) {
+        const phi = (i / (LAT * 2)) * Math.PI;
+        pts.push({ phi, theta });
+      }
+      meshLines.push(pts);
+    }
+
+    // Stars
+    const STARS = Array.from({ length: 200 }, () => ({
+      x: Math.random(),
+      y: Math.random(),
+      r: Math.random() * 1.2 + 0.2,
+      a: Math.random() * 0.7 + 0.1,
+    }));
+
+    // Particles on sphere surface
+    const PARTICLES = Array.from({ length: 60 }, () => ({
+      phi: Math.random() * Math.PI,
+      theta: Math.random() * Math.PI * 2,
+      r: Math.random() * 1.5 + 0.5,
+    }));
+
+    function project(phi, theta, rot, cx, cy, radius) {
+      const x = Math.sin(phi) * Math.cos(theta + rot);
+      const y = Math.cos(phi);
+      const z = Math.sin(phi) * Math.sin(theta + rot);
+      return { x: cx + x * radius, y: cy - y * radius, z };
+    }
+
+    function draw() {
+      const w = canvas.width, h = canvas.height;
+      const cx = w / 2, cy = h / 2;
+      const radius = R();
+      t += 0.003;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Stars
+      STARS.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x * w, s.y * h, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255," + s.a + ")";
+        ctx.fill();
+      });
+
+      // Diagonal line
+      ctx.save();
+      ctx.strokeStyle = "rgba(255,255,255,0.15)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(cx - radius * 1.8, cy + radius * 1.2);
+      ctx.lineTo(cx + radius * 1.4, cy - radius * 1.5);
+      ctx.stroke();
+      ctx.restore();
+
+      // Outer rings
+      for (let ring = 0; ring < 2; ring++) {
+        const rr = radius * (1.15 + ring * 0.12);
+        ctx.beginPath();
+        ctx.arc(cx, cy, rr, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(255,255,255,0.04)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      // Sphere mesh
+      meshLines.forEach(pts => {
+        ctx.beginPath();
+        let started = false;
+        pts.forEach(({ phi, theta }) => {
+          const p = project(phi, theta, t, cx, cy, radius);
+          if (p.z >= -0.1) {
+            const alpha = Math.max(0, (p.z + 0.1) / 1.1) * 0.35;
+            if (!started) {
+              ctx.moveTo(p.x, p.y);
+              started = true;
+            } else {
+              ctx.lineTo(p.x, p.y);
+            }
+          } else {
+            if (started) {
+              ctx.strokeStyle = "rgba(180,200,255,0.18)";
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+              ctx.beginPath();
+              started = false;
+            }
+          }
+        });
+        if (started) {
+          ctx.strokeStyle = "rgba(180,200,255,0.18)";
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      });
+
+      // Particles
+      PARTICLES.forEach(p => {
+        const proj = project(p.phi, p.theta, t, cx, cy, radius);
+        if (proj.z > 0) {
+          ctx.beginPath();
+          ctx.arc(proj.x, proj.y, p.r * proj.z, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(255,255,255," + (proj.z * 0.8) + ")";
+          ctx.fill();
+        }
+      });
+
+      // Convergence lines at top of globe (like Pendle)
+      const topProj = project(0, 0, t, cx, cy, radius);
+      for (let i = 0; i < 5; i++) {
+        const angle = (-0.3 + i * 0.15);
+        ctx.beginPath();
+        ctx.moveTo(topProj.x, topProj.y);
+        ctx.lineTo(cx + Math.sin(angle) * radius * 1.6, cy - radius * 1.5);
+        ctx.strokeStyle = "rgba(255,255,255," + (0.06 - i * 0.01) + ")";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    draw();
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+    />
+  );
+}
+
+// ── HOOKS ─────────────────────────────────────────────────────────────────────
+
+function useInView(threshold = 0.1) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold }
-    );
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) setVisible(true);
+    }, { threshold });
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
   return [ref, visible];
 }
 
-function Reveal({ children, delay = 0, className = "" }) {
+function Fade({ children, delay = 0 }) {
   const [ref, visible] = useInView();
   return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(28px)",
-        transition: `opacity 0.75s ${delay}s ease, transform 0.75s ${delay}s ease`,
-      }}
-    >
+    <div ref={ref} style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateY(0)" : "translateY(20px)",
+      transition: "opacity 0.9s " + delay + "s ease, transform 0.9s " + delay + "s ease",
+    }}>
       {children}
     </div>
   );
 }
 
-function DiscIcon({ size = 40, spinning = false }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 40 40"
-      style={spinning ? { animation: "spin 10s linear infinite" } : {}}
-    >
-      <ellipse cx="20" cy="20" rx="18" ry="18" fill="none" stroke="#D94F1E" strokeWidth="1.5" />
-      <ellipse cx="20" cy="20" rx="18" ry="7" fill="none" stroke="#D94F1E" strokeWidth="1" opacity="0.45" />
-      <ellipse cx="20" cy="20" rx="4" ry="4" fill="#D94F1E" opacity="0.7" />
-    </svg>
-  );
-}
+// ── APP ───────────────────────────────────────────────────────────────────────
 
-export default function DavidUltimate() {
-  const [activeSection, setActiveSection] = useState("Career");
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function App() {
+  const [hoveredTeam, setHoveredTeam] = useState(null);
 
   useEffect(() => {
     const style = document.createElement("style");
-    style.textContent = `
-      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
-      @keyframes spin { to { transform: rotate(360deg); } }
-      @keyframes fade-in { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-      * { margin:0; padding:0; box-sizing:border-box; }
-      html { scroll-behavior: smooth; }
-      body { background:#F7F4EE; }
-      ::-webkit-scrollbar { width:4px; }
-      ::-webkit-scrollbar-track { background:#F7F4EE; }
-      ::-webkit-scrollbar-thumb { background:#D94F1E; border-radius:2px; }
-    `;
+    style.textContent = [
+      "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');",
+      "*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }",
+      "html { scroll-behavior:smooth; }",
+      "body { background:#000; color:#fff; -webkit-font-smoothing:antialiased; }",
+      "a { text-decoration:none; color:inherit; }",
+      "::-webkit-scrollbar { width:3px; }",
+      "::-webkit-scrollbar-track { background:#000; }",
+      "::-webkit-scrollbar-thumb { background:#4466ff; }",
+    ].join("\n");
     document.head.appendChild(style);
     return () => document.head.removeChild(style);
   }, []);
 
-  const s = styles;
-
   return (
-    <div style={s.root}>
+    <div style={{ background: "#000", color: "#fff", fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
 
       {/* ── NAV ── */}
-      <nav style={s.nav}>
-        <span style={s.navLogo}>D · V</span>
-        <ul style={s.navLinks}>
-          {NAV_LINKS.map((l) => (
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.4rem 3rem", background: "rgba(0,0,0,0.6)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+        <span style={{ fontSize: "1rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase" }}>David</span>
+        <ul style={{ display: "flex", gap: "2.5rem", listStyle: "none" }}>
+          {["Career", "Teams", "Achievements", "WUCC 2025"].map(l => (
             <li key={l}>
-              <a href={`#${l.replace(" ", "")}`} style={s.navLink}
-                onMouseEnter={e => e.target.style.color = "#D94F1E"}
-                onMouseLeave={e => e.target.style.color = "#6b6560"}
+              <a href={"#" + l.replace(/\s/g, "")} style={{ fontSize: "0.82rem", fontWeight: 300, color: "rgba(255,255,255,0.6)", letterSpacing: "0.04em", transition: "color 0.2s" }}
+                onMouseEnter={e => e.target.style.color = "#fff"}
+                onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.6)"}
               >{l}</a>
             </li>
           ))}
         </ul>
-        <div style={s.navDisc}><DiscIcon size={28} spinning /></div>
+        <div style={{ display: "flex", gap: "0.75rem" }}>
+          <a href="#WUCC2025" style={{ fontSize: "0.75rem", fontWeight: 400, letterSpacing: "0.08em", padding: "0.5rem 1.2rem", border: "1px solid rgba(100,150,255,0.6)", color: "rgba(150,190,255,0.9)", borderRadius: "4px", transition: "all 0.2s" }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(100,150,255,0.1)"; e.currentTarget.style.borderColor = "rgba(100,150,255,1)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(100,150,255,0.6)"; }}
+          >WUCC 2025</a>
+          <a href="#Teams" style={{ fontSize: "0.75rem", fontWeight: 400, letterSpacing: "0.08em", padding: "0.5rem 1.2rem", border: "1px solid rgba(255,255,255,0.25)", color: "rgba(255,255,255,0.8)", borderRadius: "4px", transition: "all 0.2s" }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)"; }}
+          >All Teams</a>
+        </div>
       </nav>
 
       {/* ── HERO ── */}
-      <section style={s.hero}>
-        <div style={s.heroLeft}>
-          <p style={s.heroEyebrow}>Ultimate Frisbee · Czech Republic</p>
-          <h1 style={s.heroName}>
-            <span style={s.heroNameLine1}>David</span>
-            <span style={s.heroNameLine2}>16 Years<br />on the Field.</span>
-          </h1>
-          <p style={s.heroSub}>
-            Athlete. Captain. Competitor. From Czech club fields to US champions, Belgian squads, and World Championships.
+      <section style={{ position: "relative", width: "100%", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+        <Globe />
+        <div style={{ position: "relative", zIndex: 2, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.2rem" }}>
+          <p style={{ fontSize: "0.72rem", fontWeight: 400, letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", animation: "fade-in 1s 0.2s both" }}>
+            Ultimate Frisbee · Czech Republic
           </p>
-          <div style={s.heroBadges}>
-            <span style={s.badge}>WUCC 2025</span>
-            <span style={s.badge}>Czech National Team</span>
-            <span style={s.badge}>Rhino Slam! 2024</span>
+          <h1 style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.01em", animation: "fade-in 1s 0.4s both" }}>
+            <span style={{ color: "#6699ff" }}>Elite</span>
+            {" "}Player
+          </h1>
+          <p style={{ fontSize: "clamp(0.9rem, 1.5vw, 1.1rem)", fontWeight: 300, color: "rgba(255,255,255,0.55)", letterSpacing: "0.02em", animation: "fade-in 1s 0.6s both" }}>
+            16 years of elite ultimate frisbee across four countries
+          </p>
+          <div style={{ display: "flex", gap: "1.5rem", marginTop: "0.8rem", animation: "fade-in 1s 0.8s both" }}>
+            {[["16", "Years"], ["7+", "Teams"], ["5×", "Captain"], ["3", "World Events"]].map(([v, l]) => (
+              <div key={l} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.2rem" }}>
+                <span style={{ fontSize: "1.6rem", fontWeight: 300, color: "#fff", lineHeight: 1 }}>{v}</span>
+                <span style={{ fontSize: "0.6rem", fontWeight: 400, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>{l}</span>
+              </div>
+            ))}
           </div>
         </div>
-        <div style={s.heroRight}>
-          <div style={s.heroAccentBox}>
-            <div style={s.heroAccentInner}>
-              <span style={s.heroAccentNum}>16</span>
-              <span style={s.heroAccentLabel}>Years of Elite Play</span>
+        <div style={{ position: "absolute", bottom: "2.5rem", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem", animation: "fade-in 1s 1.2s both", zIndex: 2 }}>
+          <span style={{ fontSize: "0.6rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)" }}>Scroll</span>
+          <div style={{ width: 1, height: 32, background: "linear-gradient(to bottom, rgba(255,255,255,0.3), transparent)" }} />
+        </div>
+        <style>{`
+          @keyframes fade-in { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+        `}</style>
+      </section>
+
+      {/* ── CAREER ── */}
+      <section id="Career" style={{ padding: "7rem 3rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <Fade>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "4rem" }}>
+              <span style={{ fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(100,150,255,0.7)" }}>01</span>
+              <span style={{ width: 32, height: 1, background: "rgba(100,150,255,0.4)", display: "block" }} />
+              <span style={{ fontSize: "0.72rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>Career</span>
             </div>
-          </div>
-          <div style={s.heroStatRow}>
-            {[["7+", "Teams"], ["3", "World Events"], ["5×", "Captain"]].map(([v, l]) => (
-              <div key={l} style={s.heroStat}>
-                <span style={s.heroStatVal}>{v}</span>
-                <span style={s.heroStatLabel}>{l}</span>
+          </Fade>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "start" }}>
+            <Fade delay={0.05}>
+              <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 300, lineHeight: 1.2, letterSpacing: "-0.01em", color: "#fff", marginBottom: "1.5rem" }}>
+                <span style={{ color: "#6699ff" }}>Sixteen years</span> of elite competition across four countries.
+              </h2>
+              <p style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.85 }}>
+                Three appearances with the Czech Open national team (2015, 2019, 2023). Two with Czech Mixed (2016, 2026). A season with Rhino Slam! — 2024 US national champions. Currently one of the most experienced players on a WUCC 2025-bound squad, holding O-line strategy and D-line poaching responsibility.
+              </p>
+            </Fade>
+            <Fade delay={0.1}>
+              <div style={{ display: "flex", flexDirection: "column", border: "1px solid rgba(255,255,255,0.06)", borderRadius: "8px", overflow: "hidden" }}>
+                {[
+                  ["2009", "Began competitive ultimate frisbee"],
+                  ["2015", "Czech Open National Team — debut"],
+                  ["2016", "Czech Mixed National Team"],
+                  ["2019", "Czech Open — second appearance"],
+                  ["2020", "Windmill Windup medals (silver + 2x bronze)"],
+                  ["2021", "World Beach Ultimate — bronze medal"],
+                  ["2023", "Czech Open — third appearance"],
+                  ["2024", "Rhino Slam! — US National Champions"],
+                  ["2025", "WUCC — World Club Championships"],
+                ].map(([year, event], i) => (
+                  <div key={year} style={{ display: "flex", alignItems: "center", gap: "1.5rem", padding: "0.85rem 1.5rem", borderBottom: "1px solid rgba(255,255,255,0.04)", background: i % 2 === 0 ? "rgba(255,255,255,0.01)" : "transparent" }}>
+                    <span style={{ fontFamily: "monospace", fontSize: "0.7rem", color: "#6699ff", minWidth: 36 }}>{year}</span>
+                    <span style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.6)" }}>{event}</span>
+                  </div>
+                ))}
               </div>
+            </Fade>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TEAMS ── */}
+      <section id="Teams" style={{ padding: "7rem 3rem", borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.01)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <Fade>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "4rem" }}>
+              <span style={{ fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(100,150,255,0.7)" }}>02</span>
+              <span style={{ width: 32, height: 1, background: "rgba(100,150,255,0.4)", display: "block" }} />
+              <span style={{ fontSize: "0.72rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>Teams</span>
+            </div>
+          </Fade>
+          <div>
+            {TEAMS.map((t, i) => (
+              <Fade key={t.name} delay={i * 0.05}>
+                <div
+                  style={{ display: "grid", gridTemplateColumns: "2rem 1fr 1fr 1fr auto", gap: "1.5rem", alignItems: "center", padding: "1.2rem 0", borderBottom: "1px solid rgba(255,255,255,0.05)", borderTop: i === 0 ? "1px solid rgba(255,255,255,0.05)" : "none", transition: "all 0.25s", cursor: "default", opacity: hoveredTeam === null ? 1 : hoveredTeam === t.name ? 1 : 0.2 }}
+                  onMouseEnter={() => setHoveredTeam(t.name)}
+                  onMouseLeave={() => setHoveredTeam(null)}
+                >
+                  <span style={{ fontFamily: "monospace", fontSize: "0.6rem", color: "rgba(100,150,255,0.5)" }}>{String(i + 1).padStart(2, "0")}</span>
+                  <span style={{ fontSize: "1rem", fontWeight: 400, color: "#fff" }}>{t.name}</span>
+                  <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.35)" }}>{t.country}</span>
+                  <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.25)", fontStyle: "italic" }}>{t.note}</span>
+                  <span style={{ fontFamily: "monospace", fontSize: "0.65rem", color: "#6699ff", textAlign: "right" }}>{t.years || "—"}</span>
+                </div>
+              </Fade>
             ))}
           </div>
         </div>
       </section>
 
-      <div style={s.ruleLine} />
-
-      {/* ── CAREER OVERVIEW ── */}
-      <section id="Career" style={s.section}>
-        <Reveal>
-          <p style={s.sectionLabel}>Career Overview</p>
-          <h2 style={s.sectionTitle}>The Journey</h2>
-        </Reveal>
-        <div style={s.careerGrid}>
-          <Reveal delay={0.05}>
-            <p style={s.bodyText}>
-              Sixteen years of elite ultimate frisbee across club, national, and international competition. Started in the Czech club scene before breaking onto national and European stages — ultimately reaching the game's highest levels alongside US champions and world-class competition.
-            </p>
-            <p style={s.bodyText} style={{...s.bodyText, marginTop: "1rem"}}>
-              Three appearances with the Czech national open team (2015, 2019, 2023) and two with the Czech mixed team (2016, 2026) mark a career of consistent selection at the top level. Currently one of the most experienced players on a WUCC 2025-bound squad, holding O-line strategy and D-line smart poaching responsibility.
-            </p>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <div style={s.timelineBox}>
-              {[
-                ["2009", "Started competitive ultimate"],
-                ["2015", "Czech Open National Team debut"],
-                ["2016", "Czech Mixed National Team"],
-                ["2019", "Czech Open — second call-up"],
-                ["2024", "Rhino Slam! — US Champions"],
-                ["2025", "WUCC — World Club Champs"],
-              ].map(([year, event]) => (
-                <div key={year} style={s.timelineRow}>
-                  <span style={s.timelineYear}>{year}</span>
-                  <span style={s.timelineDot} />
-                  <span style={s.timelineEvent}>{event}</span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <div style={s.ruleLine} />
-
-      {/* ── TEAMS ── */}
-      <section id="Teams" style={{ ...s.section, background: "#111010" }}>
-        <Reveal>
-          <p style={{ ...s.sectionLabel, color: "#D94F1E" }}>Clubs & Nations</p>
-          <h2 style={{ ...s.sectionTitle, color: "#F7F4EE" }}>Teams Played For</h2>
-        </Reveal>
-        <div style={s.teamsGrid}>
-          {TEAMS.map((t, i) => (
-            <Reveal key={t.name} delay={i * 0.07}>
-              <div
-                style={s.teamCard}
-                onMouseEnter={e => e.currentTarget.style.borderColor = "#D94F1E"}
-                onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}
-              >
-                <span style={s.teamFlag}>{t.country}</span>
-                <h3 style={s.teamName}>{t.name}</h3>
-                <p style={s.teamNote}>{t.note}</p>
-                {t.years && <p style={s.teamYears}>{t.years}</p>}
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <div style={s.ruleLine} />
-
       {/* ── ACHIEVEMENTS ── */}
-      <section id="Achievements" style={s.section}>
-        <Reveal>
-          <p style={s.sectionLabel}>On the Podium</p>
-          <h2 style={s.sectionTitle}>Achievements</h2>
-        </Reveal>
-        <div style={s.achieveGrid}>
-          {ACHIEVEMENTS.map((a, i) => (
-            <Reveal key={a.title} delay={i * 0.08}>
-              <div
-                style={s.achieveCard}
-                onMouseEnter={e => {
-                  e.currentTarget.style.background = "#D94F1E";
-                  e.currentTarget.querySelector(".achieve-title").style.color = "#fff";
-                  e.currentTarget.querySelector(".achieve-detail").style.color = "rgba(255,255,255,0.75)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.background = "transparent";
-                  e.currentTarget.querySelector(".achieve-title").style.color = "#111010";
-                  e.currentTarget.querySelector(".achieve-detail").style.color = "#6b6560";
-                }}
-              >
-                <span style={s.achieveMedal}>{a.medal}</span>
-                <h3 className="achieve-title" style={s.achieveTitle}>{a.title}</h3>
-                <p className="achieve-detail" style={s.achieveDetail}>{a.detail}</p>
-                <span style={s.achieveYear}>{a.year}</span>
-              </div>
-            </Reveal>
-          ))}
+      <section id="Achievements" style={{ padding: "7rem 3rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <Fade>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "4rem" }}>
+              <span style={{ fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(100,150,255,0.7)" }}>03</span>
+              <span style={{ width: 32, height: 1, background: "rgba(100,150,255,0.4)", display: "block" }} />
+              <span style={{ fontSize: "0.72rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>Achievements</span>
+            </div>
+          </Fade>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "rgba(255,255,255,0.06)" }}>
+            {ACHIEVEMENTS.map((a, i) => (
+              <Fade key={a.num} delay={i * 0.07}>
+                <div
+                  style={{ padding: "2.5rem 2rem", background: "#000", transition: "background 0.25s" }}
+                  onMouseEnter={e => e.currentTarget.style.background = "rgba(100,150,255,0.07)"}
+                  onMouseLeave={e => e.currentTarget.style.background = "#000"}
+                >
+                  <span style={{ display: "block", fontFamily: "monospace", fontSize: "0.6rem", color: "#6699ff", marginBottom: "1.5rem", letterSpacing: "0.1em" }}>{a.num}</span>
+                  <h3 style={{ fontSize: "0.95rem", fontWeight: 400, color: "#fff", lineHeight: 1.4, marginBottom: "0.5rem" }}>{a.title}</h3>
+                  <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.35)", fontStyle: "italic" }}>{a.detail}</p>
+                </div>
+              </Fade>
+            ))}
+          </div>
         </div>
       </section>
-
-      <div style={s.ruleLine} />
 
       {/* ── WUCC ── */}
-      <section id="WUCC2025" style={{ ...s.section, background: "#1a1a1a" }}>
-        <div style={s.wuccInner}>
-          <Reveal>
-            <p style={{ ...s.sectionLabel, color: "#D94F1E" }}>Next Chapter</p>
-            <h2 style={{ ...s.sectionTitle, color: "#F7F4EE", fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
-              WUCC<br />2025
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p style={{ ...s.bodyText, color: "rgba(247,244,238,0.7)", maxWidth: 520, marginTop: "1.5rem" }}>
-              The World Ultimate Club Championships — August 2025. The peak of club competition globally. After 16 years building toward moments like this, David enters as one of the most experienced players on a squad that qualified and is ready to compete.
-            </p>
-            <div style={s.wuccRoles}>
-              {[
-                ["O-Line", "Primary system architect. Spread as the core identity."],
-                ["D-Line", "Smart poaching — reading lanes before the disc moves."],
-                ["Leadership", "One of seven in the leadership group. Mentor and anchor."],
-              ].map(([role, desc]) => (
-                <div key={role} style={s.wuccRole}>
-                  <span style={s.wuccRoleTitle}>{role}</span>
-                  <span style={s.wuccRoleDesc}>{desc}</span>
-                </div>
-              ))}
+      <section id="WUCC2025" style={{ padding: "7rem 3rem", borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(100,150,255,0.02)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <Fade>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "4rem" }}>
+              <span style={{ fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(100,150,255,0.7)" }}>04</span>
+              <span style={{ width: 32, height: 1, background: "rgba(100,150,255,0.4)", display: "block" }} />
+              <span style={{ fontSize: "0.72rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>WUCC 2025</span>
             </div>
-          </Reveal>
+          </Fade>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "start" }}>
+            <Fade delay={0.05}>
+              <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 300, lineHeight: 1.2, letterSpacing: "-0.01em", color: "#fff", marginBottom: "1.5rem" }}>
+                The <span style={{ color: "#6699ff" }}>World Stage.</span><br />August 2025.
+              </h2>
+              <p style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.85 }}>
+                The World Ultimate Club Championships — the pinnacle of club competition globally. David enters as one of the most experienced players on a squad that has qualified and is ready to compete at the highest level.
+              </p>
+            </Fade>
+            <Fade delay={0.1}>
+              <div style={{ border: "1px solid rgba(100,150,255,0.15)", borderRadius: "8px", overflow: "hidden" }}>
+                {[
+                  { label: "O-Line", text: "Primary system architect. Spread as the core offensive identity, vertical as emergency fallback." },
+                  { label: "D-Line", text: "Smart poaching — reading passing lanes before the disc moves. Turnovers through anticipation." },
+                  { label: "Leadership", text: "One of seven in the leadership group. Mentor and institutional memory for the squad." },
+                ].map(({ label, text }, i) => (
+                  <div key={label} style={{ display: "grid", gridTemplateColumns: "90px 1fr", gap: "1.5rem", padding: "1.5rem", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.05)" : "none", alignItems: "start" }}>
+                    <span style={{ fontSize: "0.65rem", fontWeight: 400, letterSpacing: "0.15em", textTransform: "uppercase", color: "#6699ff", paddingTop: "0.1rem" }}>{label}</span>
+                    <span style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.7 }}>{text}</span>
+                  </div>
+                ))}
+                <div style={{ padding: "1rem 1.5rem", background: "rgba(100,150,255,0.06)", borderTop: "1px solid rgba(100,150,255,0.1)" }}>
+                  <span style={{ fontFamily: "monospace", fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(100,150,255,0.7)" }}>Czech Republic · August 2025 · World Stage</span>
+                </div>
+              </div>
+            </Fade>
+          </div>
         </div>
-        <Reveal delay={0.2}>
-          <div style={s.wuccBigNum}>2025</div>
-        </Reveal>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={s.footer}>
-        <span style={s.footerLogo}>D · V</span>
-        <span style={s.footerNote}>16 Years · Czech Republic · World Stage</span>
-        <DiscIcon size={24} spinning />
+      <footer style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "2rem 3rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <span style={{ fontSize: "0.9rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase" }}>David</span>
+        <span style={{ fontFamily: "monospace", fontSize: "0.62rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>Ultimate Frisbee · Czech Republic · 2009 — Present</span>
+        <span style={{ fontFamily: "monospace", fontSize: "0.62rem", letterSpacing: "0.1em", color: "#6699ff" }}>WUCC 2025</span>
       </footer>
+
     </div>
   );
 }
-
-// ── STYLES ──
-const styles = {
-  root: {
-    fontFamily: "'DM Sans', sans-serif",
-    background: "#F7F4EE",
-    color: "#111010",
-    minHeight: "100vh",
-    overflowX: "hidden",
-  },
-
-  // NAV
-  nav: {
-    position: "sticky",
-    top: 0,
-    zIndex: 100,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "1.1rem 4rem",
-    background: "rgba(247,244,238,0.92)",
-    backdropFilter: "blur(12px)",
-    borderBottom: "1px solid rgba(0,0,0,0.07)",
-  },
-  navLogo: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "1.2rem",
-    fontWeight: 700,
-    letterSpacing: "0.15em",
-    color: "#D94F1E",
-  },
-  navLinks: {
-    display: "flex",
-    gap: "2.5rem",
-    listStyle: "none",
-  },
-  navLink: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.72rem",
-    letterSpacing: "0.18em",
-    textTransform: "uppercase",
-    color: "#6b6560",
-    textDecoration: "none",
-    transition: "color 0.2s",
-  },
-  navDisc: { display: "flex", alignItems: "center" },
-
-  // HERO
-  hero: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "4rem",
-    padding: "6rem 4rem 5rem",
-    alignItems: "center",
-    minHeight: "90vh",
-  },
-  heroLeft: {
-    animation: "fade-in 0.9s ease forwards",
-  },
-  heroEyebrow: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.72rem",
-    letterSpacing: "0.3em",
-    textTransform: "uppercase",
-    color: "#D94F1E",
-    marginBottom: "1.5rem",
-  },
-  heroName: {
-    fontFamily: "'Playfair Display', serif",
-    lineHeight: 1.0,
-    marginBottom: "1.8rem",
-  },
-  heroNameLine1: {
-    display: "block",
-    fontSize: "clamp(3rem, 7vw, 6rem)",
-    fontWeight: 900,
-    fontStyle: "italic",
-    color: "#111010",
-  },
-  heroNameLine2: {
-    display: "block",
-    fontSize: "clamp(1.8rem, 4vw, 3rem)",
-    fontWeight: 700,
-    color: "#D94F1E",
-    lineHeight: 1.15,
-    marginTop: "0.3rem",
-  },
-  heroSub: {
-    fontSize: "1rem",
-    fontWeight: 300,
-    color: "#6b6560",
-    lineHeight: 1.75,
-    maxWidth: 440,
-    marginBottom: "2rem",
-  },
-  heroBadges: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "0.6rem",
-  },
-  badge: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.68rem",
-    letterSpacing: "0.12em",
-    textTransform: "uppercase",
-    padding: "0.35rem 0.85rem",
-    border: "1px solid #D94F1E",
-    color: "#D94F1E",
-    background: "transparent",
-  },
-  heroRight: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.5rem",
-    alignItems: "flex-end",
-  },
-  heroAccentBox: {
-    width: "100%",
-    maxWidth: 340,
-    aspectRatio: "1",
-    border: "1px solid rgba(0,0,0,0.1)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: "#111010",
-    position: "relative",
-    overflow: "hidden",
-  },
-  heroAccentInner: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "0.5rem",
-  },
-  heroAccentNum: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(5rem, 10vw, 8rem)",
-    fontWeight: 900,
-    color: "#D94F1E",
-    lineHeight: 1,
-  },
-  heroAccentLabel: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.7rem",
-    letterSpacing: "0.25em",
-    textTransform: "uppercase",
-    color: "rgba(247,244,238,0.5)",
-  },
-  heroStatRow: {
-    display: "flex",
-    gap: "2rem",
-    width: "100%",
-    maxWidth: 340,
-    justifyContent: "space-between",
-  },
-  heroStat: { display: "flex", flexDirection: "column", gap: "0.2rem" },
-  heroStatVal: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "1.8rem",
-    fontWeight: 700,
-    color: "#111010",
-    lineHeight: 1,
-  },
-  heroStatLabel: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.62rem",
-    letterSpacing: "0.2em",
-    textTransform: "uppercase",
-    color: "#9b9590",
-  },
-
-  // RULE
-  ruleLine: {
-    height: "1px",
-    background: "linear-gradient(to right, transparent, rgba(0,0,0,0.12), transparent)",
-    margin: "0 4rem",
-  },
-
-  // SECTIONS
-  section: {
-    padding: "6rem 4rem",
-  },
-  sectionLabel: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.7rem",
-    letterSpacing: "0.35em",
-    textTransform: "uppercase",
-    color: "#D94F1E",
-    marginBottom: "0.6rem",
-  },
-  sectionTitle: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(2rem, 4vw, 3rem)",
-    fontWeight: 700,
-    color: "#111010",
-    marginBottom: "3rem",
-    lineHeight: 1.1,
-  },
-  bodyText: {
-    fontSize: "1rem",
-    fontWeight: 300,
-    color: "#4a4540",
-    lineHeight: 1.8,
-  },
-
-  // CAREER
-  careerGrid: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "5rem",
-    alignItems: "start",
-  },
-  timelineBox: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0",
-    borderLeft: "1px solid rgba(217,79,30,0.25)",
-    paddingLeft: "1.5rem",
-  },
-  timelineRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "1rem",
-    padding: "0.8rem 0",
-    borderBottom: "1px solid rgba(0,0,0,0.05)",
-    position: "relative",
-  },
-  timelineYear: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.72rem",
-    letterSpacing: "0.1em",
-    color: "#D94F1E",
-    minWidth: 36,
-  },
-  timelineDot: {
-    width: 6,
-    height: 6,
-    borderRadius: "50%",
-    background: "#D94F1E",
-    flexShrink: 0,
-    position: "absolute",
-    left: -19,
-  },
-  timelineEvent: {
-    fontSize: "0.9rem",
-    color: "#4a4540",
-    fontWeight: 400,
-  },
-
-  // TEAMS
-  teamsGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-    gap: "1px",
-    background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.06)",
-    marginTop: "1rem",
-  },
-  teamCard: {
-    padding: "2rem 1.5rem",
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.3rem",
-    border: "1px solid rgba(255,255,255,0.08)",
-    background: "#1a1a1a",
-    transition: "border-color 0.25s",
-    cursor: "default",
-  },
-  teamFlag: { fontSize: "1.4rem", marginBottom: "0.4rem" },
-  teamName: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "1.2rem",
-    fontWeight: 700,
-    color: "#F7F4EE",
-    lineHeight: 1.2,
-  },
-  teamNote: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.65rem",
-    letterSpacing: "0.15em",
-    textTransform: "uppercase",
-    color: "rgba(247,244,238,0.35)",
-  },
-  teamYears: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.68rem",
-    letterSpacing: "0.08em",
-    color: "#D94F1E",
-    marginTop: "0.5rem",
-  },
-
-  // ACHIEVEMENTS
-  achieveGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-    gap: "1px",
-    background: "rgba(0,0,0,0.06)",
-  },
-  achieveCard: {
-    padding: "2.2rem 2rem",
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.4rem",
-    background: "transparent",
-    border: "1px solid rgba(0,0,0,0.07)",
-    transition: "background 0.25s",
-    cursor: "default",
-  },
-  achieveMedal: { fontSize: "1.6rem", marginBottom: "0.4rem" },
-  achieveTitle: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "1.05rem",
-    fontWeight: 700,
-    color: "#111010",
-    transition: "color 0.25s",
-    lineHeight: 1.3,
-  },
-  achieveDetail: {
-    fontSize: "0.85rem",
-    color: "#6b6560",
-    fontWeight: 300,
-    transition: "color 0.25s",
-  },
-  achieveYear: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.62rem",
-    letterSpacing: "0.15em",
-    textTransform: "uppercase",
-    color: "rgba(217,79,30,0.6)",
-    marginTop: "0.5rem",
-  },
-
-  // WUCC
-  wuccInner: {
-    maxWidth: 580,
-    position: "relative",
-    zIndex: 2,
-  },
-  wuccRoles: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0",
-    marginTop: "2.5rem",
-    borderTop: "1px solid rgba(255,255,255,0.08)",
-  },
-  wuccRole: {
-    display: "flex",
-    gap: "2rem",
-    alignItems: "baseline",
-    padding: "1rem 0",
-    borderBottom: "1px solid rgba(255,255,255,0.06)",
-  },
-  wuccRoleTitle: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.7rem",
-    letterSpacing: "0.2em",
-    textTransform: "uppercase",
-    color: "#D94F1E",
-    minWidth: 80,
-  },
-  wuccRoleDesc: {
-    fontSize: "0.9rem",
-    color: "rgba(247,244,238,0.6)",
-    fontWeight: 300,
-    lineHeight: 1.6,
-  },
-  wuccBigNum: {
-    position: "absolute",
-    right: "4rem",
-    top: "50%",
-    transform: "translateY(-50%)",
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(6rem, 14vw, 12rem)",
-    fontWeight: 900,
-    color: "rgba(255,255,255,0.03)",
-    lineHeight: 1,
-    userSelect: "none",
-    pointerEvents: "none",
-  },
-
-  // FOOTER
-  footer: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "2rem 4rem",
-    borderTop: "1px solid rgba(0,0,0,0.08)",
-    background: "#F7F4EE",
-  },
-  footerLogo: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "1rem",
-    fontWeight: 700,
-    letterSpacing: "0.15em",
-    color: "#D94F1E",
-  },
-  footerNote: {
-    fontFamily: "'DM Mono', monospace",
-    fontSize: "0.65rem",
-    letterSpacing: "0.2em",
-    textTransform: "uppercase",
-    color: "#9b9590",
-  },
-};
