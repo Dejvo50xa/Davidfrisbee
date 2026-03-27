@@ -31,6 +31,71 @@ const WBUC_PHOTOS = [
   { file: "_MG_2685.jpg", caption: "After the battle" },
 ];
 
+const MIX_PHOTOS = [
+  { file: "_MG_1453.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1456.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1459.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1462.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1486.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1503.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1518.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1522.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1533.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1539.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1551.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1554.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1561.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1564.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1783.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1901.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1921.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1938.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1945.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1971.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1975.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_1989.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2526.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2533.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2544.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2549.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2561.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2621.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2623.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2631.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2645.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2649.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2658.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2667.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2672.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2676.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_2685.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3272.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3296.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3326.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3344.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3471.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3490.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3510.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3513.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3515.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3517.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3518.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3520.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3534.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3539.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3553.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3559.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3562.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3565.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3576.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3584.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3589.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3597.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3663.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3668.jpg", caption: "Czech Mixed 2026" },
+  { file: "_MG_3674.jpg", caption: "Czech Mixed 2026" },
+];
+
 const WBUC_ROAD = [
   { stage: "Pool Play", result: "Qualified from group unbeaten" },
   { stage: "Quarterfinal", result: "Hard-fought victory" },
@@ -234,7 +299,7 @@ export default function App() {
     return () => document.head.removeChild(style);
   }, []);
 
-  const navLinks = ["Career", "Teams", "Achievements", "WBUC", "WUCC 2025"];
+  const navLinks = ["Career", "Teams", "Achievements", "WBUC", "Czech Mixed", "WUCC 2025"];
 
   return (
     <div style={{ background: "#000", color: "#fff", fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
@@ -440,10 +505,76 @@ export default function App() {
         </div>
       </section>
 
+      {/* ── CZECH MIXED ── */}
+      <section id="CzechMixed" style={{ padding: "7rem 3rem", borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(100,150,255,0.015)" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <Fade><SectionHeader num="05" label="Czech Mixed" /></Fade>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "start", marginBottom: "5rem" }}>
+            <Fade delay={0.05}>
+              <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 300, lineHeight: 1.2, color: "#fff", marginBottom: "1.5rem" }}>
+                Czech Republic<br /><span style={{ color: "#6699ff" }}>Mixed National Team.</span>
+              </h2>
+              <p style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.85 }}>
+                Two appearances in the Czech Mixed national jersey — 2016 and 2026. Representing the country at the highest level of mixed ultimate, competing internationally with some of the best players in Czech frisbee.
+              </p>
+            </Fade>
+            <Fade delay={0.1}>
+              <div style={{ border: "1px solid rgba(100,150,255,0.15)", borderRadius: "8px", overflow: "hidden" }}>
+                {[
+                  { year: "2016", detail: "First mixed national team appearance" },
+                  { year: "2026", detail: "Return to the national jersey — a decade of growth" },
+                ].map(({ year, detail }, i) => (
+                  <div key={year} style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: "1.5rem", padding: "1.5rem", borderBottom: i === 0 ? "1px solid rgba(255,255,255,0.05)" : "none", alignItems: "center" }}>
+                    <span style={{ fontFamily: "monospace", fontSize: "1.2rem", fontWeight: 300, color: "#6699ff" }}>{year}</span>
+                    <span style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.7 }}>{detail}</span>
+                  </div>
+                ))}
+                <div style={{ padding: "1rem 1.5rem", background: "rgba(100,150,255,0.06)", borderTop: "1px solid rgba(100,150,255,0.1)" }}>
+                  <span style={{ fontFamily: "monospace", fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(100,150,255,0.7)" }}>Czech Republic · Mixed National Team · 2016 · 2026</span>
+                </div>
+              </div>
+            </Fade>
+          </div>
+
+          <Fade delay={0.1}>
+            <p style={{ fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: "1.5rem" }}>Gallery — click to expand</p>
+          </Fade>
+
+          <div style={{ columnCount: 4, columnGap: "4px" }}>
+            {MIX_PHOTOS.map((photo) => (
+              <div key={photo.file} style={{ breakInside: "avoid", marginBottom: "4px" }}>
+                <div
+                  onClick={() => setLightbox(photo)}
+                  style={{ position: "relative", overflow: "hidden", cursor: "zoom-in" }}
+                  onMouseEnter={e => {
+                    e.currentTarget.querySelector("img").style.transform = "scale(1.04)";
+                    e.currentTarget.querySelector(".cap").style.opacity = "1";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.querySelector("img").style.transform = "scale(1)";
+                    e.currentTarget.querySelector(".cap").style.opacity = "0";
+                  }}
+                >
+                  <img
+                    src={"/" + photo.file}
+                    alt={photo.caption}
+                    style={{ width: "100%", display: "block", transition: "transform 0.5s ease" }}
+                  />
+                  <div className="cap" style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "0.75rem", background: "linear-gradient(to top, rgba(0,0,0,0.7), transparent)", opacity: 0, transition: "opacity 0.3s" }}>
+                    <p style={{ fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.8)" }}>{photo.caption}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── WUCC ── */}
       <section id="WUCC2025" style={{ padding: "7rem 3rem", borderTop: "1px solid rgba(255,255,255,0.06)", background: "rgba(100,150,255,0.02)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <Fade><SectionHeader num="05" label="WUCC 2025" /></Fade>
+          <Fade><SectionHeader num="06" label="WUCC 2025" /></Fade>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "start" }}>
             <Fade delay={0.05}>
               <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 300, lineHeight: 1.2, color: "#fff", marginBottom: "1.5rem" }}>
