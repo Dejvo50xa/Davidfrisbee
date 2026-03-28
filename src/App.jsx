@@ -183,6 +183,34 @@ const AFTER_PHOTOS = [
   // e.g. { file: "after-photo-1.jpg", caption: "Portimão · Nov 2025" },
 ];
 
+// Saddest moments — the semifinal loss and its aftermath
+const SADDEST_PHOTOS = [
+  { file: "_MG_3323.jpg", caption: "Australia celebrates · a Czech player falls to the sand" },
+  { file: "_MG_3324.jpg", caption: "Head down · the weight of it" },
+  { file: "_MG_3326.jpg", caption: "Two teammates · one moment · no words needed" },
+  { file: "_MG_3334.jpg", caption: "Walking off together" },
+  { file: "_MG_3565.jpg", caption: "Wiping tears" },
+  { file: "_MG_2474.jpg", caption: "Head down · the disc drifting away" },
+  { file: "_MG_3344.jpg", caption: "Alone with it" },
+  { file: "_MG_3583.jpg", caption: "Walking off · surrounded by the other team" },
+];
+
+// Most joyful moments — the bronze win and its aftermath
+const JOYFUL_PHOTOS = [
+  { file: "_MG_3539.jpg", caption: "Pure joy · fists clenched" },
+  { file: "_MG_2203.jpg", caption: "Group hug · the moment it hit" },
+  { file: "_MG_2205.jpg", caption: "Screaming together" },
+  { file: "_MG_2210.jpg", caption: "The embrace" },
+  { file: "_MG_2216.jpg", caption: "Holding tight · bronze is ours" },
+  { file: "_MG_3551.jpg", caption: "Overwhelmed" },
+  { file: "_MG_3553.jpg", caption: "Not letting go" },
+  { file: "_MG_3559.jpg", caption: "The quiet hug" },
+  { file: "_MG_3593.jpg", caption: "Walking the spirit line · tears and smiles" },
+  { file: "_MG_3696.jpg", caption: "Medals up · four women, one dream" },
+  { file: "_MG_3706.jpg", caption: "Team selfie · bronze around every neck" },
+  { file: "_MG_3625.jpg", caption: "Official · World Beach Ultimate Championship · Bronze" },
+];
+
 // ── TRANSLATIONS ──────────────────────────────────────────────────────────────
 
 const T = {
@@ -200,6 +228,13 @@ const T = {
     after_moment_sub: "Two cameras · one moment · 12–11",
     after_reels: "Highlights",
     after_more: "From the week",
+    emotions_label: "Emotions",
+    emotions_sad: "The hardest moments",
+    emotions_sad_sub: "After the semifinal · 6–10 against Australia",
+    emotions_sad_body: "Some things don't show up in the scoreline. The semifinal loss to Australia wasn't just a game — it was the end of a dream that had carried the team across an ocean. These are the moments right after the final point. Before the bronze. Before the medals. When it just hurt.",
+    emotions_joy: "The sweetest moments",
+    emotions_joy_sub: "After the bronze · 12–11 against Spain",
+    emotions_joy_body: "Twenty minutes later, everything changed. The bronze medal game went to 12–11, and Czech Republic got the last point. What followed wasn't just celebration — it was release. A week of tension, three losses, and one final answer. These are the moments when it all came flooding out.",
     gallery_hint: "click to expand · ← → to navigate",
     team_label: "Team", team_section: "Czech Republic Mixed",
     team_sub: "WBUC Portimão 2025 · Bronze Medal · 14 players",
@@ -226,6 +261,13 @@ const T = {
     after_moment_sub: "Dvě kamery · jeden moment · 12–11",
     after_reels: "Sestřihy",
     after_more: "Z turnaje",
+    emotions_label: "Emoce",
+    emotions_sad: "Nejtěžší chvíle",
+    emotions_sad_sub: "Po semifinále · 6–10 proti Austrálii",
+    emotions_sad_body: "Některé věci se v skóre neobjeví. Prohra v semifinále s Austrálií nebyl jen zápas — byl to konec snu, který tým přenesl přes oceán. Tohle jsou chvíle hned po posledním bodu. Před bronzem. Před medailemi. Kdy to prostě bolelo.",
+    emotions_joy: "Nejkrásnější chvíle",
+    emotions_joy_sub: "Po bronzu · 12–11 proti Španělsku",
+    emotions_joy_body: "O dvacet minut později se všechno změnilo. Zápas o bronz skončil 12–11 a Česko získalo poslední bod. To, co následovalo, nebyla jen oslava — bylo to uvolnění. Týden napětí, tři prohry a jedna finální odpověď. Tohle jsou chvíle, kdy to všechno vyplavalo na povrch.",
     gallery_hint: "klikni pro zvětšení · ← → pro procházení",
     team_label: "Tým", team_section: "Česká republika Mixed",
     team_sub: "WBUC Portimão 2025 · Bronzová medaile · 14 hráčů",
@@ -921,6 +963,7 @@ export default function App() {
           { label: t.nav_bracket,  action: () => goHome("Bracket") },
           { label: t.nav_gallery,  action: () => goHome("Gallery") },
           { label: t.nav_after,    action: () => goHome("After") },
+          { label: t.emotions_label, action: () => goHome("Emotions") },
           { label: t.nav_team,     action: goTeam, active: page === "team" || page === "player" },
         ].map(({ label, action, active }) => (
           <li key={label}>
@@ -1232,6 +1275,68 @@ export default function App() {
               </div>
             </Fade>
           )}
+        </div>
+      </section>
+
+      {/* ── EMOTIONS ── */}
+      <section id="Emotions" style={{ padding: "7rem 3rem 8rem", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+
+          {/* SADDEST MOMENTS */}
+          <Fade>
+            <div style={{ marginBottom: "5rem" }}>
+              <div style={{ marginBottom: "3rem" }}>
+                <p style={{ fontSize: "0.52rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(10,10,10,0.2)", marginBottom: "0.8rem" }}>{t.emotions_sad_sub}</p>
+                <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 300, lineHeight: 1.1, letterSpacing: "-0.02em", color: "rgba(10,10,10,0.85)", marginBottom: "1.5rem" }}>{t.emotions_sad}</h2>
+                <p style={{ fontSize: "0.82rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(10,10,10,0.45)", maxWidth: 600 }}>{t.emotions_sad_body}</p>
+              </div>
+              <div style={{ columnCount: 2, columnGap: "6px" }}>
+                {SADDEST_PHOTOS.map((photo, i) => (
+                  <div key={photo.file} style={{ breakInside: "avoid", marginBottom: "6px" }}>
+                    <Fade delay={i * 0.04}>
+                      <PhotoTile
+                        photo={photo}
+                        onClick={() => openLightbox(SADDEST_PHOTOS, i)}
+                        style={{ width: "100%", aspectRatio: i === 0 || i === 4 ? "4/3" : "3/4" }}
+                      />
+                    </Fade>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Fade>
+
+          {/* Divider */}
+          <div style={{ display: "flex", alignItems: "center", gap: "1.5rem", margin: "4rem 0" }}>
+            <div style={{ flex: 1, height: 1, background: "rgba(0,0,0,0.06)" }} />
+            <span style={{ fontSize: "0.55rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(10,10,10,0.15)" }}>20 minutes later</span>
+            <div style={{ flex: 1, height: 1, background: "rgba(0,0,0,0.06)" }} />
+          </div>
+
+          {/* MOST JOYFUL MOMENTS */}
+          <Fade>
+            <div>
+              <div style={{ marginBottom: "3rem" }}>
+                <p style={{ fontSize: "0.52rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,170,51,0.5)", marginBottom: "0.8rem" }}>{t.emotions_joy_sub}</p>
+                <h2 style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 300, lineHeight: 1.1, letterSpacing: "-0.02em", color: "#c07a00", marginBottom: "1.5rem" }}>{t.emotions_joy}</h2>
+                <p style={{ fontSize: "0.82rem", fontWeight: 300, lineHeight: 1.8, color: "rgba(10,10,10,0.45)", maxWidth: 600 }}>{t.emotions_joy_body}</p>
+              </div>
+              <div style={{ columnCount: 2, columnGap: "6px" }}>
+                {JOYFUL_PHOTOS.map((photo, i) => (
+                  <div key={photo.file} style={{ breakInside: "avoid", marginBottom: "6px" }}>
+                    <Fade delay={i * 0.04}>
+                      <PhotoTile
+                        photo={photo}
+                        onClick={() => openLightbox(JOYFUL_PHOTOS, i)}
+                        style={{ width: "100%", aspectRatio: i === 0 || i === 5 ? "4/3" : "3/4" }}
+                      />
+                    </Fade>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Fade>
+
         </div>
       </section>
 
