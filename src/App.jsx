@@ -71,32 +71,46 @@ const TOURNAMENT_NARRATIVE = [
 
 const PLAYERS = [
   { name:"Filip Halamka", initials:"FH", photo:"_MG_1940.jpg", feelings:"",
+    bio:"One of the key organizers and leaders of the Czech Open ultimate scene. Filip has been instrumental in building the competitive infrastructure for Czech frisbee, co-leading the national open program alongside teammates.",
     photos:["_MG_1940.jpg","_MG_2613.jpg","_MG_1476.jpg","_MG_1496.jpg","_MG_1497.jpg","_MG_1938.jpg","_MG_1945.jpg","_MG_1969.jpg","_MG_1970.jpg","_MG_1971.jpg","_MG_1533.jpg","_MG_1549.jpg","_MG_1901.jpg","_MG_2609.jpg","_MG_2672.jpg","_MG_3663.jpg"] },
   { name:"Patrik Novak", initials:"PN", photo:"_MG_2004.jpg", feelings:"",
+    bio:"A long-standing member of the Czech ultimate community, Patrik competes at both club and national level. Known for his consistent play and commitment to the mixed division.",
     photos:["_MG_2004.jpg","_MG_2565.jpg","_MG_2580.jpg","_MG_1472.jpg","_MG_1955.jpg","_MG_1992.jpg","_MG_2529.jpg","_MG_3537.jpg"] },
   { name:"Jachym Hrusak", initials:"JH", photo:"_MG_1561.jpg", feelings:"",
+    bio:"Czech national team mixed division player competing at the highest international level. Jachym brings energy and athleticism to every point on the field.",
     photos:["_MG_1561.jpg","_MG_3272.jpg","_MG_1502.jpg","_MG_1518.jpg","_MG_1991.jpg","_MG_1921.jpg","_MG_3292.jpg","_MG_3463.jpg","_MG_3465.jpg","_MG_3539.jpg","_MG_3513.jpg","_MG_3531.jpg","_MG_3662.jpg","_MG_3668.jpg"] },
   { name:"Ondrej Rydlo", initials:"OR", photo:"_MG_3543.jpg", feelings:"",
+    bio:"One of the most accomplished Czech ultimate players, with over 12 years dedicated to the sport. Nicknamed \"Čégo\", he emerged as a top European player by 2019 and has played for Wall City Berlin. Off the field, he holds two degrees from Charles University and is pursuing a doctorate in neuroscience while working as a clinical psychologist.",
     photos:["_MG_3543.jpg","_MG_2693.jpg","_MG_1503.jpg","_MG_1509.jpg","_MG_1522.jpg","_MG_1523.jpg","_MG_1524.jpg","_MG_1547.jpg","_MG_1963.jpg","_MG_1984.jpg","_MG_1985.jpg","_MG_2526.jpg","_MG_2531.jpg","_MG_2575.jpg","_MG_2589.jpg","_MG_2620.jpg","_MG_2621.jpg","_MG_3288.jpg","_MG_3291.jpg","_MG_3316.jpg","_MG_3317.jpg","_MG_3431.jpg","_MG_3433.jpg","_MG_3453.jpg","_MG_3483.jpg","_MG_3486.jpg","_MG_3506.jpg","_MG_1887.jpg","_MG_3303.jpg","_MG_3304.jpg","_MG_3450.jpg","_MG_3451.jpg","_MG_1462.jpg","_MG_3612.jpg","_MG_3670.jpg"] },
   { name:"Vojtech Rybka", initials:"VR", photo:"_MG_2691.jpg", feelings:"",
+    bio:"Czech national team mixed division player. Vojtech is a versatile athlete who contributes both on offense and defense, bringing composure and experience to the team.",
     photos:["_MG_2691.jpg","_MG_1471.jpg","_MG_1973.jpg","_MG_2001.jpg","_MG_2555.jpg","_MG_3610.jpg","_MG_3577.jpg","_MG_3500.jpg","_MG_3660.jpg","_MG_3546.jpg","_MG_3652.jpg"] },
   { name:"Michal Schvob", initials:"MS", photo:"_MG_1469.jpg", feelings:"",
+    bio:"Czech national team mixed division player. Michal's presence on the field is defined by his defensive intensity and ability to create turnovers at critical moments.",
     photos:["_MG_1469.jpg","_MG_1907.jpg","_MG_1908.jpg","_MG_1936.jpg","_MG_2552.jpg","_MG_3340.jpg","_MG_3436.jpg","_MG_3528.jpg","_MG_3656.jpg","_MG_3657.jpg","_MG_3607.jpg","_MG_2538.jpg"] },
   { name:"David Novak", initials:"DN", photo:"_MG_2649.jpg", feelings:"",
+    bio:"Player-coach and co-leader of the Czech national ultimate program. David (number 50, Flying Ultimate Junta) served as head coach at the 2023 European Championships and continues to shape Czech ultimate both on and off the field.",
     photos:["_MG_2649.jpg","_MG_2544.jpg","_MG_2543.jpg","_MG_2545.jpg","_MG_2561.jpg","_MG_2598.jpg","_MG_2599.jpg","_MG_2644.jpg","_MG_2645.jpg","_MG_2646.jpg","_MG_2650.jpg","_MG_2651.jpg","_MG_2658.jpg","_MG_1997.jpg","_MG_2533.jpg","_MG_1506.jpg","_MG_2631.jpg","_MG_3294.jpg","_MG_3440.jpg","_MG_3475.jpg"] },
   { name:"Sarah Nemeckova", initials:"SN", photo:"_MG_2667.jpg", feelings:"",
+    bio:"Czech national team mixed division player. Sarah is a dynamic presence on both sides of the disc, known for her cutting ability and competitive drive in big moments.",
     photos:["_MG_2667.jpg","_MG_1539.jpg","_MG_2516.jpg","_MG_2525.jpg","_MG_1500.jpg","_MG_2665.jpg","_MG_2670.jpg","_MG_3334.jpg","_MG_3603.jpg","_MG_3571.jpg","_MG_1937.jpg","_MG_1928.jpg","_MG_3521.jpg","_MG_3681.jpg"] },
   { name:"Tereza Mrazova", initials:"TM", photo:"_MG_3480.jpg", feelings:"",
+    bio:"Club captain and elite-level handler. Named MVP of the 2024 Czech Final Four tournament, Tereza plays for BFD Shout (Bologna) in European competitions. She studies biology and physical education at Charles University's Faculty of Education, and previously competed in volleyball before dedicating herself to ultimate.",
     photos:["_MG_3480.jpg","_MG_1459.jpg","_MG_1486.jpg","_MG_2592.jpg","_MG_2591.jpg","_MG_2681.jpg","_MG_3268.jpg","_MG_1488.jpg","_MG_1961.jpg","_MG_1903.jpg","_MG_1932.jpg","_MG_2559.jpg","_MG_2585.jpg","_MG_3321.jpg","_MG_3467.jpg","_MG_3469.jpg","_MG_3471.jpg","_MG_3470.jpg","_MG_3490.jpg","_MG_3635.jpg","_MG_3634.jpg","_MG_3618.jpg","_MG_2549.jpg","_MG_3527.jpg","_MG_3678.jpg"] },
   { name:"Tereza Havelcova", initials:"TH", photo:"_MG_2685.jpg", feelings:"",
+    bio:"Plays for JinX Midnight, a Berlin-based club competing in the European League. One of the Czech players making their mark internationally, Tereza brings European-level club experience to the national team setup.",
     photos:["_MG_2685.jpg","_MG_2676.jpg","_MG_1958.jpg","_MG_1959.jpg","_MG_1986.jpg","_MG_1989.jpg","_MG_1510.jpg","_MG_1884.jpg","_MG_2623.jpg","_MG_2636.jpg","_MG_2637.jpg","_MG_3312.jpg","_MG_3323.jpg","_MG_3324.jpg","_MG_3326.jpg","_MG_3429.jpg","_MG_3442.jpg","_MG_3445.jpg","_MG_3447.jpg","_MG_3456.jpg","_MG_3477.jpg","_MG_3478.jpg","_MG_3632.jpg","_MG_3573.jpg","_MG_3534.jpg","_MG_3551.jpg","_MG_3553.jpg","_MG_3555.jpg","_MG_3561.jpg","_MG_2542.jpg"] },
   { name:"Bara Hrusakova", initials:"BH", photo:"_MG_3629.jpg", feelings:"",
+    bio:"Czech national team mixed division player. Bara's athleticism and tenacity on the field make her one of the most impactful defenders in the lineup.",
     photos:["_MG_3629.jpg","_MG_1564.jpg","_MG_1975.jpg","_MG_2550.jpg","_MG_2635.jpg","_MG_2675.jpg","_MG_3344.jpg","_MG_3461.jpg","_MG_3609.jpg","_MG_3503.jpg"] },
   { name:"Anicka Dvorakova", initials:"AD", photo:"_MG_3569.jpg", feelings:"",
+    bio:"Czech national team mixed division player. Anicka is a composed and skilled cutter who thrives in high-pressure situations, consistently finding space against tight defensive coverage.",
     photos:["_MG_3569.jpg","_MG_3559.jpg","_MG_3562.jpg","_MG_3565.jpg","_MG_3572.jpg","_MG_3576.jpg","_MG_2611.jpg","_MG_1489.jpg","_MG_1950.jpg","_MG_1904.jpg","_MG_1551.jpg","_MG_3520.jpg","_MG_3659.jpg","_MG_3601.jpg"] },
   { name:"Klara Svecova", initials:"KS", photo:"_MG_3482.jpg", feelings:"",
+    bio:"Czech national team mixed division player. Klara's precision throwing and smart decision-making make her a reliable presence in the offensive system.",
     photos:["_MG_3482.jpg","_MG_1474.jpg","_MG_1550.jpg","_MG_3606.jpg","_MG_3564.jpg","_MG_3522.jpg"] },
   { name:"Maja Volkova", initials:"MV", photo:"_MG_1516.jpg", feelings:"",
+    bio:"Czech national team mixed division player. Maja brings an explosive playing style to the field — a dynamic athlete who can change the pace of a point in an instant.",
     photos:["_MG_1516.jpg","_MG_1495.jpg","_MG_1513.jpg","_MG_3611.jpg","_MG_3494.jpg","_MG_3566.jpg"] },
 ];
 
@@ -302,9 +316,9 @@ function SectionHeader({ num, label, sub }) {
       <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: sub ? "0.6rem" : 0 }}>
         <span style={{ fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(100,150,255,0.6)", fontFamily: "monospace" }}>{num}</span>
         <span style={{ width: 28, height: 1, background: "rgba(100,150,255,0.35)", display: "block" }} />
-        <span style={{ fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>{label}</span>
+        <span style={{ fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(10,10,10,0.35)" }}>{label}</span>
       </div>
-      {sub && <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.2)", letterSpacing: "0.1em", paddingLeft: "3.5rem" }}>{sub}</p>}
+      {sub && <p style={{ fontSize: "0.72rem", color: "rgba(10,10,10,0.2)", letterSpacing: "0.1em", paddingLeft: "3.5rem" }}>{sub}</p>}
     </div>
   );
 }
@@ -343,10 +357,10 @@ function ScoreChart({ data, annotations = [] }) {
       </defs>
       {/* Grid — always visible */}
       {[0, 3, 6, 9, 12].filter(s => s <= maxScore).map(s => (
-        <line key={s} x1={pad.l} y1={py(s)} x2={W - pad.r} y2={py(s)} stroke="rgba(255,255,255,0.05)" strokeWidth={1} />
+        <line key={s} x1={pad.l} y1={py(s)} x2={W - pad.r} y2={py(s)} stroke="rgba(0,0,0,0.08)" strokeWidth={1} />
       ))}
       {[0, 6, 12].filter(s => s <= maxScore).map(s => (
-        <text key={s} x={pad.l - 5} y={py(s) + 3.5} textAnchor="end" fontSize={8} fill="rgba(255,255,255,0.18)" fontFamily="monospace">{s}</text>
+        <text key={s} x={pad.l - 5} y={py(s) + 3.5} textAnchor="end" fontSize={8} fill="rgba(0,0,0,0.3)" fontFamily="monospace">{s}</text>
       ))}
       {/* Animated paths */}
       <g clipPath={`url(#${clipId})`}>
@@ -359,16 +373,16 @@ function ScoreChart({ data, annotations = [] }) {
           return (
             <g key={idx}>
               <circle cx={x} cy={y} r={3.5} fill={cze ? "#6699ff" : "rgba(255,90,90,0.9)"} />
-              <text x={x} y={cze ? y - 9 : y + 14} textAnchor="middle" fontSize={7.5} fill="rgba(255,255,255,0.45)" fontFamily="monospace">{label}</text>
+              <text x={x} y={cze ? y - 9 : y + 14} textAnchor="middle" fontSize={7.5} fill="rgba(0,0,0,0.45)" fontFamily="monospace">{label}</text>
             </g>
           );
         })}
       </g>
       {/* Legend — always visible */}
       <line x1={pad.l} y1={H - 10} x2={pad.l + 18} y2={H - 10} stroke="rgba(100,153,255,0.9)" strokeWidth={2} />
-      <text x={pad.l + 22} y={H - 6} fontSize={8} fill="rgba(255,255,255,0.35)" fontFamily="monospace">CZE</text>
+      <text x={pad.l + 22} y={H - 6} fontSize={8} fill="rgba(0,0,0,0.35)" fontFamily="monospace">CZE</text>
       <line x1={pad.l + 60} y1={H - 10} x2={pad.l + 78} y2={H - 10} stroke="rgba(255,90,90,0.55)" strokeWidth={1.5} />
-      <text x={pad.l + 82} y={H - 6} fontSize={8} fill="rgba(255,255,255,0.35)" fontFamily="monospace">{opName}</text>
+      <text x={pad.l + 82} y={H - 6} fontSize={8} fill="rgba(0,0,0,0.35)" fontFamily="monospace">{opName}</text>
     </svg>
   );
 }
@@ -412,14 +426,14 @@ function BracketSection({ t }) {
 
   const MatchCard = ({ m }) => {
     const topWin = m.winner === "top", botWin = m.winner === "bot";
-    const bdr = m.cze ? "rgba(100,150,255,0.35)" : m.gold ? "rgba(255,220,51,0.25)" : "rgba(255,255,255,0.07)";
-    const bg  = m.cze ? "rgba(100,150,255,0.04)" : m.gold ? "rgba(255,220,51,0.03)" : "rgba(255,255,255,0.01)";
-    const wCol = (win) => m.cze && win ? "#6699ff" : m.gold && win ? "#ffdd33" : win ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.22)";
+    const bdr = m.cze ? "rgba(100,150,255,0.35)" : m.gold ? "rgba(255,220,51,0.25)" : "rgba(0,0,0,0.08)";
+    const bg  = m.cze ? "rgba(100,150,255,0.04)" : m.gold ? "rgba(255,220,51,0.03)" : "rgba(0,0,0,0.01)";
+    const wCol = (win) => m.cze && win ? "#6699ff" : m.gold && win ? "#ffdd33" : win ? "rgba(10,10,10,0.75)" : "rgba(10,10,10,0.3)";
 
     const Row = ({ team, score, win, top }) => (
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.38rem 0.65rem", borderTop: !top ? "1px solid rgba(255,255,255,0.05)" : "none", background: win && m.cze ? "rgba(100,150,255,0.07)" : win && m.gold ? "rgba(255,220,51,0.04)" : "transparent" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.38rem 0.65rem", borderTop: !top ? "1px solid rgba(0,0,0,0.05)" : "none", background: win && m.cze ? "rgba(100,150,255,0.07)" : win && m.gold ? "rgba(255,220,51,0.04)" : "transparent" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", overflow: "hidden" }}>
-          <span style={{ fontSize: "0.44rem", fontFamily: "monospace", color: "rgba(255,255,255,0.18)", flexShrink: 0, minWidth: "1rem" }}>{team.seed}</span>
+          <span style={{ fontSize: "0.44rem", fontFamily: "monospace", color: "rgba(10,10,10,0.18)", flexShrink: 0, minWidth: "1rem" }}>{team.seed}</span>
           <span style={{ fontSize: "0.73rem", fontWeight: win ? 400 : 300, color: wCol(win), whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{team.name}</span>
         </div>
         <span style={{ fontFamily: "monospace", fontSize: "0.78rem", fontWeight: win ? 500 : 300, color: wCol(win), flexShrink: 0, marginLeft: "0.4rem" }}>{score}</span>
@@ -428,9 +442,9 @@ function BracketSection({ t }) {
 
     return (
       <div style={{ border: `1px solid ${bdr}`, borderRadius: "4px", overflow: "hidden", background: bg }}>
-        {m.bronze && <div style={{ fontSize: "0.45rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,170,51,0.65)", padding: "0.25rem 0.65rem", borderBottom: "1px solid rgba(255,255,255,0.04)", background: "rgba(255,170,51,0.05)" }}>🥉 {t.bracket_bronze}</div>}
-        {m.gold   && <div style={{ fontSize: "0.45rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,220,51,0.65)", padding: "0.25rem 0.65rem", borderBottom: "1px solid rgba(255,255,255,0.04)", background: "rgba(255,220,51,0.04)" }}>🥇 {t.bracket_gold}</div>}
-        {m.upset  && <div style={{ fontSize: "0.44rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(100,150,255,0.6)", padding: "0.22rem 0.65rem", borderBottom: "1px solid rgba(255,255,255,0.04)", background: "rgba(100,150,255,0.05)" }}>★ {t.bracket_upset}</div>}
+        {m.bronze && <div style={{ fontSize: "0.45rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,170,51,0.65)", padding: "0.25rem 0.65rem", borderBottom: "1px solid rgba(0,0,0,0.04)", background: "rgba(255,170,51,0.05)" }}>🥉 {t.bracket_bronze}</div>}
+        {m.gold   && <div style={{ fontSize: "0.45rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,220,51,0.65)", padding: "0.25rem 0.65rem", borderBottom: "1px solid rgba(0,0,0,0.04)", background: "rgba(255,220,51,0.04)" }}>🥇 {t.bracket_gold}</div>}
+        {m.upset  && <div style={{ fontSize: "0.44rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(100,150,255,0.6)", padding: "0.22rem 0.65rem", borderBottom: "1px solid rgba(0,0,0,0.04)", background: "rgba(100,150,255,0.05)" }}>★ {t.bracket_upset}</div>}
         <Row team={m.top} score={m.topS} win={topWin} top={true}  />
         <Row team={m.bot} score={m.botS} win={botWin} top={false} />
       </div>
@@ -438,7 +452,7 @@ function BracketSection({ t }) {
   };
 
   return (
-    <section id="Bracket" style={{ padding: "6rem 3rem 7rem", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+    <section id="Bracket" style={{ padding: "6rem 3rem 7rem", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
         <Fade><SectionHeader num="03" label={t.s03} sub={t.s03sub} /></Fade>
         <Fade delay={0.05}>
@@ -446,7 +460,7 @@ function BracketSection({ t }) {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "1rem", minWidth: 540, alignItems: "start" }}>
               {rounds.map((round) => (
                 <div key={round.label}>
-                  <p style={{ fontSize: "0.52rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.18)", marginBottom: "0.75rem" }}>{round.label}</p>
+                  <p style={{ fontSize: "0.52rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(10,10,10,0.18)", marginBottom: "0.75rem" }}>{round.label}</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                     {round.matches.map((m, mi) => <MatchCard key={mi} m={m} />)}
                   </div>
@@ -456,7 +470,7 @@ function BracketSection({ t }) {
           </div>
         </Fade>
         <Fade delay={0.12}>
-          <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "2.5rem", marginTop: "2rem", paddingTop: "1.5rem", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+          <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "2.5rem", marginTop: "2rem", paddingTop: "1.5rem", borderTop: "1px solid rgba(0,0,0,0.04)" }}>
             {[
               { m: "🥇", c: "#ffdd33",              l: t.bracket_gold,   n: "Germany"        },
               { m: "🥈", c: "rgba(200,210,230,0.75)", l: t.bracket_silver, n: "Australia"      },
@@ -465,7 +479,7 @@ function BracketSection({ t }) {
               <div key={l} style={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
                 <span style={{ fontSize: "1.2rem" }}>{m}</span>
                 <div>
-                  <div style={{ fontSize: "0.48rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.18)" }}>{l}</div>
+                  <div style={{ fontSize: "0.48rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(10,10,10,0.18)" }}>{l}</div>
                   <div style={{ fontSize: "0.85rem", fontWeight: 300, color: c }}>{n}</div>
                 </div>
               </div>
@@ -491,9 +505,9 @@ function Lightbox({ photos, index, onClose, onPrev, onNext }) {
   }, [onClose, handlePrev, handleNext]);
 
   const Btn = ({ enabled, onClick, side, char }) => (
-    <button onClick={onClick} style={{ position: "absolute", top: "50%", [side]: "2rem", transform: "translateY(-50%)", background: enabled ? "rgba(255,255,255,0.08)" : "transparent", border: `1px solid ${enabled ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.04)"}`, color: enabled ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.08)", borderRadius: "50%", width: 56, height: 56, fontSize: "1.6rem", cursor: enabled ? "pointer" : "default", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10, transition: "all 0.2s", backdropFilter: "blur(8px)" }}
-      onMouseEnter={e => { if (enabled) e.currentTarget.style.background = "rgba(255,255,255,0.15)"; }}
-      onMouseLeave={e => { if (enabled) e.currentTarget.style.background = enabled ? "rgba(255,255,255,0.08)" : "transparent"; }}
+    <button onClick={onClick} style={{ position: "absolute", top: "50%", [side]: "2rem", transform: "translateY(-50%)", background: enabled ? "rgba(0,0,0,0.08)" : "transparent", border: `1px solid ${enabled ? "rgba(0,0,0,0.1)" : "rgba(0,0,0,0.04)"}`, color: enabled ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.08)", borderRadius: "50%", width: 56, height: 56, fontSize: "1.6rem", cursor: enabled ? "pointer" : "default", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10, transition: "all 0.2s", backdropFilter: "blur(8px)" }}
+      onMouseEnter={e => { if (enabled) e.currentTarget.style.background = "rgba(0,0,0,0.1)"; }}
+      onMouseLeave={e => { if (enabled) e.currentTarget.style.background = enabled ? "rgba(0,0,0,0.08)" : "transparent"; }}
     >{char}</button>
   );
   return (
@@ -502,7 +516,7 @@ function Lightbox({ photos, index, onClose, onPrev, onNext }) {
       <div onClick={e => e.stopPropagation()} style={{ position: "relative", cursor: "default" }}>
         <img src={"/" + photo.file} alt={photo.caption} style={{ maxWidth: "84vw", maxHeight: "80vh", objectFit: "contain", display: "block" }} />
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem", padding: "0 0.1rem" }}>
-          <p style={{ fontSize: "0.68rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>{photo.caption}</p>
+          <p style={{ fontSize: "0.68rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(10,10,10,0.3)" }}>{photo.caption}</p>
           <p style={{ fontFamily: "monospace", fontSize: "0.65rem", color: "rgba(255,170,51,0.6)" }}>{index + 1} / {photos.length}</p>
         </div>
       </div>
@@ -541,7 +555,7 @@ function PlayerCard({ player, index, onClick }) {
         onClick={onClick}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        style={{ position: "relative", aspectRatio: "3/4", background: hovered ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.6)", cursor: "pointer", transition: "background 0.3s", overflow: "hidden", display: "flex", flexDirection: "column" }}
+        style={{ position: "relative", aspectRatio: "3/4", background: hovered ? "rgba(0,0,0,0.03)" : "rgba(0,0,0,0.0)", cursor: "pointer", transition: "background 0.3s", overflow: "hidden", display: "flex", flexDirection: "column" }}
       >
         <div style={{ flex: 1, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
           {player.photo && !imgError ? (
@@ -552,14 +566,14 @@ function PlayerCard({ player, index, onClick }) {
               onError={() => setImgError(true)}
             />
           ) : (
-            <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.02)" }}>
-              <span style={{ fontSize: "2rem", fontWeight: 200, letterSpacing: "0.08em", color: "rgba(255,255,255,0.1)", fontFamily: "monospace" }}>{player.initials}</span>
+            <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.02)" }}>
+              <span style={{ fontSize: "2rem", fontWeight: 200, letterSpacing: "0.08em", color: "rgba(10,10,10,0.1)", fontFamily: "monospace" }}>{player.initials}</span>
             </div>
           )}
           <div style={{ position: "absolute", inset: 0, background: hovered ? "rgba(100,150,255,0.08)" : "transparent", transition: "background 0.3s" }} />
         </div>
-        <div style={{ padding: "0.9rem 1rem", background: hovered ? "rgba(100,150,255,0.06)" : "rgba(0,0,0,0.5)", borderTop: "1px solid rgba(255,255,255,0.04)", transition: "background 0.3s" }}>
-          <p style={{ fontSize: "0.78rem", fontWeight: hovered ? 400 : 300, color: hovered ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.65)", letterSpacing: "0.02em", transition: "all 0.2s", lineHeight: 1.2 }}>
+        <div style={{ padding: "0.9rem 1rem", background: hovered ? "rgba(100,150,255,0.06)" : "rgba(245,244,240,0.92)", borderTop: "1px solid rgba(0,0,0,0.04)", transition: "background 0.3s" }}>
+          <p style={{ fontSize: "0.78rem", fontWeight: hovered ? 400 : 300, color: hovered ? "rgba(10,10,10,0.9)" : "rgba(10,10,10,0.7)", letterSpacing: "0.02em", transition: "all 0.2s", lineHeight: 1.2 }}>
             {player.name}
           </p>
         </div>
@@ -572,7 +586,7 @@ function PlayerCard({ player, index, onClick }) {
 
 function VideoClip({ src, caption, aspect = "9/16" }) {
   return (
-    <div style={{ borderRadius: "6px", overflow: "hidden", background: "#0a0a0a", border: "1px solid rgba(255,255,255,0.06)" }}>
+    <div style={{ borderRadius: "6px", overflow: "hidden", background: "#0a0a0a", border: "1px solid rgba(0,0,0,0.06)" }}>
       <video
         src={"/" + src}
         style={{ width: "100%", aspectRatio: aspect, display: "block", objectFit: "cover" }}
@@ -581,7 +595,7 @@ function VideoClip({ src, caption, aspect = "9/16" }) {
         preload="metadata"
       />
       {caption && (
-        <p style={{ fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)", padding: "0.65rem 0.8rem" }}>
+        <p style={{ fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(10,10,10,0.22)", padding: "0.65rem 0.8rem" }}>
           {caption}
         </p>
       )}
@@ -594,16 +608,16 @@ function VideoClip({ src, caption, aspect = "9/16" }) {
 function TeamPage({ onSelectPlayer, onOpenLightbox, t }) {
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
-    <div style={{ minHeight: "100vh", background: "#000", paddingTop: 80 }}>
+    <div style={{ minHeight: "100vh", background: "#f5f4f0", paddingTop: 80 }}>
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "5rem 3rem 8rem" }}>
         <Fade>
           <div style={{ marginBottom: "3rem" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "0.6rem" }}>
               <span style={{ fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(100,150,255,0.6)", fontFamily: "monospace" }}>{t.team_label}</span>
               <span style={{ width: 28, height: 1, background: "rgba(100,150,255,0.35)", display: "block" }} />
-              <span style={{ fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>{t.team_section}</span>
+              <span style={{ fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(10,10,10,0.35)" }}>{t.team_section}</span>
             </div>
-            <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.2)", letterSpacing: "0.1em", paddingLeft: "3.5rem" }}>
+            <p style={{ fontSize: "0.72rem", color: "rgba(10,10,10,0.2)", letterSpacing: "0.1em", paddingLeft: "3.5rem" }}>
               {t.team_sub}
             </p>
           </div>
@@ -620,14 +634,14 @@ function TeamPage({ onSelectPlayer, onOpenLightbox, t }) {
           </div>
         </Fade>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "1px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.04)", borderRadius: "6px", overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "1px", background: "rgba(0,0,0,0.05)", border: "1px solid rgba(0,0,0,0.07)", borderRadius: "6px", overflow: "hidden" }}>
           {PLAYERS.map((player, i) => (
             <PlayerCard key={player.name} player={player} index={i} onClick={() => onSelectPlayer(player, i)} />
           ))}
         </div>
 
         <Fade delay={0.2}>
-          <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.12)", textAlign: "center", marginTop: "3rem" }}>
+          <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(10,10,10,0.12)", textAlign: "center", marginTop: "3rem" }}>
             {t.team_hint}
           </p>
         </Fade>
@@ -664,26 +678,26 @@ function PlayerPage({ player, playerIndex, hasPrev, hasNext, onPrev, onNext, onB
       style={{
         display: "flex", alignItems: "center", justifyContent: "center",
         width: 34, height: 34, borderRadius: "50%",
-        background: enabled ? "rgba(255,255,255,0.07)" : "transparent",
-        border: `1px solid ${enabled ? "rgba(255,255,255,0.14)" : "rgba(255,255,255,0.05)"}`,
-        color: enabled ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.12)",
+        background: enabled ? "rgba(0,0,0,0.07)" : "transparent",
+        border: `1px solid ${enabled ? "rgba(0,0,0,0.14)" : "rgba(0,0,0,0.05)"}`,
+        color: enabled ? "rgba(10,10,10,0.75)" : "rgba(10,10,10,0.15)",
         fontSize: "1.1rem", cursor: enabled ? "pointer" : "default",
         transition: "all 0.2s", flexShrink: 0,
       }}
-      onMouseEnter={e => { if (enabled) e.currentTarget.style.background = "rgba(255,255,255,0.13)"; }}
-      onMouseLeave={e => { if (enabled) e.currentTarget.style.background = "rgba(255,255,255,0.07)"; }}
+      onMouseEnter={e => { if (enabled) e.currentTarget.style.background = "rgba(0,0,0,0.09)"; }}
+      onMouseLeave={e => { if (enabled) e.currentTarget.style.background = "rgba(0,0,0,0.07)"; }}
       title={enabled ? (side === "left" ? "Previous player (←)" : "Next player (→)") : ""}
     >{char}</button>
   );
 
   return (
-    <div style={{ minHeight: "100vh", background: "#000", paddingTop: 80 }}>
+    <div style={{ minHeight: "100vh", background: "#f5f4f0", paddingTop: 80 }}>
       {/* Top bar */}
-      <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", padding: "1.1rem 3rem", background: "rgba(0,0,0,0.85)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(255,255,255,0.04)", gap: "1rem" }}>
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", padding: "1.1rem 3rem", background: "rgba(245,244,240,0.94)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(0,0,0,0.08)", gap: "1rem" }}>
         <button onClick={onBack}
-          style={{ display: "flex", alignItems: "center", gap: "0.6rem", background: "none", border: "none", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", padding: 0, transition: "color 0.2s", flexShrink: 0 }}
-          onMouseEnter={e => e.currentTarget.style.color = "rgba(255,255,255,0.9)"}
-          onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.5)"}
+          style={{ display: "flex", alignItems: "center", gap: "0.6rem", background: "none", border: "none", color: "rgba(10,10,10,0.55)", cursor: "pointer", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", padding: 0, transition: "color 0.2s", flexShrink: 0 }}
+          onMouseEnter={e => e.currentTarget.style.color = "rgba(10,10,10,0.9)"}
+          onMouseLeave={e => e.currentTarget.style.color = "rgba(10,10,10,0.5)"}
         >
           <span style={{ fontSize: "1rem" }}>&#8592;</span> {t.player_back}
         </button>
@@ -691,7 +705,7 @@ function PlayerPage({ player, playerIndex, hasPrev, hasNext, onPrev, onNext, onB
         {/* Player navigator: ← name → */}
         <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "0.9rem" }}>
           <NavBtn enabled={hasPrev} onClick={onPrev} char="&#8249;" side="left" />
-          <span style={{ fontSize: "0.78rem", fontWeight: 400, color: "rgba(255,255,255,0.75)", letterSpacing: "0.04em", minWidth: 160, textAlign: "center" }}>{player.name}</span>
+          <span style={{ fontSize: "0.78rem", fontWeight: 400, color: "rgba(10,10,10,0.75)", letterSpacing: "0.04em", minWidth: 160, textAlign: "center" }}>{player.name}</span>
           <NavBtn enabled={hasNext} onClick={onNext} char="&#8250;" side="right" />
         </div>
 
@@ -707,7 +721,7 @@ function PlayerPage({ player, playerIndex, hasPrev, hasNext, onPrev, onNext, onB
           <Fade>
             <div
               onClick={() => onOpenLightbox(playerPhotos, 0)}
-              style={{ position: "relative", aspectRatio: "3/4", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "4px", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", cursor: playerPhotos.length ? "zoom-in" : "default" }}>
+              style={{ position: "relative", aspectRatio: "3/4", background: "rgba(0,0,0,0.03)", border: "1px solid rgba(0,0,0,0.07)", borderRadius: "4px", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", cursor: playerPhotos.length ? "zoom-in" : "default" }}>
               {player.photo && !imgError ? (
                 <img
                   src={"/" + player.photo}
@@ -717,8 +731,8 @@ function PlayerPage({ player, playerIndex, hasPrev, hasNext, onPrev, onNext, onB
                 />
               ) : (
                 <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: "3.5rem", fontWeight: 200, letterSpacing: "0.1em", color: "rgba(255,255,255,0.08)", fontFamily: "monospace", lineHeight: 1 }}>{player.initials}</div>
-                  <div style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.1)", marginTop: "0.8rem" }}>Photo coming soon</div>
+                  <div style={{ fontSize: "3.5rem", fontWeight: 200, letterSpacing: "0.1em", color: "rgba(10,10,10,0.08)", fontFamily: "monospace", lineHeight: 1 }}>{player.initials}</div>
+                  <div style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(10,10,10,0.1)", marginTop: "0.8rem" }}>Photo coming soon</div>
                 </div>
               )}
             </div>
@@ -734,16 +748,27 @@ function PlayerPage({ player, playerIndex, hasPrev, hasNext, onPrev, onNext, onB
                 {player.name}
               </h1>
 
-              <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "2.5rem" }}>
-                <p style={{ fontSize: "0.58rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)", marginBottom: "1.5rem" }}>
+              {player.bio && (
+                <div style={{ borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "2rem", marginBottom: "2rem" }}>
+                  <p style={{ fontSize: "0.58rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(100,150,255,0.6)", marginBottom: "1rem", fontFamily: "monospace" }}>
+                    About
+                  </p>
+                  <p style={{ fontSize: "0.88rem", fontWeight: 300, color: "rgba(10,10,10,0.65)", lineHeight: 1.8 }}>
+                    {player.bio}
+                  </p>
+                </div>
+              )}
+
+              <div style={{ borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "2.5rem" }}>
+                <p style={{ fontSize: "0.58rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(10,10,10,0.22)", marginBottom: "1.5rem" }}>
                   {t.player_feelings}
                 </p>
                 {player.feelings ? (
-                  <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(255,255,255,0.7)", lineHeight: 1.8, fontStyle: "italic" }}>
+                  <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(10,10,10,0.7)", lineHeight: 1.8, fontStyle: "italic" }}>
                     &ldquo;{player.feelings}&rdquo;
                   </p>
                 ) : (
-                  <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "rgba(255,255,255,0.18)", lineHeight: 1.8, fontStyle: "italic" }}>
+                  <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "rgba(10,10,10,0.18)", lineHeight: 1.8, fontStyle: "italic" }}>
                     {t.player_coming}
                   </p>
                 )}
@@ -752,16 +777,16 @@ function PlayerPage({ player, playerIndex, hasPrev, hasNext, onPrev, onNext, onB
               {/* Player ← → hint */}
               <div style={{ marginTop: "3rem", display: "flex", alignItems: "center", gap: "1rem" }}>
                 {hasPrev && (
-                  <button onClick={onPrev} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.25)", cursor: "pointer", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", padding: 0, transition: "color 0.2s", display: "flex", alignItems: "center", gap: "0.4rem" }}
-                    onMouseEnter={e => e.currentTarget.style.color = "rgba(255,255,255,0.7)"}
-                    onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.25)"}
+                  <button onClick={onPrev} style={{ background: "none", border: "none", color: "rgba(10,10,10,0.25)", cursor: "pointer", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", padding: 0, transition: "color 0.2s", display: "flex", alignItems: "center", gap: "0.4rem" }}
+                    onMouseEnter={e => e.currentTarget.style.color = "rgba(10,10,10,0.8)"}
+                    onMouseLeave={e => e.currentTarget.style.color = "rgba(10,10,10,0.3)"}
                   >&#8592; {PLAYERS[playerIndex - 1]?.name.split(" ")[0]}</button>
                 )}
-                {hasPrev && hasNext && <span style={{ color: "rgba(255,255,255,0.08)", fontSize: "0.6rem" }}>·</span>}
+                {hasPrev && hasNext && <span style={{ color: "rgba(10,10,10,0.08)", fontSize: "0.6rem" }}>·</span>}
                 {hasNext && (
-                  <button onClick={onNext} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.25)", cursor: "pointer", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", padding: 0, transition: "color 0.2s", display: "flex", alignItems: "center", gap: "0.4rem" }}
-                    onMouseEnter={e => e.currentTarget.style.color = "rgba(255,255,255,0.7)"}
-                    onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.25)"}
+                  <button onClick={onNext} style={{ background: "none", border: "none", color: "rgba(10,10,10,0.25)", cursor: "pointer", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", padding: 0, transition: "color 0.2s", display: "flex", alignItems: "center", gap: "0.4rem" }}
+                    onMouseEnter={e => e.currentTarget.style.color = "rgba(10,10,10,0.8)"}
+                    onMouseLeave={e => e.currentTarget.style.color = "rgba(10,10,10,0.3)"}
                   >{PLAYERS[playerIndex + 1]?.name.split(" ")[0]} &#8594;</button>
                 )}
               </div>
@@ -772,8 +797,8 @@ function PlayerPage({ player, playerIndex, hasPrev, hasNext, onPrev, onNext, onB
         {/* Photo gallery — all photos of this player */}
         {playerPhotos.length > 1 && (
           <Fade delay={0.15}>
-            <div style={{ marginTop: "5rem", borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: "3rem" }}>
-              <p style={{ fontSize: "0.58rem", letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "1.5rem" }}>
+            <div style={{ marginTop: "5rem", borderTop: "1px solid rgba(0,0,0,0.07)", paddingTop: "3rem" }}>
+              <p style={{ fontSize: "0.58rem", letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(10,10,10,0.2)", marginBottom: "1.5rem" }}>
                 {t.player_photos} &middot; {playerPhotos.length}
               </p>
               <div style={{ columnCount: 3, columnGap: "4px" }}>
@@ -841,11 +866,11 @@ export default function App() {
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
       *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
       html { scroll-behavior:smooth; }
-      body { background:#000; color:#fff; -webkit-font-smoothing:antialiased; }
+      body { background:#f5f4f0; color:#111; -webkit-font-smoothing:antialiased; }
       a { text-decoration:none; color:inherit; }
       ::-webkit-scrollbar { width:2px; }
-      ::-webkit-scrollbar-track { background:#000; }
-      ::-webkit-scrollbar-thumb { background:#333; border-radius:2px; }
+      ::-webkit-scrollbar-track { background:#f5f4f0; }
+      ::-webkit-scrollbar-thumb { background:#bbb; border-radius:2px; }
       @keyframes fi { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
     `;
     document.head.appendChild(s);
@@ -857,9 +882,9 @@ export default function App() {
 
   // Shared nav
   const Nav = () => (
-    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.1rem 2rem", background: "rgba(0,0,0,0.75)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(255,255,255,0.04)", gap: "1rem" }}>
+    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.1rem 2rem", background: "rgba(245,244,240,0.94)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(0,0,0,0.08)", gap: "1rem" }}>
       <button onClick={() => goHome()} style={{ background: "none", border: "none", cursor: "pointer", padding: 0, flexShrink: 0 }}>
-        <span style={{ fontSize: "0.85rem", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)" }}>Czech Mixed</span>
+        <span style={{ fontSize: "0.85rem", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(10,10,10,0.9)" }}>Czech Mixed</span>
       </button>
       <ul style={{ display: "flex", gap: "1.8rem", listStyle: "none" }}>
         {[
@@ -872,19 +897,19 @@ export default function App() {
         ].map(({ label, action, active }) => (
           <li key={label}>
             <button onClick={action}
-              style={{ background: "none", border: "none", cursor: "pointer", fontSize: "0.72rem", fontWeight: 300, color: active ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.45)", letterSpacing: "0.05em", transition: "color 0.25s", padding: 0 }}
-              onMouseEnter={e => e.target.style.color = "rgba(255,255,255,0.9)"}
-              onMouseLeave={e => e.target.style.color = active ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.45)"}
+              style={{ background: "none", border: "none", cursor: "pointer", fontSize: "0.72rem", fontWeight: 300, color: active ? "rgba(10,10,10,0.9)" : "rgba(10,10,10,0.45)", letterSpacing: "0.05em", transition: "color 0.25s", padding: 0 }}
+              onMouseEnter={e => e.target.style.color = "rgba(10,10,10,0.9)"}
+              onMouseLeave={e => e.target.style.color = active ? "rgba(10,10,10,0.9)" : "rgba(10,10,10,0.45)"}
             >{label}</button>
           </li>
         ))}
       </ul>
       <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexShrink: 0 }}>
         {/* CZ / EN toggle */}
-        <div style={{ display: "flex", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "3px", overflow: "hidden" }}>
+        <div style={{ display: "flex", background: "rgba(0,0,0,0.05)", border: "1px solid rgba(0,0,0,0.1)", borderRadius: "3px", overflow: "hidden" }}>
           {["en", "cz"].map((l) => (
             <button key={l} onClick={() => setLang(l)}
-              style={{ padding: "0.3rem 0.55rem", background: lang === l ? "rgba(255,255,255,0.12)" : "transparent", border: "none", cursor: "pointer", fontSize: "0.6rem", fontWeight: lang === l ? 500 : 300, color: lang === l ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.35)", letterSpacing: "0.08em", textTransform: "uppercase", transition: "all 0.2s" }}
+              style={{ padding: "0.3rem 0.55rem", background: lang === l ? "rgba(0,0,0,0.1)" : "transparent", border: "none", cursor: "pointer", fontSize: "0.6rem", fontWeight: lang === l ? 500 : 300, color: lang === l ? "rgba(10,10,10,0.9)" : "rgba(10,10,10,0.45)", letterSpacing: "0.08em", textTransform: "uppercase", transition: "all 0.2s" }}
             >{l}</button>
           ))}
         </div>
@@ -899,7 +924,7 @@ export default function App() {
   // ── PLAYER PAGE ──
   if (page === "player" && activePlayer) {
     return (
-      <div style={{ background: "#000", color: "#fff", fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
+      <div style={{ background: "#f5f4f0", color: "#111", fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
         {lightbox && <Lightbox photos={lightbox.photos} index={lightbox.index} onClose={closeLightbox} onPrev={prevPhoto} onNext={nextPhoto} />}
         <PlayerPage
           player={activePlayer}
@@ -919,7 +944,7 @@ export default function App() {
   // ── TEAM PAGE ──
   if (page === "team") {
     return (
-      <div style={{ background: "#000", color: "#fff", fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
+      <div style={{ background: "#f5f4f0", color: "#111", fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
         {lightbox && <Lightbox photos={lightbox.photos} index={lightbox.index} onClose={closeLightbox} onPrev={prevPhoto} onNext={nextPhoto} />}
         <Nav />
         <TeamPage onSelectPlayer={openPlayer} onOpenLightbox={openLightbox} t={t} />
@@ -929,13 +954,13 @@ export default function App() {
 
   // ── HOME PAGE ──
   return (
-    <div style={{ background: "#000", color: "#fff", fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
+    <div style={{ background: "#f5f4f0", color: "#111", fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
       {lightbox && <Lightbox photos={lightbox.photos} index={lightbox.index} onClose={closeLightbox} onPrev={prevPhoto} onNext={nextPhoto} />}
 
       <Nav />
 
       {/* ── HERO ── */}
-      <section style={{ position: "relative", width: "100%", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+      <section style={{ position: "relative", width: "100%", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden", background: "#0a0a0a" }}>
         <Globe />
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 600, height: 300, background: "radial-gradient(ellipse, rgba(255,140,30,0.06) 0%, transparent 70%)", pointerEvents: "none", zIndex: 1 }} />
         <div style={{ position: "relative", zIndex: 2, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
@@ -944,21 +969,21 @@ export default function App() {
             <p style={{ fontSize: "0.65rem", fontWeight: 400, letterSpacing: "0.4em", textTransform: "uppercase", color: "rgba(255,170,51,0.7)" }}>Portim&#227;o, Portugal &middot; 2025</p>
             <div style={{ width: 20, height: 1, background: "rgba(255,170,51,0.4)" }} />
           </div>
-          <p style={{ fontSize: "0.72rem", fontWeight: 300, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", animation: "fi 1s 0.2s both" }}>{t.hero_event}</p>
+          <p style={{ fontSize: "0.72rem", fontWeight: 300, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(10,10,10,0.35)", animation: "fi 1s 0.2s both" }}>{t.hero_event}</p>
           <h1 style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.02em", animation: "fi 1s 0.35s both" }}>Czech Republic</h1>
           <h1 style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.02em", color: "#ffaa33", animation: "fi 1s 0.5s both" }}>Bronze Medal.</h1>
           <div style={{ display: "flex", alignItems: "center", gap: "2.5rem", marginTop: "1.5rem", animation: "fi 1s 0.7s both" }}>
             {[["13", t.hero_games], ["9W \u2013 4L", t.hero_record], ["12\u201311", t.hero_final]].map(([v, l]) => (
               <div key={l} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.3rem" }}>
-                <span style={{ fontSize: "1.3rem", fontWeight: 300, color: "rgba(255,255,255,0.9)", letterSpacing: "-0.01em", lineHeight: 1 }}>{v}</span>
-                <span style={{ fontSize: "0.55rem", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)" }}>{l}</span>
+                <span style={{ fontSize: "1.3rem", fontWeight: 300, color: "rgba(10,10,10,0.9)", letterSpacing: "-0.01em", lineHeight: 1 }}>{v}</span>
+                <span style={{ fontSize: "0.55rem", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(10,10,10,0.25)" }}>{l}</span>
               </div>
             ))}
           </div>
         </div>
         <div style={{ position: "absolute", bottom: "2.5rem", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: "0.6rem", animation: "fi 1s 1.1s both", zIndex: 2 }}>
-          <span style={{ fontSize: "0.55rem", letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>{t.hero_scroll}</span>
-          <div style={{ width: 1, height: 36, background: "linear-gradient(to bottom, rgba(255,255,255,0.25), transparent)" }} />
+          <span style={{ fontSize: "0.55rem", letterSpacing: "0.28em", textTransform: "uppercase", color: "rgba(10,10,10,0.2)" }}>{t.hero_scroll}</span>
+          <div style={{ width: 1, height: 36, background: "linear-gradient(to bottom, rgba(0,0,0,0.15), transparent)" }} />
         </div>
       </section>
 
@@ -972,12 +997,12 @@ export default function App() {
       </div>
 
       {/* ── ROAD TO BRONZE ── */}
-      <section id="WBUC" style={{ padding: "8rem 3rem 5rem", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <section id="WBUC" style={{ padding: "8rem 3rem 5rem", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <Fade><SectionHeader num="01" label={t.s01} sub={t.s01sub} /></Fade>
 
           <div style={{ position: "relative" }}>
-            <div style={{ position: "absolute", left: 110, top: 0, bottom: 0, width: 1, background: "linear-gradient(to bottom, rgba(255,255,255,0.0), rgba(255,255,255,0.08) 10%, rgba(255,255,255,0.08) 90%, rgba(255,255,255,0.0))", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", left: 110, top: 0, bottom: 0, width: 1, background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.08) 10%, rgba(0,0,0,0.08) 90%, transparent)", pointerEvents: "none" }} />
 
             {TOURNAMENT_NARRATIVE.map((block, i) => (
               <Fade key={block.phase} delay={i * 0.08}>
@@ -985,11 +1010,11 @@ export default function App() {
                   {/* Left: label + score */}
                   <div style={{ width: 110, flexShrink: 0, paddingRight: "1.5rem", paddingTop: "0.15rem", textAlign: "right" }}>
                     <p style={{ fontSize: "0.58rem", letterSpacing: "0.15em", textTransform: "uppercase", color: block.canada ? "#ffaa33" : block.isBronze ? "rgba(255,170,51,0.6)" : "rgba(100,150,255,0.6)", marginBottom: "0.3rem", lineHeight: 1.3 }}>{block.phase}</p>
-                    <p style={{ fontFamily: "monospace", fontSize: block.canada ? "1.1rem" : "0.85rem", fontWeight: block.canada ? 500 : 300, color: block.canada ? "#ffaa33" : block.isBronze ? "rgba(255,170,51,0.8)" : "rgba(255,255,255,0.5)", lineHeight: 1 }}>{block.score}</p>
+                    <p style={{ fontFamily: "monospace", fontSize: block.canada ? "1.1rem" : "0.85rem", fontWeight: block.canada ? 500 : 300, color: block.canada ? "#ffaa33" : block.isBronze ? "rgba(255,170,51,0.8)" : "rgba(10,10,10,0.5)", lineHeight: 1 }}>{block.score}</p>
                   </div>
                   {/* Dot */}
                   <div style={{ position: "relative", flexShrink: 0, width: 0 }}>
-                    <div style={{ position: "absolute", top: "0.4rem", left: -6, width: 13, height: 13, borderRadius: "50%", background: block.canada ? "#ffaa33" : block.isBronze ? "rgba(255,170,51,0.5)" : "rgba(255,255,255,0.12)", border: `1px solid ${block.canada ? "#ffaa33" : block.isBronze ? "rgba(255,170,51,0.4)" : "rgba(255,255,255,0.15)"}`, boxShadow: block.canada ? "0 0 12px rgba(255,170,51,0.4)" : "none" }} />
+                    <div style={{ position: "absolute", top: "0.4rem", left: -6, width: 13, height: 13, borderRadius: "50%", background: block.canada ? "#ffaa33" : block.isBronze ? "rgba(255,170,51,0.5)" : "rgba(0,0,0,0.1)", border: `1px solid ${block.canada ? "#ffaa33" : block.isBronze ? "rgba(255,170,51,0.4)" : "rgba(0,0,0,0.1)"}`, boxShadow: block.canada ? "0 0 12px rgba(255,170,51,0.4)" : "none" }} />
                   </div>
                   {/* Right: content */}
                   <div style={{ flex: 1, paddingLeft: "2.5rem", paddingBottom: block.canada || block.isBronze ? "2rem" : "3.5rem" }}>
@@ -998,7 +1023,7 @@ export default function App() {
                         <div style={{ position: "absolute", top: 0, right: 0, width: 200, height: 200, background: "radial-gradient(circle, rgba(255,170,51,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
                         <p style={{ fontSize: "0.55rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,170,51,0.5)", marginBottom: "0.7rem" }}>{block.label}</p>
                         <h3 style={{ fontSize: "1.25rem", fontWeight: 400, color: "#fff", marginBottom: "1rem", lineHeight: 1.25 }}>{block.heading}</h3>
-                        <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", lineHeight: 1.9, marginBottom: "1.8rem" }}>{block.body}</p>
+                        <p style={{ fontSize: "0.85rem", color: "rgba(10,10,10,0.65)", lineHeight: 1.9, marginBottom: "1.8rem" }}>{block.body}</p>
                         <div style={{ marginBottom: "1.8rem", borderRadius: "4px", overflow: "hidden", background: "rgba(0,0,0,0.3)", padding: "1rem 0.5rem 0.5rem" }}>
                           <ScoreChart data={CANADA_GAME} annotations={[
                             { i: 10, label: "5\u20135", cze: true },
@@ -1010,17 +1035,17 @@ export default function App() {
                           {block.stats.map(([v, l]) => (
                             <div key={l} style={{ padding: "0.6rem 1rem", border: "1px solid rgba(255,170,51,0.15)", borderRadius: "4px", textAlign: "center" }}>
                               <div style={{ fontSize: "1.1rem", fontWeight: 300, color: "#ffaa33", lineHeight: 1 }}>{v}</div>
-                              <div style={{ fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginTop: "0.3rem" }}>{l}</div>
+                              <div style={{ fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(10,10,10,0.25)", marginTop: "0.3rem" }}>{l}</div>
                             </div>
                           ))}
                         </div>
                       </div>
                     ) : block.isBronze ? (
                       <div>
-                        <p style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "0.5rem" }}>{block.label}</p>
+                        <p style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(10,10,10,0.2)", marginBottom: "0.5rem" }}>{block.label}</p>
                         <h3 style={{ fontSize: "1.05rem", fontWeight: 400, color: "rgba(255,220,150,0.95)", marginBottom: "0.9rem", lineHeight: 1.3 }}>{block.heading}</h3>
-                        <p style={{ fontSize: "0.84rem", color: "rgba(255,255,255,0.48)", lineHeight: 1.9, marginBottom: "1.8rem" }}>{block.body}</p>
-                        <div style={{ borderRadius: "4px", overflow: "hidden", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)", padding: "1rem 0.5rem 0.5rem", marginBottom: "2rem" }}>
+                        <p style={{ fontSize: "0.84rem", color: "rgba(10,10,10,0.6)", lineHeight: 1.9, marginBottom: "1.8rem" }}>{block.body}</p>
+                        <div style={{ borderRadius: "4px", overflow: "hidden", background: "rgba(0,0,0,0.02)", border: "1px solid rgba(0,0,0,0.05)", padding: "1rem 0.5rem 0.5rem", marginBottom: "2rem" }}>
                           <ScoreChart data={BRONZE_GAME} annotations={[
                             { i: 17, label: "9\u20138 ESP", cze: false },
                             { i: 19, label: "10\u20139 ESP", cze: false },
@@ -1041,9 +1066,9 @@ export default function App() {
                       </div>
                     ) : (
                       <div>
-                        <p style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "0.5rem" }}>{block.label}</p>
+                        <p style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(10,10,10,0.2)", marginBottom: "0.5rem" }}>{block.label}</p>
                         <h3 style={{ fontSize: "1.05rem", fontWeight: 400, color: "#fff", marginBottom: "0.9rem", lineHeight: 1.3 }}>{block.heading}</h3>
-                        <p style={{ fontSize: "0.84rem", color: "rgba(255,255,255,0.48)", lineHeight: 1.9 }}>{block.body}</p>
+                        <p style={{ fontSize: "0.84rem", color: "rgba(10,10,10,0.6)", lineHeight: 1.9 }}>{block.body}</p>
                       </div>
                     )}
                   </div>
@@ -1055,7 +1080,7 @@ export default function App() {
       </section>
 
       {/* ── RESULTS ── */}
-      <section id="Results" style={{ padding: "6rem 3rem 7rem", borderTop: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.008)" }}>
+      <section id="Results" style={{ padding: "6rem 3rem 7rem", borderTop: "1px solid rgba(0,0,0,0.07)", background: "rgba(0,0,0,0.01)" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <Fade><SectionHeader num="02" label={t.s02} sub={t.s02sub} /></Fade>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.2rem" }}>
@@ -1065,23 +1090,23 @@ export default function App() {
               const total = games.length;
               return (
                 <Fade key={phase} delay={0.05}>
-                  <div style={{ border: `1px solid ${isBronze ? "rgba(255,170,51,0.3)" : "rgba(255,255,255,0.06)"}`, borderRadius: "6px", overflow: "hidden" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.75rem 1.1rem", borderBottom: "1px solid rgba(255,255,255,0.05)", background: isBronze ? "rgba(255,170,51,0.06)" : "rgba(255,255,255,0.02)" }}>
+                  <div style={{ border: `1px solid ${isBronze ? "rgba(255,170,51,0.3)" : "rgba(0,0,0,0.06)"}`, borderRadius: "6px", overflow: "hidden" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.75rem 1.1rem", borderBottom: "1px solid rgba(0,0,0,0.05)", background: isBronze ? "rgba(255,170,51,0.06)" : "rgba(0,0,0,0.02)" }}>
                       <span style={{ fontSize: "0.6rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: isBronze ? "#ffaa33" : "rgba(100,150,255,0.75)" }}>
                         {isBronze ? "\uD83E\uDD49 " : ""}{phase}
                       </span>
-                      {!isBronze && <span style={{ fontFamily: "monospace", fontSize: "0.6rem", color: "rgba(255,255,255,0.2)" }}>{wins}W \u2013 {total - wins}L</span>}
+                      {!isBronze && <span style={{ fontFamily: "monospace", fontSize: "0.6rem", color: "rgba(10,10,10,0.2)" }}>{wins}W \u2013 {total - wins}L</span>}
                     </div>
                     {games.map((g, i) => {
                       const win = g.us > g.them;
                       const isCanada = g.opponent === "Canada";
                       return (
-                        <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 80px 28px", alignItems: "center", padding: `${isCanada ? "0.85rem" : "0.65rem"} 1.1rem`, borderBottom: i < games.length - 1 ? "1px solid rgba(255,255,255,0.03)" : "none", background: g.final ? "rgba(255,170,51,0.04)" : isCanada ? "rgba(255,170,51,0.025)" : "transparent" }}>
+                        <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 80px 28px", alignItems: "center", padding: `${isCanada ? "0.85rem" : "0.65rem"} 1.1rem`, borderBottom: i < games.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none", background: g.final ? "rgba(255,170,51,0.04)" : isCanada ? "rgba(255,170,51,0.025)" : "transparent" }}>
                           <div>
-                            <span style={{ fontSize: "0.8rem", color: g.final || isCanada ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.6)", fontWeight: g.final || isCanada ? 400 : 300, display: "block" }}>{g.opponent}</span>
+                            <span style={{ fontSize: "0.8rem", color: g.final || isCanada ? "rgba(10,10,10,0.9)" : "rgba(10,10,10,0.65)", fontWeight: g.final || isCanada ? 400 : 300, display: "block" }}>{g.opponent}</span>
                             {isCanada && <span style={{ fontSize: "0.56rem", letterSpacing: "0.1em", color: "rgba(255,170,51,0.55)", display: "block", marginTop: "2px" }}>Undefeated \u00b7 1 offensive turnover</span>}
                           </div>
-                          <span style={{ fontFamily: "monospace", fontSize: "0.92rem", fontWeight: 500, color: g.final ? "#ffaa33" : win ? "#6699ff" : "rgba(255,255,255,0.22)", letterSpacing: "0.03em", textAlign: "right" }}>{g.us}\u2013{g.them}</span>
+                          <span style={{ fontFamily: "monospace", fontSize: "0.92rem", fontWeight: 500, color: g.final ? "#ffaa33" : win ? "#6699ff" : "rgba(10,10,10,0.3)", letterSpacing: "0.03em", textAlign: "right" }}>{g.us}\u2013{g.them}</span>
                           <span style={{ fontSize: "0.58rem", fontWeight: 500, color: g.final ? "#ffaa33" : win ? "rgba(80,200,100,0.85)" : "rgba(255,70,70,0.55)", textAlign: "right", letterSpacing: "0.05em" }}>
                             {g.final ? "\uD83E\uDD49" : win ? "W" : "L"}
                           </span>
@@ -1100,7 +1125,7 @@ export default function App() {
       <BracketSection t={t} />
 
       {/* ── GALLERY ── */}
-      <section id="Gallery" style={{ padding: "7rem 3rem 8rem", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <section id="Gallery" style={{ padding: "7rem 3rem 8rem", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <Fade><SectionHeader num="04" label={t.s04} sub={t.s04sub} /></Fade>
 
@@ -1113,7 +1138,7 @@ export default function App() {
 
           {/* Masonry grid */}
           <Fade delay={0.1}>
-            <p style={{ fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.18)", margin: "1.5rem 0 1.2rem" }}>
+            <p style={{ fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(10,10,10,0.18)", margin: "1.5rem 0 1.2rem" }}>
               {t.gallery_hint}
             </p>
             <div style={{ columnCount: 4, columnGap: "3px" }}>
@@ -1128,13 +1153,13 @@ export default function App() {
       </section>
 
       {/* ── AFTER ── */}
-      <section id="After" style={{ padding: "7rem 3rem 8rem", borderTop: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.005)" }}>
+      <section id="After" style={{ padding: "7rem 3rem 8rem", borderTop: "1px solid rgba(0,0,0,0.07)", background: "rgba(0,0,0,0.02)" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <Fade><SectionHeader num="05" label={t.s05} sub={t.s05sub} /></Fade>
 
           {/* Celebration clips */}
           <Fade delay={0.05}>
-            <p style={{ fontSize: "0.52rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "1rem" }}>{t.after_reels}</p>
+            <p style={{ fontSize: "0.52rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(10,10,10,0.2)", marginBottom: "1rem" }}>{t.after_reels}</p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px", marginBottom: "1.5rem" }}>
               <VideoClip src="bronze-moment-1.mp4" aspect="9/16" />
               <VideoClip src="bronze-moment-2.mp4" aspect="9/16" />
@@ -1143,10 +1168,9 @@ export default function App() {
 
           {/* More clips */}
           <Fade delay={0.1}>
-            <p style={{ fontSize: "0.52rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", margin: "2.5rem 0 1rem" }}>{t.after_more}</p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "6px" }}>
+            <p style={{ fontSize: "0.52rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(10,10,10,0.2)", margin: "2.5rem 0 1rem" }}>{t.after_more}</p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px" }}>
               <VideoClip src="after-1.mp4" aspect="4/5" />
-              <VideoClip src="after-2.mp4" aspect="4/5" />
               <VideoClip src="after-3.mp4" aspect="4/5" />
             </div>
           </Fade>
@@ -1154,7 +1178,7 @@ export default function App() {
           {/* Photo grid — populated once photos are uploaded as files */}
           {AFTER_PHOTOS.length > 0 && (
             <Fade delay={0.15}>
-              <p style={{ fontSize: "0.52rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", margin: "2.5rem 0 1rem" }}>Moments</p>
+              <p style={{ fontSize: "0.52rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(10,10,10,0.2)", margin: "2.5rem 0 1rem" }}>Moments</p>
               <div style={{ columnCount: 3, columnGap: "4px" }}>
                 {AFTER_PHOTOS.map((photo, i) => (
                   <div key={photo.file} style={{ breakInside: "avoid", marginBottom: "4px" }}>
@@ -1172,9 +1196,9 @@ export default function App() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.8rem 3rem", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
-        <span style={{ fontSize: "0.82rem", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>Czech Mixed</span>
-        <span style={{ fontFamily: "monospace", fontSize: "0.58rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.15)" }}>Czech Republic &middot; National Mixed Team</span>
+      <footer style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.8rem 3rem", borderTop: "1px solid rgba(0,0,0,0.04)" }}>
+        <span style={{ fontSize: "0.82rem", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(10,10,10,0.7)" }}>Czech Mixed</span>
+        <span style={{ fontFamily: "monospace", fontSize: "0.58rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(10,10,10,0.15)" }}>Czech Republic &middot; National Mixed Team</span>
         <span style={{ fontFamily: "monospace", fontSize: "0.6rem", letterSpacing: "0.08em", color: "rgba(255,170,51,0.6)" }}>WBUC Portim&#227;o 2025 &middot; &#x1F949;</span>
       </footer>
 
