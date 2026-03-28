@@ -28,11 +28,13 @@
   .pbutton .count { font-size:10px; color:#666; margin-left:2px; }
   .pbutton.active .count { color:var(--c); }
 
-  #toolbar { display:flex; align-items:center; gap:10px; margin-top:8px; }
+  #toolbar { display:flex; align-items:center; gap:10px; margin-top:8px; flex-wrap:wrap; }
   #filter-btns { display:flex; gap:4px; }
   .fbtn { font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:4px 8px;
     background:#1a1a1a; border:1px solid #333; color:#666; border-radius:3px; cursor:pointer; }
   .fbtn.active { background:#333; color:#ccc; border-color:#555; }
+  .fbtn.danger { }
+  .fbtn.danger.active { background:rgba(255,80,80,.15); color:#f55; border-color:#f55; }
   #search { background:#1a1a1a; border:1px solid #333; border-radius:3px; padding:4px 8px;
     color:#ccc; font-size:11px; width:130px; }
   #export-btn { margin-left:auto; padding:6px 16px; background:#ffaa33; color:#000;
@@ -54,6 +56,8 @@
   .tile.tagged { border-color:var(--c); }
   .tile.tagged img { opacity:.75; }
   .tile.dimmed { opacity:.3; }
+  .tile.hidden-tile { opacity:.4; border-color:#f5545444; }
+  .tile.hidden-tile img { filter:grayscale(1); }
 
   .badge {
     position:absolute; top:4px; right:4px;
@@ -66,6 +70,41 @@
     position:absolute; bottom:0; left:0; right:0;
     font-size:8px; color:rgba(255,255,255,.5); padding:2px 4px;
     background:rgba(0,0,0,.6); letter-spacing:.04em;
+    pointer-events:none;
+  }
+
+  /* Delete button on tile */
+  .del-btn {
+    position:absolute; top:4px; left:4px;
+    width:20px; height:20px; border-radius:3px;
+    background:rgba(200,40,40,.85); border:none; color:#fff;
+    font-size:13px; line-height:1; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .15s;
+    z-index:10;
+  }
+  .tile:hover .del-btn { opacity:1; }
+  .del-btn:hover { background:rgba(255,60,60,1) !important; }
+
+  /* Restore button for hidden tiles */
+  .restore-btn {
+    position:absolute; top:4px; left:4px;
+    width:20px; height:20px; border-radius:3px;
+    background:rgba(80,200,80,.85); border:none; color:#fff;
+    font-size:13px; line-height:1; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .15s;
+    z-index:10;
+  }
+  .tile:hover .restore-btn { opacity:1; }
+  .restore-btn:hover { background:rgba(100,220,100,1) !important; }
+
+  /* Hidden badge */
+  .hidden-badge {
+    position:absolute; top:4px; right:4px;
+    padding:2px 5px; border-radius:2px;
+    font-size:9px; font-weight:700; letter-spacing:.05em;
+    background:#f55; color:#fff;
     pointer-events:none;
   }
 
@@ -86,18 +125,22 @@
     border:1px solid #333; border-radius:4px; font-size:11px; cursor:pointer; }
   #close-btn:hover { color:#fff; }
   #modal-note { margin-top:10px; font-size:10px; color:#666; line-height:1.6; }
+  #hidden-summary { margin-top:14px; padding:10px 14px; background:#1a0a0a; border:1px solid #422;
+    border-radius:4px; font-size:10px; color:#f99; line-height:1.8; }
+  #hidden-summary strong { color:#f55; display:block; margin-bottom:4px; }
 </style>
 </head>
 <body>
 
 <div id="top">
-  <h1>Photo Tagger &middot; Czech Mixed &middot; <span id="total-count">0</span> tagged</h1>
+  <h1>Photo Tagger &middot; Czech Mixed &middot; <span id="total-count">0</span> tagged &middot; <span id="hidden-count">0</span> hidden</h1>
   <div id="players"></div>
   <div id="toolbar">
     <div id="filter-btns">
       <button class="fbtn active" data-filter="all">All</button>
       <button class="fbtn" data-filter="tagged">Tagged</button>
       <button class="fbtn" data-filter="untagged">Untagged</button>
+      <button class="fbtn danger" data-filter="hidden">Hidden</button>
     </div>
     <input id="search" type="text" placeholder="Search filename…">
     <span id="status"></span>
@@ -116,6 +159,7 @@
       <button id="copy-btn" onclick="copyCode()">Copy to clipboard</button>
       <button id="close-btn" onclick="closeExport()">Close</button>
     </div>
+    <div id="hidden-summary"></div>
     <div id="modal-note">
       Paste this into App.jsx, replacing the existing <code>const PLAYERS = [...];</code> block.<br>
       Then run <code>bash ~/Desktop/push_mix.sh</code> to deploy.
@@ -162,30 +206,36 @@ const DEFAULT = {
   "Maja Volkova":     ["_MG_1516.jpg","_MG_1495.jpg","_MG_1500.jpg","_MG_1502.jpg","_MG_1503.jpg","_MG_1518.jpg","_MG_1522.jpg"],
 };
 
-// State: photo → player name (or null)
-let assignments = {};
+// State
+let assignments = {};  // photo → player name
+let hidden = new Set(); // hidden photo filenames
 let selectedPlayer = null;
 let filter = 'all';
 let searchQ = '';
 
-const STORE_KEY = 'czech_mixed_tags_v1';
+const STORE_KEY  = 'czech_mixed_tags_v1';
+const HIDDEN_KEY = 'czech_mixed_hidden_v1';
 
 function load() {
   try {
     const saved = localStorage.getItem(STORE_KEY);
-    if (saved) { assignments = JSON.parse(saved); return; }
+    if (saved) { assignments = JSON.parse(saved); }
+    else {
+      assignments = {};
+      Object.entries(DEFAULT).forEach(([name, photos]) => {
+        photos.forEach(p => { assignments[p] = name; });
+      });
+      save();
+    }
   } catch(e) {}
-  // First run: load defaults
-  assignments = {};
-  Object.entries(DEFAULT).forEach(([name, photos]) => {
-    photos.forEach(p => { assignments[p] = name; });
-  });
-  save();
+  try {
+    const savedH = localStorage.getItem(HIDDEN_KEY);
+    if (savedH) { hidden = new Set(JSON.parse(savedH)); }
+  } catch(e) {}
 }
 
-function save() {
-  localStorage.setItem(STORE_KEY, JSON.stringify(assignments));
-}
+function save() { localStorage.setItem(STORE_KEY, JSON.stringify(assignments)); }
+function saveHidden() { localStorage.setItem(HIDDEN_KEY, JSON.stringify([...hidden])); }
 
 function getPlayer(name) { return PLAYERS.find(p => p.name === name); }
 function playerColor(name) { const p = getPlayer(name); return p ? p.color : '#fff'; }
@@ -211,6 +261,7 @@ function renderPlayers() {
     bar.appendChild(btn);
   });
   document.getElementById('total-count').textContent = Object.keys(assignments).length;
+  document.getElementById('hidden-count').textContent = hidden.size;
 }
 
 // ── Render photo grid ──
@@ -219,26 +270,70 @@ function renderGrid() {
   grid.innerHTML = '';
   const visPhotos = ALL_PHOTOS.filter(f => {
     if (searchQ && !f.toLowerCase().includes(searchQ)) return false;
-    if (filter === 'tagged')   return assignments[f];
-    if (filter === 'untagged') return !assignments[f];
-    return true;
+    if (filter === 'tagged')   return assignments[f] && !hidden.has(f);
+    if (filter === 'untagged') return !assignments[f] && !hidden.has(f);
+    if (filter === 'hidden')   return hidden.has(f);
+    // 'all' — show everything except hidden
+    return !hidden.has(f);
   });
   document.getElementById('status').textContent = `${visPhotos.length} photos`;
 
   visPhotos.forEach(file => {
+    const isHidden = hidden.has(file);
     const owner = assignments[file];
     const p = owner ? getPlayer(owner) : null;
+
     const tile = document.createElement('div');
-    tile.className = 'tile' + (owner ? ' tagged' : '');
+    tile.className = 'tile' + (owner && !isHidden ? ' tagged' : '') + (isHidden ? ' hidden-tile' : '');
     tile.dataset.file = file;
-    if (p) tile.style.setProperty('--c', p.color);
-    tile.innerHTML = `<img src="${file}" loading="lazy" onerror="this.parentElement.style.opacity='.3'">
-      ${p ? `<div class="badge">${p.initials}</div>` : ''}
-      <div class="fname">${file.replace('_MG_','').replace('.jpg','')}</div>`;
-    tile.addEventListener('click', () => toggleTag(file, tile));
+    if (p && !isHidden) tile.style.setProperty('--c', p.color);
+
+    if (isHidden) {
+      // Restore button
+      const rb = document.createElement('button');
+      rb.className = 'restore-btn'; rb.title = 'Restore'; rb.textContent = '↩';
+      rb.addEventListener('click', e => { e.stopPropagation(); restorePhoto(file, tile); });
+      tile.innerHTML = `<img src="${file}" loading="lazy" onerror="this.parentElement.style.opacity='.2'">
+        <div class="hidden-badge">✕</div>
+        <div class="fname">${file.replace('_MG_','').replace('.jpg','')}</div>`;
+      tile.appendChild(rb);
+    } else {
+      // Delete button
+      const db = document.createElement('button');
+      db.className = 'del-btn'; db.title = 'Hide photo'; db.textContent = '✕';
+      db.addEventListener('click', e => { e.stopPropagation(); hidePhoto(file, tile); });
+
+      tile.innerHTML = `<img src="${file}" loading="lazy" onerror="this.parentElement.style.opacity='.3'">
+        ${p ? `<div class="badge">${p.initials}</div>` : ''}
+        <div class="fname">${file.replace('_MG_','').replace('.jpg','')}</div>`;
+      tile.appendChild(db);
+      tile.addEventListener('click', () => toggleTag(file, tile));
+    }
+
     grid.appendChild(tile);
   });
   updateGridDim();
+}
+
+function hidePhoto(file, tile) {
+  // Remove any player tag
+  delete assignments[file];
+  hidden.add(file);
+  save(); saveHidden();
+  // Remove from grid (unless we're in hidden filter)
+  if (filter !== 'hidden') {
+    tile.remove();
+  } else {
+    renderGrid();
+  }
+  renderPlayers();
+}
+
+function restorePhoto(file, tile) {
+  hidden.delete(file);
+  saveHidden();
+  renderGrid();
+  renderPlayers();
 }
 
 function toggleTag(file, tile) {
@@ -256,10 +351,15 @@ function toggleTag(file, tile) {
   tile.style.setProperty('--c', p ? p.color : 'transparent');
   tile.querySelector('.badge')?.remove();
   tile.querySelector('.fname')?.remove();
+  tile.querySelector('.del-btn')?.remove();
   if (p) {
     const b = document.createElement('div'); b.className = 'badge'; b.textContent = p.initials; tile.appendChild(b);
   }
   const fn = document.createElement('div'); fn.className = 'fname'; fn.textContent = file.replace('_MG_','').replace('.jpg',''); tile.appendChild(fn);
+  const db = document.createElement('button');
+  db.className = 'del-btn'; db.title = 'Hide photo'; db.textContent = '✕';
+  db.addEventListener('click', e => { e.stopPropagation(); hidePhoto(file, tile); });
+  tile.appendChild(db);
   updateGridDim();
   renderPlayers();
 }
@@ -284,13 +384,10 @@ function clearSelected() {
 // ── Export ──
 function openExport() {
   const byPlayer = {};
-  PLAYERS.forEach(p => {
-    // Always include profile photo first
-    byPlayer[p.name] = [p.photo];
-  });
+  PLAYERS.forEach(p => { byPlayer[p.name] = [p.photo]; });
   Object.entries(assignments).forEach(([file, name]) => {
     if (!byPlayer[name]) return;
-    if (!byPlayer[name].includes(file)) byPlayer[name].push(file);
+    if (!hidden.has(file) && !byPlayer[name].includes(file)) byPlayer[name].push(file);
   });
 
   const lines = PLAYERS.map(p => {
@@ -300,6 +397,20 @@ function openExport() {
   });
   const code = `const PLAYERS = [\n${lines.join(',\n')},\n];`;
   document.getElementById('modal-code').textContent = code;
+
+  // Show hidden photos summary
+  const hiddenEl = document.getElementById('hidden-summary');
+  if (hidden.size > 0) {
+    const list = [...hidden].map(f => f.replace('_MG_','').replace('.jpg','')).join(', ');
+    hiddenEl.innerHTML = `<strong>⚠ ${hidden.size} photos marked hidden</strong>
+These won't appear in player galleries. To also remove them from the main gallery in App.jsx,
+search for each filename in <code>ALL_PHOTOS</code> and delete those lines:<br><br>
+<code>${[...hidden].join(', ')}</code>`;
+    hiddenEl.style.display = 'block';
+  } else {
+    hiddenEl.style.display = 'none';
+  }
+
   document.getElementById('modal').classList.add('open');
 }
 
