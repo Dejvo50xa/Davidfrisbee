@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Profile Photo Picker</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0a0a0a; color: #eee; font-family: monospace; display: flex; height: 100vh; overflow: hidden; }
+
+#sidebar {
+  width: 230px; flex-shrink: 0; background: #111;
+  border-right: 1px solid #222; display: flex; flex-direction: column; overflow: hidden;
+}
+#sidebar h2 {
+  font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+  color: #ffaa33; padding: 14px 14px 10px; border-bottom: 1px solid #222; flex-shrink: 0;
+}
+#players { overflow-y: auto; flex: 1; }
+.player {
+  display: flex; align-items: center; gap: 9px; padding: 9px 12px;
+  cursor: pointer; border-bottom: 1px solid #1a1a1a; border-left: 2px solid transparent;
+  transition: background .15s;
+}
+.player:hover { background: #1a1a1a; }
+.player.active { background: #1c1a10; border-left-color: #ffaa33; }
+.player .num {
+  width: 20px; height: 20px; border-radius: 50%; background: #222; color: #555;
+  font-size: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.player.done .num { background: #1a3a1a; color: #6dc96d; }
+.player .pname { font-size: 12px; color: #aaa; flex: 1; }
+.player.active .pname { color: #fff; }
+.pthumb {
+  width: 34px; height: 34px; object-fit: cover;
+  border-radius: 3px; border: 1px solid #444; flex-shrink: 0;
+}
+.pthumb-empty {
+  width: 34px; height: 34px; border-radius: 3px;
+  background: #1a1a1a; border: 1px dashed #333; flex-shrink: 0;
+}
+#sidebar-footer { border-top: 1px solid #222; padding: 12px; flex-shrink: 0; }
+#export-btn {
+  width: 100%; background: #ffaa33; color: #000; border: none; padding: 9px;
+  font-family: monospace; font-size: 11px; font-weight: 700; cursor: pointer; border-radius: 3px;
+}
+#export-btn:hover { background: #ffc055; }
+#progress { font-size: 10px; color: #555; text-align: center; margin-top: 8px; }
+
+#main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+#topbar {
+  padding: 10px 14px; background: #0d0d0d; border-bottom: 1px solid #1e1e1e;
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+#topbar .lbl { font-size: 10px; color: #555; letter-spacing: .1em; text-transform: uppercase; }
+#active-label { font-size: 13px; color: #ffaa33; font-weight: 600; }
+#search {
+  margin-left: auto; background: #1a1a1a; border: 1px solid #2a2a2a; color: #ddd;
+  padding: 5px 10px; font-family: monospace; font-size: 11px; border-radius: 3px; width: 180px;
+}
+#grid-wrap { overflow-y: auto; flex: 1; padding: 8px; }
+#grid { display: grid; grid-template-columns: repeat(auto-fill, 130px); gap: 4px; }
+
+.tile {
+  position: relative; cursor: pointer; border: 2px solid transparent;
+  border-radius: 4px; overflow: hidden; background: #111;
+}
+.tile img { width: 130px; height: 97px; object-fit: cover; display: block; transition: opacity .15s; }
+.tile:hover img { opacity: .8; }
+.tile .fname {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,.8); font-size: 9px; padding: 2px 4px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #777;
+}
+.tile.assigned { border-color: #3a7a4a; }
+.tile.active-pick { border-color: #ffaa33; }
+.tile .badge {
+  display: none; position: absolute; top: 3px; right: 3px;
+  font-size: 9px; font-weight: 700; padding: 2px 5px; border-radius: 2px;
+}
+.tile.assigned .badge { display: block; background: #3a7a4a; color: #aaffaa; }
+.tile.active-pick .badge { display: block; background: #ffaa33; color: #000; }
+
+#overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.93);
+  z-index: 999; align-items: center; justify-content: center;
+}
+#overlay.open { display: flex; }
+#modal-box {
+  background: #111; border: 1px solid #333; border-radius: 6px;
+  padding: 24px; width: 640px; max-height: 80vh; overflow-y: auto;
+}
+#modal-box h3 { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #ffaa33; margin-bottom: 14px; }
+#output {
+  background: #000; border: 1px solid #222; padding: 14px;
+  font-size: 11px; font-family: monospace; white-space: pre; color: #6dc96d; line-height: 1.7;
+  border-radius: 3px; overflow-x: auto;
+}
+.mbtn {
+  background: #ffaa33; color: #000; border: none; padding: 8px 18px;
+  font-family: monospace; font-size: 11px; font-weight: 700; cursor: pointer;
+  border-radius: 3px; margin-top: 12px; margin-right: 8px;
+}
+.mbtn.close { background: #222; color: #888; }
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+  <h2>&#x1F949; WBUC Team &middot; 14 players</h2>
+  <div id="players"></div>
+  <div id="sidebar-footer">
+    <button id="export-btn" onclick="showOutput()">Export assignments</button>
+    <div id="progress">0 / 14 assigned</div>
+  </div>
+</div>
+
+<div id="main">
+  <div id="topbar">
+    <span class="lbl">Picking for:</span>
+    <span id="active-label">—</span>
+    <input id="search" type="text" placeholder="Filter by filename..." oninput="filterGrid(this.value)">
+  </div>
+  <div id="grid-wrap"><div id="grid"></div></div>
+</div>
+
+<div id="overlay">
+  <div id="modal-box">
+    <h3>Profile photo assignments — paste to Claude</h3>
+    <div id="output"></div>
+    <button class="mbtn" onclick="copyOutput()">Copy to clipboard</button>
+    <button class="mbtn close" onclick="document.getElementById('overlay').classList.remove('open')">Close</button>
+  </div>
+</div>
+
+<script>
+var PLAYERS = [
+  "Filip Halamka","Patrik Novak","Jachym Hrusak","Ondrej Rydlo",
+  "Vojtech Rybka","Michal Schvob","David Novak","Sarah Nemeckova",
+  "Tereza Mrazova","Tereza Havelcova","Bara Hrusakova",
+  "Anicka Dvorakova","Klara Svecova","Maja Volkova"
+];
+
+var PHOTOS = [
+  "_MG_1452.jpg","_MG_1453.jpg","_MG_1454.jpg","_MG_1456.jpg","_MG_1457.jpg",
+  "_MG_1459.jpg","_MG_1462.jpg","_MG_1469.jpg","_MG_1471.jpg","_MG_1472.jpg",
+  "_MG_1474.jpg","_MG_1476.jpg","_MG_1486.jpg","_MG_1488.jpg","_MG_1489.jpg",
+  "_MG_1495.jpg","_MG_1500.jpg","_MG_1502.jpg","_MG_1503.jpg","_MG_1516.jpg",
+  "_MG_1518.jpg","_MG_1522.jpg","_MG_1533.jpg","_MG_1539.jpg","_MG_1549.jpg",
+  "_MG_1550.jpg","_MG_1551.jpg","_MG_1554.jpg","_MG_1561.jpg","_MG_1564.jpg",
+  "_MG_1783.jpg","_MG_1875.jpg","_MG_1884.jpg","_MG_1890.jpg","_MG_1901.jpg",
+  "_MG_1904.jpg","_MG_1907.jpg","_MG_1915.jpg","_MG_1921.jpg","_MG_1936.jpg",
+  "_MG_1938.jpg","_MG_1945.jpg","_MG_1950.jpg","_MG_1955.jpg","_MG_1958.jpg",
+  "_MG_1971.jpg","_MG_1973.jpg","_MG_1975.jpg","_MG_1989.jpg","_MG_2526.jpg",
+  "_MG_2531.jpg","_MG_2533.jpg","_MG_2544.jpg","_MG_2549.jpg","_MG_2561.jpg",
+  "_MG_2599.jpg","_MG_2611.jpg","_MG_2621.jpg","_MG_2623.jpg","_MG_2631.jpg",
+  "_MG_2644.jpg","_MG_2645.jpg","_MG_2646.jpg","_MG_2649.jpg","_MG_2650.jpg",
+  "_MG_2658.jpg","_MG_2659.jpg","_MG_2663.jpg","_MG_2665.jpg","_MG_2667.jpg",
+  "_MG_2670.jpg","_MG_2672.jpg","_MG_2676.jpg","_MG_2681.jpg","_MG_2685.jpg",
+  "_MG_2691.jpg","_MG_3268.jpg","_MG_3272.jpg","_MG_3296.jpg","_MG_3321.jpg",
+  "_MG_3324.jpg","_MG_3326.jpg","_MG_3344.jpg","_MG_3423.jpg","_MG_3447.jpg",
+  "_MG_3453.jpg","_MG_3456.jpg","_MG_3471.jpg","_MG_3478.jpg","_MG_3480.jpg",
+  "_MG_3482.jpg","_MG_3490.jpg","_MG_3500.jpg","_MG_3510.jpg","_MG_3513.jpg",
+  "_MG_3515.jpg","_MG_3517.jpg","_MG_3518.jpg","_MG_3520.jpg","_MG_3521.jpg",
+  "_MG_3522.jpg","_MG_3528.jpg","_MG_3531.jpg","_MG_3534.jpg","_MG_3539.jpg",
+  "_MG_3546.jpg","_MG_3553.jpg","_MG_3559.jpg","_MG_3562.jpg","_MG_3565.jpg",
+  "_MG_3572.jpg","_MG_3576.jpg","_MG_3584.jpg","_MG_3589.jpg","_MG_3593.jpg",
+  "_MG_3594.jpg","_MG_3597.jpg","_MG_3600.jpg","_MG_3607.jpg","_MG_3632.jpg",
+  "_MG_3634.jpg","_MG_3640.jpg","_MG_3656.jpg","_MG_3659.jpg","_MG_3663.jpg",
+  "_MG_3668.jpg","_MG_3674.jpg","_MG_3709.jpg","_MG_3717.jpg"
+];
+
+var assignments = {};
+var activeIdx = 0;
+
+// Build sidebar
+var pContainer = document.getElementById('players');
+PLAYERS.forEach(function(name, i) {
+  var div = document.createElement('div');
+  div.className = 'player';
+  div.id = 'player-' + i;
+  div.innerHTML =
+    '<div class="num">' + (i+1) + '</div>' +
+    '<div class="pthumb-empty" id="pthumb-' + i + '"></div>' +
+    '<div class="pname">' + name + '</div>';
+  div.onclick = (function(n, idx) { return function() { setActive(n, idx); }; })(name, i);
+  pContainer.appendChild(div);
+});
+
+// Build grid
+var grid = document.getElementById('grid');
+PHOTOS.forEach(function(fname) {
+  var div = document.createElement('div');
+  div.className = 'tile';
+  div.dataset.fname = fname;
+  var img = document.createElement('img');
+  img.src = fname;
+  img.loading = 'lazy';
+  img.onerror = function() { this.parentNode.style.display = 'none'; };
+  var label = document.createElement('div');
+  label.className = 'fname';
+  label.textContent = fname;
+  var badge = document.createElement('div');
+  badge.className = 'badge';
+  div.appendChild(img);
+  div.appendChild(label);
+  div.appendChild(badge);
+  div.onclick = (function(f) { return function() { assignPhoto(f); }; })(fname);
+  grid.appendChild(div);
+});
+
+function setActive(name, idx) {
+  activeIdx = idx;
+  document.querySelectorAll('.player').forEach(function(p) { p.classList.remove('active'); });
+  var el = document.getElementById('player-' + idx);
+  if (el) { el.classList.add('active'); el.scrollIntoView({block: 'nearest'}); }
+  document.getElementById('active-label').textContent = name;
+  refreshGrid();
+}
+
+function assignPhoto(fname) {
+  var name = PLAYERS[activeIdx];
+  // remove old tile highlight for this player
+  var prev = assignments[name];
+  if (prev) {
+    var oldTile = document.querySelector('.tile[data-fname="' + prev + '"]');
+    if (oldTile) { oldTile.classList.remove('active-pick', 'assigned'); oldTile.querySelector('.badge').textContent = ''; }
+  }
+
+  assignments[name] = fname;
+
+  // update sidebar thumbnail
+  var oldThumb = document.getElementById('pthumb-' + activeIdx);
+  var img = document.createElement('img');
+  img.className = 'pthumb';
+  img.id = 'pthumb-' + activeIdx;
+  img.src = fname;
+  oldThumb.parentNode.replaceChild(img, oldThumb);
+  document.getElementById('player-' + activeIdx).classList.add('done');
+
+  refreshGrid();
+  updateProgress();
+
+  // advance to next unassigned
+  var next = -1;
+  for (var j = activeIdx + 1; j < PLAYERS.length; j++) {
+    if (!assignments[PLAYERS[j]]) { next = j; break; }
+  }
+  if (next !== -1) setActive(PLAYERS[next], next);
+}
+
+function refreshGrid() {
+  var revMap = {};
+  Object.keys(assignments).forEach(function(p) { revMap[assignments[p]] = p; });
+  document.querySelectorAll('.tile').forEach(function(tile) {
+    var fname = tile.dataset.fname;
+    var owner = revMap[fname];
+    var badge = tile.querySelector('.badge');
+    tile.classList.remove('assigned', 'active-pick');
+    badge.textContent = '';
+    if (owner) {
+      var first = owner.split(' ')[0];
+      if (PLAYERS[activeIdx] === owner) {
+        tile.classList.add('active-pick');
+        badge.textContent = first;
+      } else {
+        tile.classList.add('assigned');
+        badge.textContent = first;
+      }
+    }
+  });
+}
+
+function updateProgress() {
+  var n = Object.keys(assignments).length;
+  document.getElementById('progress').textContent = n + ' / ' + PLAYERS.length + ' assigned';
+}
+
+function filterGrid(q) {
+  q = (q || '').toLowerCase();
+  document.querySelectorAll('.tile').forEach(function(t) {
+    t.style.display = (!q || t.dataset.fname.toLowerCase().indexOf(q) !== -1) ? '' : 'none';
+  });
+}
+
+function showOutput() {
+  var lines = PLAYERS.map(function(p) {
+    var f = assignments[p];
+    return '  "' + p + '": ' + (f ? '"' + f + '"' : '"" // not assigned yet');
+  });
+  document.getElementById('output').textContent = '{\n' + lines.join(',\n') + '\n}';
+  document.getElementById('overlay').classList.add('open');
+}
+
+function copyOutput() {
+  var text = document.getElementById('output').textContent;
+  navigator.clipboard.writeText(text).then(function() { alert('Copied!'); });
+}
+
+setActive(PLAYERS[0], 0);
+</script>
+</body>
+</html>

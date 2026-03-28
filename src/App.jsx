@@ -606,7 +606,7 @@ export default function App() {
   const Nav = () => (
     <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.1rem 3rem", background: "rgba(0,0,0,0.75)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
       <button onClick={() => goHome()} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
-        <span style={{ fontSize: "0.85rem", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)" }}>David</span>
+        <span style={{ fontSize: "0.85rem", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.9)" }}>Czech Mixed</span>
       </button>
       <ul style={{ display: "flex", gap: "2.5rem", listStyle: "none" }}>
         {[
@@ -832,8 +832,8 @@ export default function App() {
 
       {/* ── FOOTER ── */}
       <footer style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1.8rem 3rem", borderTop: "1px solid rgba(255,255,255,0.04)" }}>
-        <span style={{ fontSize: "0.82rem", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>David</span>
-        <span style={{ fontFamily: "monospace", fontSize: "0.58rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.15)" }}>Czech Republic &middot; Ultimate Frisbee</span>
+        <span style={{ fontSize: "0.82rem", fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>Czech Mixed</span>
+        <span style={{ fontFamily: "monospace", fontSize: "0.58rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.15)" }}>Czech Republic &middot; National Mixed Team</span>
         <span style={{ fontFamily: "monospace", fontSize: "0.6rem", letterSpacing: "0.08em", color: "rgba(255,170,51,0.6)" }}>WBUC Portim&#227;o 2025 &middot; &#x1F949;</span>
       </footer>
 
