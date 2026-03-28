@@ -128,13 +128,38 @@
   #hidden-summary { margin-top:14px; padding:10px 14px; background:#1a0a0a; border:1px solid #422;
     border-radius:4px; font-size:10px; color:#f99; line-height:1.8; }
   #hidden-summary strong { color:#f55; display:block; margin-bottom:4px; }
+
+  /* Team button */
+  .team-btn {
+    display:flex; align-items:center; gap:6px;
+    padding:5px 12px 5px 5px;
+    border-radius:4px; border:1px solid #444; cursor:pointer;
+    background:#1a1a1a; transition:all .15s; user-select:none;
+    margin-right:6px;
+  }
+  .team-btn:hover { border-color:#aaa; }
+  .team-btn.active { border-color:#fff; background:rgba(255,255,255,0.12); }
+  .team-btn .t-icon { width:28px; height:28px; border-radius:3px; background:#222;
+    border:1px solid #444; display:flex; align-items:center; justify-content:center;
+    font-size:14px; flex-shrink:0; }
+  .team-btn .label { font-size:11px; font-weight:600; white-space:nowrap; color:#ccc; }
+  .team-btn.active .label { color:#fff; }
+  .team-btn .count { font-size:10px; color:#666; margin-left:2px; }
+  .team-btn.active .count { color:#aaa; }
+
+  #players-wrap { display:flex; align-items:center; flex-wrap:wrap; gap:4px; }
+  .players-divider { width:1px; height:28px; background:#333; margin:0 4px; flex-shrink:0; }
 </style>
 </head>
 <body>
 
 <div id="top">
   <h1>Photo Tagger &middot; Czech Mixed &middot; <span id="total-count">0</span> tagged &middot; <span id="hidden-count">0</span> hidden</h1>
-  <div id="players"></div>
+  <div id="players-wrap">
+    <div id="team-btn-wrap"></div>
+    <div class="players-divider"></div>
+    <div id="players"></div>
+  </div>
   <div id="toolbar">
     <div id="filter-btns">
       <button class="fbtn active" data-filter="all">All</button>
@@ -161,7 +186,8 @@
     </div>
     <div id="hidden-summary"></div>
     <div id="modal-note">
-      Paste this into App.jsx, replacing the existing <code>const PLAYERS = [...];</code> block.<br>
+      Paste into App.jsx, replacing the existing <code>const PLAYERS = [...];</code> block.<br>
+      If you tagged Team photos, also replace <code>const ALL_PHOTOS = [...]</code> with the exported <code>TEAM_PHOTOS</code> list.<br>
       Then run <code>bash ~/Desktop/push_mix.sh</code> to deploy.
     </div>
   </div>
@@ -206,8 +232,11 @@ const DEFAULT = {
   "Maja Volkova":     ["_MG_1516.jpg","_MG_1495.jpg","_MG_1500.jpg","_MG_1502.jpg","_MG_1503.jpg","_MG_1518.jpg","_MG_1522.jpg"],
 };
 
+// Special team pseudo-player
+const TEAM = { name:"Team", initials:"CZ", photo:"_MG_2659.jpg", color:"#ffffff" };
+
 // State
-let assignments = {};  // photo → player name
+let assignments = {};  // photo → player name (or "Team")
 let hidden = new Set(); // hidden photo filenames
 let selectedPlayer = null;
 let filter = 'all';
@@ -237,11 +266,30 @@ function load() {
 function save() { localStorage.setItem(STORE_KEY, JSON.stringify(assignments)); }
 function saveHidden() { localStorage.setItem(HIDDEN_KEY, JSON.stringify([...hidden])); }
 
-function getPlayer(name) { return PLAYERS.find(p => p.name === name); }
+function getPlayer(name) {
+  if (name === "Team") return TEAM;
+  return PLAYERS.find(p => p.name === name);
+}
 function playerColor(name) { const p = getPlayer(name); return p ? p.color : '#fff'; }
 
 // ── Render players bar ──
 function renderPlayers() {
+  // Team button
+  const teamWrap = document.getElementById('team-btn-wrap');
+  const teamCount = Object.values(assignments).filter(v => v === "Team").length;
+  const tb = document.createElement('div');
+  tb.className = 'team-btn' + (selectedPlayer === "Team" ? ' active' : '');
+  tb.innerHTML = `<div class="t-icon">🇨🇿</div>
+    <span class="label">Team</span>
+    <span class="count">${teamCount}</span>`;
+  tb.addEventListener('click', () => {
+    selectedPlayer = selectedPlayer === "Team" ? null : "Team";
+    renderPlayers(); renderStatus(); updateGridDim();
+  });
+  teamWrap.innerHTML = '';
+  teamWrap.appendChild(tb);
+
+  // Player buttons
   const bar = document.getElementById('players');
   bar.innerHTML = '';
   PLAYERS.forEach(p => {
@@ -254,9 +302,7 @@ function renderPlayers() {
       <span class="count">${count}</span>`;
     btn.addEventListener('click', () => {
       selectedPlayer = selectedPlayer === p.name ? null : p.name;
-      renderPlayers();
-      renderStatus();
-      updateGridDim();
+      renderPlayers(); renderStatus(); updateGridDim();
     });
     bar.appendChild(btn);
   });
@@ -385,9 +431,16 @@ function clearSelected() {
 function openExport() {
   const byPlayer = {};
   PLAYERS.forEach(p => { byPlayer[p.name] = [p.photo]; });
+  const teamPhotos = [];
+
   Object.entries(assignments).forEach(([file, name]) => {
+    if (hidden.has(file)) return;
+    if (name === "Team") {
+      if (!teamPhotos.includes(file)) teamPhotos.push(file);
+      return;
+    }
     if (!byPlayer[name]) return;
-    if (!hidden.has(file) && !byPlayer[name].includes(file)) byPlayer[name].push(file);
+    if (!byPlayer[name].includes(file)) byPlayer[name].push(file);
   });
 
   const lines = PLAYERS.map(p => {
@@ -395,7 +448,12 @@ function openExport() {
     const pArr = JSON.stringify(photos).replace(/,/g,', ');
     return `  { name:"${p.name}", initials:"${p.initials}", photo:"${p.photo}", feelings:"",\n    photos:${pArr} }`;
   });
-  const code = `const PLAYERS = [\n${lines.join(',\n')},\n];`;
+
+  const teamLine = teamPhotos.length > 0
+    ? `\n\n// ── Team / gallery photos (${teamPhotos.length}) ──\nconst TEAM_PHOTOS = ${JSON.stringify(teamPhotos, null, 2)};`
+    : '';
+
+  const code = `const PLAYERS = [\n${lines.join(',\n')},\n];${teamLine}`;
   document.getElementById('modal-code').textContent = code;
 
   // Show hidden photos summary
