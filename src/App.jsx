@@ -70,20 +70,34 @@ const TOURNAMENT_NARRATIVE = [
 ];
 
 const PLAYERS = [
-  { name: "Filip Halamka",    initials: "FH", photo: "_MG_1940.jpg", photos: ["_MG_1940.jpg"], feelings: "" },
-  { name: "Patrik Novak",     initials: "PN", photo: "_MG_2004.jpg", photos: ["_MG_2004.jpg"], feelings: "" },
-  { name: "Jachym Hrusak",    initials: "JH", photo: "_MG_1561.jpg", photos: ["_MG_1561.jpg"], feelings: "" },
-  { name: "Ondrej Rydlo",     initials: "OR", photo: "_MG_3543.jpg", photos: ["_MG_3543.jpg"], feelings: "" },
-  { name: "Vojtech Rybka",    initials: "VR", photo: "_MG_2691.jpg", photos: ["_MG_2691.jpg"], feelings: "" },
-  { name: "Michal Schvob",    initials: "MS", photo: "_MG_1469.jpg", photos: ["_MG_1469.jpg"], feelings: "" },
-  { name: "David Novak",      initials: "DN", photo: "_MG_2649.jpg", photos: ["_MG_2649.jpg"], feelings: "" },
-  { name: "Sarah Nemeckova",  initials: "SN", photo: "_MG_2667.jpg", photos: ["_MG_2667.jpg"], feelings: "" },
-  { name: "Tereza Mrazova",   initials: "TM", photo: "_MG_3480.jpg", photos: ["_MG_3480.jpg"], feelings: "" },
-  { name: "Tereza Havelcova", initials: "TH", photo: "_MG_2685.jpg", photos: ["_MG_2685.jpg"], feelings: "" },
-  { name: "Bara Hrusakova",   initials: "BH", photo: "_MG_3629.jpg", photos: ["_MG_3629.jpg"], feelings: "" },
-  { name: "Anicka Dvorakova", initials: "AD", photo: "_MG_3569.jpg", photos: ["_MG_3569.jpg"], feelings: "" },
-  { name: "Klara Svecova",    initials: "KS", photo: "_MG_3482.jpg", photos: ["_MG_3482.jpg"], feelings: "" },
-  { name: "Maja Volkova",     initials: "MV", photo: "_MG_1516.jpg", photos: ["_MG_1516.jpg"], feelings: "" },
+  { name: "Filip Halamka",    initials: "FH", photo: "_MG_1940.jpg", feelings: "",
+    photos: ["_MG_1940.jpg","_MG_1921.jpg","_MG_1936.jpg","_MG_1938.jpg","_MG_1945.jpg","_MG_1950.jpg"] },
+  { name: "Patrik Novak",     initials: "PN", photo: "_MG_2004.jpg", feelings: "",
+    photos: ["_MG_2004.jpg","_MG_1971.jpg","_MG_1975.jpg","_MG_1989.jpg"] },
+  { name: "Jachym Hrusak",    initials: "JH", photo: "_MG_1561.jpg", feelings: "",
+    photos: ["_MG_1561.jpg","_MG_1549.jpg","_MG_1550.jpg","_MG_1551.jpg","_MG_1554.jpg","_MG_1564.jpg"] },
+  { name: "Ondrej Rydlo",     initials: "OR", photo: "_MG_3543.jpg", feelings: "",
+    photos: ["_MG_3543.jpg","_MG_3534.jpg","_MG_3539.jpg","_MG_3546.jpg","_MG_3553.jpg"] },
+  { name: "Vojtech Rybka",    initials: "VR", photo: "_MG_2691.jpg", feelings: "",
+    photos: ["_MG_2691.jpg","_MG_2676.jpg","_MG_2681.jpg"] },
+  { name: "Michal Schvob",    initials: "MS", photo: "_MG_1469.jpg", feelings: "",
+    photos: ["_MG_1469.jpg","_MG_1462.jpg","_MG_1471.jpg","_MG_1472.jpg","_MG_1474.jpg"] },
+  { name: "David Novak",      initials: "DN", photo: "_MG_2649.jpg", feelings: "",
+    photos: ["_MG_2649.jpg","_MG_2644.jpg","_MG_2645.jpg","_MG_2646.jpg","_MG_2650.jpg"] },
+  { name: "Sarah Nemeckova",  initials: "SN", photo: "_MG_2667.jpg", feelings: "",
+    photos: ["_MG_2667.jpg","_MG_2663.jpg","_MG_2665.jpg","_MG_2670.jpg","_MG_2672.jpg"] },
+  { name: "Tereza Mrazova",   initials: "TM", photo: "_MG_3480.jpg", feelings: "",
+    photos: ["_MG_3480.jpg","_MG_3471.jpg","_MG_3478.jpg"] },
+  { name: "Tereza Havelcova", initials: "TH", photo: "_MG_2685.jpg", feelings: "",
+    photos: ["_MG_2685.jpg","_MG_2658.jpg","_MG_2663.jpg"] },
+  { name: "Bara Hrusakova",   initials: "BH", photo: "_MG_3629.jpg", feelings: "",
+    photos: ["_MG_3629.jpg","_MG_3632.jpg","_MG_3634.jpg","_MG_3640.jpg"] },
+  { name: "Anicka Dvorakova", initials: "AD", photo: "_MG_3569.jpg", feelings: "",
+    photos: ["_MG_3569.jpg","_MG_3559.jpg","_MG_3562.jpg","_MG_3565.jpg","_MG_3572.jpg","_MG_3576.jpg"] },
+  { name: "Klara Svecova",    initials: "KS", photo: "_MG_3482.jpg", feelings: "",
+    photos: ["_MG_3482.jpg","_MG_3490.jpg","_MG_3500.jpg","_MG_3510.jpg"] },
+  { name: "Maja Volkova",     initials: "MV", photo: "_MG_1516.jpg", feelings: "",
+    photos: ["_MG_1516.jpg","_MG_1495.jpg","_MG_1500.jpg","_MG_1502.jpg","_MG_1503.jpg","_MG_1518.jpg","_MG_1522.jpg"] },
 ];
 
 // Featured team photo shown full-width at top of gallery
@@ -1027,6 +1041,15 @@ export default function App() {
         </div>
       </section>
 
+      {/* ── TEAM PHOTO ── */}
+      <div style={{ width: "100%", cursor: "zoom-in" }} onClick={() => openLightbox([FEATURED_PHOTO], 0)}>
+        <img
+          src={"/" + FEATURED_PHOTO.file}
+          alt={FEATURED_PHOTO.caption}
+          style={{ width: "100%", aspectRatio: "21/8", objectFit: "cover", objectPosition: "center", display: "block" }}
+        />
+      </div>
+
       {/* ── ROAD TO BRONZE ── */}
       <section id="WBUC" style={{ padding: "8rem 3rem 5rem", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
@@ -1090,8 +1113,8 @@ export default function App() {
                             The final point &middot; two camera angles
                           </p>
                           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px" }}>
-                            <VideoClip src="bronze-moment-1.mp4" aspect="9/16" />
-                            <VideoClip src="bronze-moment-2.mp4" aspect="9/16" />
+                            <VideoClip src="reel-1.mp4" aspect="9/16" />
+                            <VideoClip src="reel-2.mp4" aspect="9/16" />
                           </div>
                         </div>
                       </div>
@@ -1188,16 +1211,16 @@ export default function App() {
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <Fade><SectionHeader num="05" label={t.s05} sub={t.s05sub} /></Fade>
 
-          {/* Highlight reels */}
+          {/* Celebration clips */}
           <Fade delay={0.05}>
             <p style={{ fontSize: "0.52rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "1rem" }}>{t.after_reels}</p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px", marginBottom: "1.5rem" }}>
-              <VideoClip src="reel-1.mp4" aspect="9/16" />
-              <VideoClip src="reel-2.mp4" aspect="9/16" />
+              <VideoClip src="bronze-moment-1.mp4" aspect="9/16" />
+              <VideoClip src="bronze-moment-2.mp4" aspect="9/16" />
             </div>
           </Fade>
 
-          {/* More celebration clips */}
+          {/* More clips */}
           <Fade delay={0.1}>
             <p style={{ fontSize: "0.52rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", margin: "2.5rem 0 1rem" }}>{t.after_more}</p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "6px" }}>
