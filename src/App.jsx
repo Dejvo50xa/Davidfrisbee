@@ -70,48 +70,48 @@ const TOURNAMENT_NARRATIVE = [
 ];
 
 const PLAYERS = [
-  { name:"Filip Halamka", initials:"FH", photo:"_MG_1940.jpg", club:"FUJ Prague", feelings:"",
-    bio:"One of the key organizers and leaders of the Czech Open ultimate scene. Filip has been instrumental in building the competitive infrastructure for Czech frisbee, co-leading the national open program alongside teammates.",
-    photos:["_MG_1940.jpg","_MG_2613.jpg","_MG_1476.jpg","_MG_1496.jpg","_MG_1497.jpg","_MG_1938.jpg","_MG_1945.jpg","_MG_1969.jpg","_MG_1970.jpg","_MG_1971.jpg","_MG_1533.jpg","_MG_1549.jpg","_MG_1901.jpg","_MG_2609.jpg","_MG_2672.jpg","_MG_3663.jpg"] },
-  { name:"Patrik Novak", initials:"PN", photo:"_MG_2004.jpg", club:"Czech Republic", feelings:"",
-    bio:"A long-standing member of the Czech ultimate community, Patrik competes at both club and national level. Known for his consistent play and commitment to the mixed division.",
-    photos:["_MG_2004.jpg","_MG_2565.jpg","_MG_2580.jpg","_MG_1472.jpg","_MG_1955.jpg","_MG_1992.jpg","_MG_2529.jpg","_MG_3537.jpg"] },
-  { name:"Jachym Hrusak", initials:"JH", photo:"_MG_1561.jpg", club:"Czech Republic", feelings:"",
-    bio:"Czech national team mixed division player competing at the highest international level. Jachym brings energy and athleticism to every point on the field.",
-    photos:["_MG_1561.jpg","_MG_3272.jpg","_MG_1502.jpg","_MG_1518.jpg","_MG_1991.jpg","_MG_1921.jpg","_MG_3292.jpg","_MG_3463.jpg","_MG_3465.jpg","_MG_3539.jpg","_MG_3513.jpg","_MG_3531.jpg","_MG_3662.jpg","_MG_3668.jpg"] },
-  { name:"Ondrej Rydlo", initials:"OR", photo:"_MG_3543.jpg", club:"Wall City Berlin", feelings:"",
-    bio:"One of the most accomplished Czech ultimate players, with over 12 years dedicated to the sport. Nicknamed \"Čégo\", he emerged as a top European player by 2019 and has played for Wall City Berlin. Off the field, he holds two degrees from Charles University and is pursuing a doctorate in neuroscience while working as a clinical psychologist.",
-    photos:["_MG_3543.jpg","_MG_2693.jpg","_MG_1503.jpg","_MG_1509.jpg","_MG_1522.jpg","_MG_1523.jpg","_MG_1524.jpg","_MG_1547.jpg","_MG_1963.jpg","_MG_1984.jpg","_MG_1985.jpg","_MG_2526.jpg","_MG_2531.jpg","_MG_2575.jpg","_MG_2589.jpg","_MG_2620.jpg","_MG_2621.jpg","_MG_3288.jpg","_MG_3291.jpg","_MG_3316.jpg","_MG_3317.jpg","_MG_3431.jpg","_MG_3433.jpg","_MG_3453.jpg","_MG_3483.jpg","_MG_3486.jpg","_MG_3506.jpg","_MG_1887.jpg","_MG_3303.jpg","_MG_3304.jpg","_MG_3450.jpg","_MG_3451.jpg","_MG_1462.jpg","_MG_3612.jpg","_MG_3670.jpg"] },
-  { name:"Vojtech Rybka", initials:"VR", photo:"_MG_2691.jpg", club:"Czech Republic", feelings:"",
-    bio:"Czech national team mixed division player. Vojtech is a versatile athlete who contributes both on offense and defense, bringing composure and experience to the team.",
-    photos:["_MG_2691.jpg","_MG_1471.jpg","_MG_1973.jpg","_MG_2001.jpg","_MG_2555.jpg","_MG_3610.jpg","_MG_3577.jpg","_MG_3500.jpg","_MG_3660.jpg","_MG_3546.jpg","_MG_3652.jpg"] },
-  { name:"Michal Schvob", initials:"MS", photo:"_MG_1469.jpg", club:"Czech Republic", feelings:"",
-    bio:"Czech national team mixed division player. Michal's presence on the field is defined by his defensive intensity and ability to create turnovers at critical moments.",
-    photos:["_MG_1469.jpg","_MG_1907.jpg","_MG_1908.jpg","_MG_1936.jpg","_MG_2552.jpg","_MG_3340.jpg","_MG_3436.jpg","_MG_3528.jpg","_MG_3656.jpg","_MG_3657.jpg","_MG_3607.jpg","_MG_2538.jpg"] },
-  { name:"David Novak", initials:"DN", photo:"_MG_2649.jpg", club:"FUJ Prague", feelings:"",
-    bio:"Player-coach and co-leader of the Czech national ultimate program. David (number 50, Flying Ultimate Junta) served as head coach at the 2023 European Championships and continues to shape Czech ultimate both on and off the field.",
-    photos:["_MG_2649.jpg","_MG_2544.jpg","_MG_2543.jpg","_MG_2545.jpg","_MG_2561.jpg","_MG_2598.jpg","_MG_2599.jpg","_MG_2644.jpg","_MG_2645.jpg","_MG_2646.jpg","_MG_2650.jpg","_MG_2651.jpg","_MG_2658.jpg","_MG_1997.jpg","_MG_2533.jpg","_MG_1506.jpg","_MG_2631.jpg","_MG_3294.jpg","_MG_3440.jpg","_MG_3475.jpg"] },
-  { name:"Sarah Nemeckova", initials:"SN", photo:"_MG_2667.jpg", club:"Czech Republic", feelings:"",
-    bio:"Czech national team mixed division player. Sarah is a dynamic presence on both sides of the disc, known for her cutting ability and competitive drive in big moments.",
-    photos:["_MG_2667.jpg","_MG_1539.jpg","_MG_2516.jpg","_MG_2525.jpg","_MG_1500.jpg","_MG_2665.jpg","_MG_2670.jpg","_MG_3334.jpg","_MG_3603.jpg","_MG_3571.jpg","_MG_1937.jpg","_MG_1928.jpg","_MG_3521.jpg","_MG_3681.jpg"] },
-  { name:"Tereza Mrazova", initials:"TM", photo:"_MG_3480.jpg", club:"BFD Shout (Bologna)", feelings:"",
+  { name:"Tereza Mrazova", initials:"TM", photo:"_MG_3635.jpg", club:"BFD Shout (Bologna)", feelings:"",
     bio:"Club captain and elite-level handler. Named MVP of the 2024 Czech Final Four tournament, Tereza plays for BFD Shout (Bologna) in European competitions. She studies biology and physical education at Charles University's Faculty of Education, and previously competed in volleyball before dedicating herself to ultimate.",
     photos:["_MG_3480.jpg","_MG_1459.jpg","_MG_1486.jpg","_MG_2592.jpg","_MG_2591.jpg","_MG_2681.jpg","_MG_3268.jpg","_MG_1488.jpg","_MG_1961.jpg","_MG_1903.jpg","_MG_1932.jpg","_MG_2559.jpg","_MG_2585.jpg","_MG_3321.jpg","_MG_3467.jpg","_MG_3469.jpg","_MG_3471.jpg","_MG_3470.jpg","_MG_3490.jpg","_MG_3635.jpg","_MG_3634.jpg","_MG_3618.jpg","_MG_2549.jpg","_MG_3527.jpg","_MG_3678.jpg"] },
+  { name:"Ondrej Rydlo", initials:"OR", photo:"_MG_3543.jpg", club:"Wall City Berlin", feelings:"",
+    bio:"One of the most accomplished Czech ultimate players, with over 12 years dedicated to the sport. Nicknamed \"\u010cégo\", he emerged as a top European player by 2019 and has played for Wall City Berlin. Off the field, he holds two degrees from Charles University and is pursuing a doctorate in neuroscience while working as a clinical psychologist.",
+    photos:["_MG_3543.jpg","_MG_2693.jpg","_MG_1503.jpg","_MG_1509.jpg","_MG_1522.jpg","_MG_1523.jpg","_MG_1524.jpg","_MG_1547.jpg","_MG_1963.jpg","_MG_1984.jpg","_MG_1985.jpg","_MG_2526.jpg","_MG_2531.jpg","_MG_2575.jpg","_MG_2589.jpg","_MG_2620.jpg","_MG_2621.jpg","_MG_3288.jpg","_MG_3291.jpg","_MG_3316.jpg","_MG_3317.jpg","_MG_3431.jpg","_MG_3433.jpg","_MG_3453.jpg","_MG_3483.jpg","_MG_3486.jpg","_MG_3506.jpg","_MG_1887.jpg","_MG_3303.jpg","_MG_3304.jpg","_MG_3450.jpg","_MG_3451.jpg","_MG_1462.jpg","_MG_3612.jpg","_MG_3670.jpg"] },
+  { name:"Sarah Nemeckova", initials:"SN", photo:"_MG_3334.jpg", club:"3SB", feelings:"",
+    bio:"Czech national team mixed division player. Sarah is a dynamic presence on both sides of the disc, known for her cutting ability and competitive drive in big moments.",
+    photos:["_MG_2667.jpg","_MG_1539.jpg","_MG_2516.jpg","_MG_2525.jpg","_MG_1500.jpg","_MG_2665.jpg","_MG_2670.jpg","_MG_3334.jpg","_MG_3603.jpg","_MG_3571.jpg","_MG_1937.jpg","_MG_1928.jpg","_MG_3521.jpg","_MG_3681.jpg"] },
+  { name:"Jachym Hrusak", initials:"JH", photo:"_MG_3272.jpg", club:"FUJ Prague", feelings:"",
+    bio:"Czech national team mixed division player competing at the highest international level. Jachym brings energy and athleticism to every point on the field.",
+    photos:["_MG_1561.jpg","_MG_3272.jpg","_MG_1502.jpg","_MG_1518.jpg","_MG_1991.jpg","_MG_1921.jpg","_MG_3292.jpg","_MG_3463.jpg","_MG_3465.jpg","_MG_3539.jpg","_MG_3513.jpg","_MG_3531.jpg","_MG_3662.jpg","_MG_3668.jpg"] },
+  { name:"Maja Volkova", initials:"MV", photo:"_MG_3611.jpg", club:"3SB", feelings:"",
+    bio:"Czech national team mixed division player. Maja brings an explosive playing style to the field — a dynamic athlete who can change the pace of a point in an instant.",
+    photos:["_MG_1516.jpg","_MG_1495.jpg","_MG_1513.jpg","_MG_3611.jpg","_MG_3494.jpg","_MG_3566.jpg"] },
+  { name:"David Novak", initials:"DN", photo:"_MG_3294.jpg", club:"FUJ Prague", feelings:"",
+    bio:"Player-coach and co-leader of the Czech national ultimate program. David (number 50, Flying Ultimate Junta) served as head coach at the 2023 European Championships and continues to shape Czech ultimate both on and off the field.",
+    photos:["_MG_2649.jpg","_MG_2544.jpg","_MG_2543.jpg","_MG_2545.jpg","_MG_2561.jpg","_MG_2598.jpg","_MG_2599.jpg","_MG_2644.jpg","_MG_2645.jpg","_MG_2646.jpg","_MG_2650.jpg","_MG_2651.jpg","_MG_2658.jpg","_MG_1997.jpg","_MG_2533.jpg","_MG_1506.jpg","_MG_2631.jpg","_MG_3294.jpg","_MG_3440.jpg","_MG_3475.jpg"] },
+  { name:"Klara Svecova", initials:"KS", photo:"_MG_3606.jpg", club:"Vychodni Blok", feelings:"",
+    bio:"Czech national team mixed division player. Klara's precision throwing and smart decision-making make her a reliable presence in the offensive system.",
+    photos:["_MG_3482.jpg","_MG_1474.jpg","_MG_1550.jpg","_MG_3606.jpg","_MG_3564.jpg","_MG_3522.jpg"] },
+  { name:"Vojtech Rybka", initials:"VR", photo:"_MG_2691.jpg", club:"Prague Devils", feelings:"",
+    bio:"Czech national team mixed division player. Vojtech is a versatile athlete who contributes both on offense and defense, bringing composure and experience to the team.",
+    photos:["_MG_2691.jpg","_MG_1471.jpg","_MG_1973.jpg","_MG_2001.jpg","_MG_2555.jpg","_MG_3610.jpg","_MG_3577.jpg","_MG_3500.jpg","_MG_3660.jpg","_MG_3546.jpg","_MG_3652.jpg"] },
+  { name:"Anicka Dvorakova", initials:"AD", photo:"_MG_3659.jpg", club:"3SB", feelings:"",
+    bio:"Czech national team mixed division player. Anicka is a composed and skilled cutter who thrives in high-pressure situations, consistently finding space against tight defensive coverage.",
+    photos:["_MG_3569.jpg","_MG_3559.jpg","_MG_3562.jpg","_MG_3565.jpg","_MG_3572.jpg","_MG_3576.jpg","_MG_2611.jpg","_MG_1489.jpg","_MG_1950.jpg","_MG_1904.jpg","_MG_1551.jpg","_MG_3520.jpg","_MG_3659.jpg","_MG_3601.jpg"] },
+  { name:"Filip Halamka", initials:"FH", photo:"_MG_2609.jpg", club:"FUJ Prague", feelings:"",
+    bio:"One of the key organizers and leaders of the Czech Open ultimate scene. Filip has been instrumental in building the competitive infrastructure for Czech frisbee, co-leading the national open program alongside teammates.",
+    photos:["_MG_1940.jpg","_MG_2613.jpg","_MG_1476.jpg","_MG_1496.jpg","_MG_1497.jpg","_MG_1938.jpg","_MG_1945.jpg","_MG_1969.jpg","_MG_1970.jpg","_MG_1971.jpg","_MG_1533.jpg","_MG_1549.jpg","_MG_1901.jpg","_MG_2609.jpg","_MG_2672.jpg","_MG_3663.jpg"] },
+  { name:"Bara Hrusakova", initials:"BH", photo:"_MG_3629.jpg", club:"FUJ Prague", feelings:"",
+    bio:"Czech national team mixed division player. Bara's athleticism and tenacity on the field make her one of the most impactful defenders in the lineup.",
+    photos:["_MG_3629.jpg","_MG_1564.jpg","_MG_1975.jpg","_MG_2550.jpg","_MG_2635.jpg","_MG_2675.jpg","_MG_3344.jpg","_MG_3461.jpg","_MG_3609.jpg","_MG_3503.jpg"] },
+  { name:"Patrik Novak", initials:"PN", photo:"_MG_2565.jpg", club:"Chlupatá Žaba", feelings:"",
+    bio:"A long-standing member of the Czech ultimate community, Patrik competes at both club and national level. Known for his consistent play and commitment to the mixed division.",
+    photos:["_MG_2004.jpg","_MG_2565.jpg","_MG_2580.jpg","_MG_1472.jpg","_MG_1955.jpg","_MG_1992.jpg","_MG_2529.jpg","_MG_3537.jpg"] },
   { name:"Tereza Havelcova", initials:"TH", photo:"_MG_2685.jpg", club:"JinX Midnight (Berlin)", feelings:"",
     bio:"Plays for JinX Midnight, a Berlin-based club competing in the European League. One of the Czech players making their mark internationally, Tereza brings European-level club experience to the national team setup.",
     photos:["_MG_2685.jpg","_MG_2676.jpg","_MG_1958.jpg","_MG_1959.jpg","_MG_1986.jpg","_MG_1989.jpg","_MG_1510.jpg","_MG_1884.jpg","_MG_2623.jpg","_MG_2636.jpg","_MG_2637.jpg","_MG_3312.jpg","_MG_3323.jpg","_MG_3324.jpg","_MG_3326.jpg","_MG_3429.jpg","_MG_3442.jpg","_MG_3445.jpg","_MG_3447.jpg","_MG_3456.jpg","_MG_3477.jpg","_MG_3478.jpg","_MG_3632.jpg","_MG_3573.jpg","_MG_3534.jpg","_MG_3551.jpg","_MG_3553.jpg","_MG_3555.jpg","_MG_3561.jpg","_MG_2542.jpg"] },
-  { name:"Bara Hrusakova", initials:"BH", photo:"_MG_3629.jpg", club:"Czech Republic", feelings:"",
-    bio:"Czech national team mixed division player. Bara's athleticism and tenacity on the field make her one of the most impactful defenders in the lineup.",
-    photos:["_MG_3629.jpg","_MG_1564.jpg","_MG_1975.jpg","_MG_2550.jpg","_MG_2635.jpg","_MG_2675.jpg","_MG_3344.jpg","_MG_3461.jpg","_MG_3609.jpg","_MG_3503.jpg"] },
-  { name:"Anicka Dvorakova", initials:"AD", photo:"_MG_3569.jpg", club:"Czech Republic", feelings:"",
-    bio:"Czech national team mixed division player. Anicka is a composed and skilled cutter who thrives in high-pressure situations, consistently finding space against tight defensive coverage.",
-    photos:["_MG_3569.jpg","_MG_3559.jpg","_MG_3562.jpg","_MG_3565.jpg","_MG_3572.jpg","_MG_3576.jpg","_MG_2611.jpg","_MG_1489.jpg","_MG_1950.jpg","_MG_1904.jpg","_MG_1551.jpg","_MG_3520.jpg","_MG_3659.jpg","_MG_3601.jpg"] },
-  { name:"Klara Svecova", initials:"KS", photo:"_MG_3482.jpg", club:"Czech Republic", feelings:"",
-    bio:"Czech national team mixed division player. Klara's precision throwing and smart decision-making make her a reliable presence in the offensive system.",
-    photos:["_MG_3482.jpg","_MG_1474.jpg","_MG_1550.jpg","_MG_3606.jpg","_MG_3564.jpg","_MG_3522.jpg"] },
-  { name:"Maja Volkova", initials:"MV", photo:"_MG_1516.jpg", club:"Czech Republic", feelings:"",
-    bio:"Czech national team mixed division player. Maja brings an explosive playing style to the field — a dynamic athlete who can change the pace of a point in an instant.",
-    photos:["_MG_1516.jpg","_MG_1495.jpg","_MG_1513.jpg","_MG_3611.jpg","_MG_3494.jpg","_MG_3566.jpg"] },
+  { name:"Michal Schvob", initials:"MS", photo:"_MG_1469.jpg", club:"Atruc", feelings:"",
+    bio:"Czech national team mixed division player. Michal's presence on the field is defined by his defensive intensity and ability to create turnovers at critical moments.",
+    photos:["_MG_1469.jpg","_MG_1907.jpg","_MG_1908.jpg","_MG_1936.jpg","_MG_2552.jpg","_MG_3340.jpg","_MG_3436.jpg","_MG_3528.jpg","_MG_3656.jpg","_MG_3657.jpg","_MG_3607.jpg","_MG_2538.jpg"] },
 ];
 
 // Featured team photo shown full-width at top of gallery
@@ -573,10 +573,15 @@ function PlayerCard({ player, index, onClick }) {
           )}
           <div style={{ position: "absolute", inset: 0, background: hovered ? "rgba(100,150,255,0.08)" : "transparent", transition: "background 0.3s" }} />
         </div>
-        <div style={{ padding: "0.9rem 1rem", background: hovered ? "rgba(100,150,255,0.06)" : "rgba(245,244,240,0.92)", borderTop: "1px solid rgba(0,0,0,0.04)", transition: "background 0.3s" }}>
-          <p style={{ fontSize: "0.78rem", fontWeight: hovered ? 400 : 300, color: hovered ? "rgba(10,10,10,0.9)" : "rgba(10,10,10,0.7)", letterSpacing: "0.02em", transition: "all 0.2s", lineHeight: 1.2 }}>
+        <div style={{ padding: "0.75rem 1rem 0.85rem", background: hovered ? "rgba(100,150,255,0.06)" : "rgba(245,244,240,0.92)", borderTop: "1px solid rgba(0,0,0,0.04)", transition: "background 0.3s" }}>
+          <p style={{ fontSize: "0.78rem", fontWeight: hovered ? 400 : 300, color: hovered ? "rgba(10,10,10,0.9)" : "rgba(10,10,10,0.7)", letterSpacing: "0.02em", transition: "all 0.2s", lineHeight: 1.2, marginBottom: player.club ? "0.25rem" : 0 }}>
             {player.name}
           </p>
+          {player.club && (
+            <p style={{ fontSize: "0.55rem", fontWeight: 300, color: "rgba(10,10,10,0.3)", letterSpacing: "0.08em", textTransform: "uppercase", lineHeight: 1, fontFamily: "monospace" }}>
+              {player.club}
+            </p>
+          )}
         </div>
       </div>
     </Fade>
@@ -715,7 +720,16 @@ function PlayerPage({ player, playerIndex, hasPrev, hasNext, onPrev, onNext, onB
         </span>
       </div>
 
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "4rem 3rem 8rem" }}>
+      {/* Full-bleed hero photo */}
+      <div style={{ width: "100%", height: "48vh", overflow: "hidden", position: "relative", marginTop: 0 }}>
+        <img
+          src={"/" + player.photo}
+          alt={player.name}
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
+        />
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "65%", background: "linear-gradient(to top, rgba(245,244,240,1) 0%, rgba(245,244,240,0) 100%)" }} />
+      </div>
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: "2rem 3rem 8rem" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "start" }}>
 
           {/* Profile photo */}
@@ -978,6 +992,7 @@ export default function App() {
           <p style={{ fontSize: "0.72rem", fontWeight: 300, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(10,10,10,0.35)", animation: "fi 1s 0.2s both" }}>{t.hero_event}</p>
           <h1 style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.02em", animation: "fi 1s 0.35s both" }}>Czech Republic</h1>
           <h1 style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.02em", color: "#ffaa33", animation: "fi 1s 0.5s both" }}>Bronze Medal.</h1>
+          <p style={{ fontSize: "0.78rem", fontWeight: 300, letterSpacing: "0.06em", color: "rgba(255,255,255,0.32)", marginTop: "0.6rem", animation: "fi 1s 0.65s both", maxWidth: 420, textAlign: "center", lineHeight: 1.7 }}>13 games. 9 wins. One point decided everything.</p>
           <div style={{ display: "flex", alignItems: "center", gap: "2.5rem", marginTop: "1.5rem", animation: "fi 1s 0.7s both" }}>
             {[["13", t.hero_games], ["9W \u2013 4L", t.hero_record], ["12\u201311", t.hero_final]].map(([v, l]) => (
               <div key={l} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.3rem" }}>
@@ -1000,6 +1015,10 @@ export default function App() {
           alt={TEAM_PHOTO_HERO.caption}
           style={{ width: "100%", height: "70vh", objectFit: "cover", objectPosition: "center top", display: "block" }}
         />
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.85rem 2.5rem", borderBottom: "1px solid rgba(0,0,0,0.05)" }}>
+        <span style={{ fontSize: "0.56rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(10,10,10,0.28)", fontFamily: "monospace" }}>Czech Mixed · Portimão, Portugal · November 2025</span>
+        <span style={{ fontSize: "0.56rem", letterSpacing: "0.12em", color: "rgba(10,10,10,0.14)", fontFamily: "monospace" }}>World Beach Ultimate Championship</span>
       </div>
 
       {/* ── ROAD TO BRONZE ── */}
@@ -1028,8 +1047,13 @@ export default function App() {
                       <div style={{ background: "rgba(255,170,51,0.04)", border: "1px solid rgba(255,170,51,0.2)", borderRadius: "8px", padding: "2rem", position: "relative", overflow: "hidden" }}>
                         <div style={{ position: "absolute", top: 0, right: 0, width: 200, height: 200, background: "radial-gradient(circle, rgba(255,170,51,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
                         <p style={{ fontSize: "0.55rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,170,51,0.5)", marginBottom: "0.7rem" }}>{block.label}</p>
-                        <h3 style={{ fontSize: "1.25rem", fontWeight: 400, color: "#fff", marginBottom: "1rem", lineHeight: 1.25 }}>{block.heading}</h3>
-                        <p style={{ fontSize: "0.85rem", color: "rgba(10,10,10,0.65)", lineHeight: 1.9, marginBottom: "1.8rem" }}>{block.body}</p>
+                        <h3 style={{ fontSize: "1.25rem", fontWeight: 400, color: "rgba(10,10,10,0.88)", marginBottom: "1rem", lineHeight: 1.25 }}>{block.heading}</h3>
+                        <p style={{ fontSize: "0.85rem", color: "rgba(10,10,10,0.65)", lineHeight: 1.9, marginBottom: "1.4rem" }}>{block.body}</p>
+                        <div style={{ borderLeft: "3px solid rgba(255,170,51,0.45)", paddingLeft: "1.2rem", marginBottom: "1.8rem" }}>
+                          <p style={{ fontSize: "0.98rem", fontWeight: 300, color: "rgba(10,10,10,0.45)", lineHeight: 1.65, fontStyle: "italic" }}>
+                            &#8220;The final score, 12&#8211;9, flatters Canada.&#8221;
+                          </p>
+                        </div>
                         <div style={{ marginBottom: "1.8rem", borderRadius: "4px", overflow: "hidden", background: "rgba(0,0,0,0.3)", padding: "1rem 0.5rem 0.5rem" }}>
                           <ScoreChart data={CANADA_GAME} annotations={[
                             { i: 10, label: "5\u20135", cze: true },
@@ -1049,7 +1073,7 @@ export default function App() {
                     ) : block.isBronze ? (
                       <div>
                         <p style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(10,10,10,0.2)", marginBottom: "0.5rem" }}>{block.label}</p>
-                        <h3 style={{ fontSize: "1.05rem", fontWeight: 400, color: "rgba(255,220,150,0.95)", marginBottom: "0.9rem", lineHeight: 1.3 }}>{block.heading}</h3>
+                        <h3 style={{ fontSize: "1.05rem", fontWeight: 400, color: "#b8720a", marginBottom: "0.9rem", lineHeight: 1.3 }}>{block.heading}</h3>
                         <p style={{ fontSize: "0.84rem", color: "rgba(10,10,10,0.6)", lineHeight: 1.9, marginBottom: "1.8rem" }}>{block.body}</p>
                         <div style={{ borderRadius: "4px", overflow: "hidden", background: "rgba(0,0,0,0.02)", border: "1px solid rgba(0,0,0,0.05)", padding: "1rem 0.5rem 0.5rem", marginBottom: "2rem" }}>
                           <ScoreChart data={BRONZE_GAME} annotations={[
@@ -1073,7 +1097,7 @@ export default function App() {
                     ) : (
                       <div>
                         <p style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(10,10,10,0.2)", marginBottom: "0.5rem" }}>{block.label}</p>
-                        <h3 style={{ fontSize: "1.05rem", fontWeight: 400, color: "#fff", marginBottom: "0.9rem", lineHeight: 1.3 }}>{block.heading}</h3>
+                        <h3 style={{ fontSize: "1.05rem", fontWeight: 400, color: "rgba(10,10,10,0.75)", marginBottom: "0.9rem", lineHeight: 1.3 }}>{block.heading}</h3>
                         <p style={{ fontSize: "0.84rem", color: "rgba(10,10,10,0.6)", lineHeight: 1.9 }}>{block.body}</p>
                       </div>
                     )}
@@ -1144,7 +1168,7 @@ export default function App() {
 
           {/* Masonry grid */}
           <Fade delay={0.1}>
-            <p style={{ fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(10,10,10,0.18)", margin: "1.5rem 0 1.2rem" }}>
+            <p style={{ fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(10,10,10,0.38)", margin: "1.5rem 0 1.2rem" }}>
               {t.gallery_hint}
             </p>
             <div style={{ columnCount: 4, columnGap: "3px" }}>
