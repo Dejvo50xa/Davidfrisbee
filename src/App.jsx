@@ -70,20 +70,20 @@ const TOURNAMENT_NARRATIVE = [
 ];
 
 const PLAYERS = [
-  { name: "Filip Halamka",    initials: "FH", feelings: "" },
-  { name: "Patrik Novak",     initials: "PN", feelings: "" },
-  { name: "Jachym Hrusak",    initials: "JH", feelings: "" },
-  { name: "Ondrej Rydlo",     initials: "OR", feelings: "" },
-  { name: "Vojtech Rybka",    initials: "VR", feelings: "" },
-  { name: "Michal Schvob",    initials: "MS", feelings: "" },
-  { name: "David Novak",      initials: "DN", feelings: "" },
-  { name: "Sarah Nemeckova",  initials: "SN", feelings: "" },
-  { name: "Tereza Mrazova",   initials: "TM", feelings: "" },
-  { name: "Tereza Havelcova", initials: "TH", feelings: "" },
-  { name: "Bara Hrusakova",   initials: "BH", feelings: "" },
-  { name: "Anicka Dvorakova", initials: "AD", feelings: "" },
-  { name: "Klara Svecova",    initials: "KS", feelings: "" },
-  { name: "Maja Volkova",     initials: "MV", feelings: "" },
+  { name: "Filip Halamka",    initials: "FH", photo: "_MG_1940.jpg", feelings: "" },
+  { name: "Patrik Novak",     initials: "PN", photo: "_MG_2004.jpg", feelings: "" },
+  { name: "Jachym Hrusak",    initials: "JH", photo: "_MG_1561.jpg", feelings: "" },
+  { name: "Ondrej Rydlo",     initials: "OR", photo: "_MG_3543.jpg", feelings: "" },
+  { name: "Vojtech Rybka",    initials: "VR", photo: "_MG_2691.jpg", feelings: "" },
+  { name: "Michal Schvob",    initials: "MS", photo: "_MG_1469.jpg", feelings: "" },
+  { name: "David Novak",      initials: "DN", photo: "_MG_2649.jpg", feelings: "" },
+  { name: "Sarah Nemeckova",  initials: "SN", photo: "_MG_2667.jpg", feelings: "" },
+  { name: "Tereza Mrazova",   initials: "TM", photo: "_MG_3480.jpg", feelings: "" },
+  { name: "Tereza Havelcova", initials: "TH", photo: "_MG_2685.jpg", feelings: "" },
+  { name: "Bara Hrusakova",   initials: "BH", photo: "_MG_3629.jpg", feelings: "" },
+  { name: "Anicka Dvorakova", initials: "AD", photo: "_MG_3569.jpg", feelings: "" },
+  { name: "Klara Svecova",    initials: "KS", photo: "_MG_3482.jpg", feelings: "" },
+  { name: "Maja Volkova",     initials: "MV", photo: "_MG_1516.jpg", feelings: "" },
 ];
 
 // Featured team photo shown full-width at top of gallery
@@ -421,15 +421,14 @@ function PlayerCard({ player, index, onClick }) {
         style={{ position: "relative", aspectRatio: "3/4", background: hovered ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.6)", cursor: "pointer", transition: "background 0.3s", overflow: "hidden", display: "flex", flexDirection: "column" }}
       >
         <div style={{ flex: 1, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          {!imgError ? (
+          {player.photo && !imgError ? (
             <img
-              src={`/players/${player.name.toLowerCase().replace(/\s+/g, "_")}.jpg`}
+              src={"/" + player.photo}
               alt={player.name}
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }}
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", transition: "transform 0.5s ease", transform: hovered ? "scale(1.05)" : "scale(1)" }}
               onError={() => setImgError(true)}
             />
-          ) : null}
-          {imgError && (
+          ) : (
             <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "rgba(255,255,255,0.02)" }}>
               <span style={{ fontSize: "2rem", fontWeight: 200, letterSpacing: "0.08em", color: "rgba(255,255,255,0.1)", fontFamily: "monospace" }}>{player.initials}</span>
             </div>
@@ -509,15 +508,14 @@ function PlayerPage({ player, onBack }) {
           {/* Photo */}
           <Fade>
             <div style={{ position: "relative", aspectRatio: "3/4", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "4px", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              {!imgError ? (
+              {player.photo && !imgError ? (
                 <img
-                  src={`/players/${player.name.toLowerCase().replace(/\s+/g, "_")}.jpg`}
+                  src={"/" + player.photo}
                   alt={player.name}
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }}
                   onError={() => setImgError(true)}
                 />
-              ) : null}
-              {imgError && (
+              ) : (
                 <div style={{ textAlign: "center" }}>
                   <div style={{ fontSize: "3.5rem", fontWeight: 200, letterSpacing: "0.1em", color: "rgba(255,255,255,0.08)", fontFamily: "monospace", lineHeight: 1 }}>{player.initials}</div>
                   <div style={{ fontSize: "0.55rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.1)", marginTop: "0.8rem" }}>Photo coming soon</div>
