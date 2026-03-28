@@ -76,7 +76,7 @@ const PLAYERS = [
   { name:"Ondrej Rydlo", initials:"OR", photo:"_MG_3543.jpg", club:"Wall City Berlin", feelings:"",
     bio:"One of the most accomplished Czech ultimate players, with over 12 years dedicated to the sport. Nicknamed \"\u010cégo\", he emerged as a top European player by 2019 and has played for Wall City Berlin. Off the field, he holds two degrees from Charles University and is pursuing a doctorate in neuroscience while working as a clinical psychologist.",
     photos:["_MG_3543.jpg","_MG_2693.jpg","_MG_1503.jpg","_MG_1509.jpg","_MG_1522.jpg","_MG_1523.jpg","_MG_1524.jpg","_MG_1547.jpg","_MG_1963.jpg","_MG_1984.jpg","_MG_1985.jpg","_MG_2526.jpg","_MG_2531.jpg","_MG_2575.jpg","_MG_2589.jpg","_MG_2620.jpg","_MG_2621.jpg","_MG_3288.jpg","_MG_3291.jpg","_MG_3316.jpg","_MG_3317.jpg","_MG_3431.jpg","_MG_3433.jpg","_MG_3453.jpg","_MG_3483.jpg","_MG_3486.jpg","_MG_3506.jpg","_MG_1887.jpg","_MG_3303.jpg","_MG_3304.jpg","_MG_3450.jpg","_MG_3451.jpg","_MG_1462.jpg","_MG_3612.jpg","_MG_3670.jpg"] },
-  { name:"Sarah Nemeckova", initials:"SN", photo:"_MG_3334.jpg", club:"3SB", feelings:"",
+  { name:"Sarah Nemeckova", initials:"SN", photo:"_MG_1928.jpg", club:"3SB", feelings:"",
     bio:"Czech national team mixed division player. Sarah is a dynamic presence on both sides of the disc, known for her cutting ability and competitive drive in big moments.",
     photos:["_MG_2667.jpg","_MG_1539.jpg","_MG_2516.jpg","_MG_2525.jpg","_MG_1500.jpg","_MG_2665.jpg","_MG_2670.jpg","_MG_3334.jpg","_MG_3603.jpg","_MG_3571.jpg","_MG_1937.jpg","_MG_1928.jpg","_MG_3521.jpg","_MG_3681.jpg"] },
   { name:"Jachym Hrusak", initials:"JH", photo:"_MG_3272.jpg", club:"FUJ Prague", feelings:"",
@@ -85,7 +85,7 @@ const PLAYERS = [
   { name:"Maja Volkova", initials:"MV", photo:"_MG_3611.jpg", club:"3SB", feelings:"",
     bio:"Czech national team mixed division player. Maja brings an explosive playing style to the field — a dynamic athlete who can change the pace of a point in an instant.",
     photos:["_MG_1516.jpg","_MG_1495.jpg","_MG_1513.jpg","_MG_3611.jpg","_MG_3494.jpg","_MG_3566.jpg"] },
-  { name:"David Novak", initials:"DN", photo:"_MG_3294.jpg", club:"FUJ Prague", feelings:"",
+  { name:"David Novak", initials:"DN", photo:"_MG_2651.jpg", club:"FUJ Prague", feelings:"",
     bio:"Player-coach and co-leader of the Czech national ultimate program. David (number 50, Flying Ultimate Junta) served as head coach at the 2023 European Championships and continues to shape Czech ultimate both on and off the field.",
     photos:["_MG_2649.jpg","_MG_2544.jpg","_MG_2543.jpg","_MG_2545.jpg","_MG_2561.jpg","_MG_2598.jpg","_MG_2599.jpg","_MG_2644.jpg","_MG_2645.jpg","_MG_2646.jpg","_MG_2650.jpg","_MG_2651.jpg","_MG_2658.jpg","_MG_1997.jpg","_MG_2533.jpg","_MG_1506.jpg","_MG_2631.jpg","_MG_3294.jpg","_MG_3440.jpg","_MG_3475.jpg"] },
   { name:"Klara Svecova", initials:"KS", photo:"_MG_3606.jpg", club:"Vychodni Blok", feelings:"",
@@ -94,10 +94,10 @@ const PLAYERS = [
   { name:"Vojtech Rybka", initials:"VR", photo:"_MG_2691.jpg", club:"Prague Devils", feelings:"",
     bio:"Czech national team mixed division player. Vojtech is a versatile athlete who contributes both on offense and defense, bringing composure and experience to the team.",
     photos:["_MG_2691.jpg","_MG_1471.jpg","_MG_1973.jpg","_MG_2001.jpg","_MG_2555.jpg","_MG_3610.jpg","_MG_3577.jpg","_MG_3500.jpg","_MG_3660.jpg","_MG_3546.jpg","_MG_3652.jpg"] },
-  { name:"Anicka Dvorakova", initials:"AD", photo:"_MG_3659.jpg", club:"3SB", feelings:"",
+  { name:"Anicka Dvorakova", initials:"AD", photo:"_MG_3576.jpg", club:"3SB", feelings:"",
     bio:"Czech national team mixed division player. Anicka is a composed and skilled cutter who thrives in high-pressure situations, consistently finding space against tight defensive coverage.",
     photos:["_MG_3569.jpg","_MG_3559.jpg","_MG_3562.jpg","_MG_3565.jpg","_MG_3572.jpg","_MG_3576.jpg","_MG_2611.jpg","_MG_1489.jpg","_MG_1950.jpg","_MG_1904.jpg","_MG_1551.jpg","_MG_3520.jpg","_MG_3659.jpg","_MG_3601.jpg"] },
-  { name:"Filip Halamka", initials:"FH", photo:"_MG_2609.jpg", club:"FUJ Prague", feelings:"",
+  { name:"Filip Halamka", initials:"FH", photo:"_MG_2672.jpg", club:"FUJ Prague", feelings:"",
     bio:"One of the key organizers and leaders of the Czech Open ultimate scene. Filip has been instrumental in building the competitive infrastructure for Czech frisbee, co-leading the national open program alongside teammates.",
     photos:["_MG_1940.jpg","_MG_2613.jpg","_MG_1476.jpg","_MG_1496.jpg","_MG_1497.jpg","_MG_1938.jpg","_MG_1945.jpg","_MG_1969.jpg","_MG_1970.jpg","_MG_1971.jpg","_MG_1533.jpg","_MG_1549.jpg","_MG_1901.jpg","_MG_2609.jpg","_MG_2672.jpg","_MG_3663.jpg"] },
   { name:"Bara Hrusakova", initials:"BH", photo:"_MG_3629.jpg", club:"FUJ Prague", feelings:"",
@@ -980,23 +980,21 @@ export default function App() {
       <Nav />
 
       {/* ── HERO ── */}
-      <section style={{ position: "relative", width: "100%", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden", background: "#0a0a0a" }}>
-        <Globe />
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 600, height: 300, background: "radial-gradient(ellipse, rgba(255,140,30,0.06) 0%, transparent 70%)", pointerEvents: "none", zIndex: 1 }} />
+      <section style={{ position: "relative", width: "100%", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden", background: "#f5f4f0" }}>
         <div style={{ position: "relative", zIndex: 2, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "1.2rem", animation: "fi 1s 0.1s both" }}>
-            <div style={{ width: 20, height: 1, background: "rgba(255,170,51,0.4)" }} />
-            <p style={{ fontSize: "0.65rem", fontWeight: 400, letterSpacing: "0.4em", textTransform: "uppercase", color: "rgba(255,170,51,0.7)" }}>Portim&#227;o, Portugal &middot; 2025</p>
-            <div style={{ width: 20, height: 1, background: "rgba(255,170,51,0.4)" }} />
+            <div style={{ width: 20, height: 1, background: "rgba(255,170,51,0.5)" }} />
+            <p style={{ fontSize: "0.65rem", fontWeight: 400, letterSpacing: "0.4em", textTransform: "uppercase", color: "rgba(200,120,20,0.85)" }}>Portimão, Portugal · 2025</p>
+            <div style={{ width: 20, height: 1, background: "rgba(255,170,51,0.5)" }} />
           </div>
           <p style={{ fontSize: "0.72rem", fontWeight: 300, letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(10,10,10,0.35)", animation: "fi 1s 0.2s both" }}>{t.hero_event}</p>
-          <h1 style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.02em", animation: "fi 1s 0.35s both" }}>Czech Republic</h1>
-          <h1 style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.02em", color: "#ffaa33", animation: "fi 1s 0.5s both" }}>Bronze Medal.</h1>
-          <p style={{ fontSize: "0.78rem", fontWeight: 300, letterSpacing: "0.06em", color: "rgba(255,255,255,0.32)", marginTop: "0.6rem", animation: "fi 1s 0.65s both", maxWidth: 420, textAlign: "center", lineHeight: 1.7 }}>13 games. 9 wins. One point decided everything.</p>
+          <h1 style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.02em", color: "rgba(10,10,10,0.88)", animation: "fi 1s 0.35s both" }}>Czech Republic</h1>
+          <h1 style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 300, lineHeight: 1.0, letterSpacing: "-0.02em", color: "#c07a00", animation: "fi 1s 0.5s both" }}>Bronze Medal.</h1>
+          <p style={{ fontSize: "0.78rem", fontWeight: 300, letterSpacing: "0.06em", color: "rgba(10,10,10,0.38)", marginTop: "0.6rem", animation: "fi 1s 0.65s both", maxWidth: 420, textAlign: "center", lineHeight: 1.7 }}>13 games. 9 wins. One point decided everything.</p>
           <div style={{ display: "flex", alignItems: "center", gap: "2.5rem", marginTop: "1.5rem", animation: "fi 1s 0.7s both" }}>
-            {[["13", t.hero_games], ["9W \u2013 4L", t.hero_record], ["12\u201311", t.hero_final]].map(([v, l]) => (
+            {[["13", t.hero_games], ["9W – 4L", t.hero_record], ["12–11", t.hero_final]].map(([v, l]) => (
               <div key={l} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.3rem" }}>
-                <span style={{ fontSize: "1.3rem", fontWeight: 300, color: "rgba(10,10,10,0.9)", letterSpacing: "-0.01em", lineHeight: 1 }}>{v}</span>
+                <span style={{ fontSize: "1.3rem", fontWeight: 300, color: "rgba(10,10,10,0.82)", letterSpacing: "-0.01em", lineHeight: 1 }}>{v}</span>
                 <span style={{ fontSize: "0.55rem", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(10,10,10,0.25)" }}>{l}</span>
               </div>
             ))}
@@ -1109,36 +1107,40 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── RESULTS ── */}
-      <section id="Results" style={{ padding: "6rem 3rem 7rem", borderTop: "1px solid rgba(0,0,0,0.07)", background: "rgba(0,0,0,0.01)" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+            {/* ── RESULTS ── */}
+      <section id="Results" style={{ padding: "6rem 3rem 7rem", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
+        <div style={{ maxWidth: 640, margin: "0 auto" }}>
           <Fade><SectionHeader num="02" label={t.s02} sub={t.s02sub} /></Fade>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            {resultsByPhase.map(({ phase, games }) => {
+          <div style={{ marginTop: "2.5rem" }}>
+            {resultsByPhase.map(({ phase, games }, pi) => {
               const isBronze = phase === "Bronze Medal";
-              const wins = games.filter(g => g.us > g.them).length;
-              const total = games.length;
               return (
-                <Fade key={phase} delay={0.05}>
-                  <div style={{ border: `1px solid ${isBronze ? "rgba(255,170,51,0.3)" : "rgba(0,0,0,0.06)"}`, borderRadius: "6px", overflow: "hidden" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.75rem 1.4rem", borderBottom: "1px solid rgba(0,0,0,0.04)", background: isBronze ? "rgba(255,170,51,0.06)" : "rgba(0,0,0,0.02)" }}>
-                      <span style={{ fontSize: "0.6rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: isBronze ? "#ffaa33" : "rgba(100,150,255,0.75)" }}>
-                        {isBronze ? "\uD83E\uDD49 " : ""}{phase}
-                      </span>
-                      {!isBronze && <span style={{ fontFamily: "monospace", fontSize: "0.6rem", color: "rgba(10,10,10,0.2)" }}>{wins}W \u2013 {total - wins}L</span>}
-                    </div>
+                <Fade key={phase} delay={pi * 0.05}>
+                  <div style={{ marginBottom: "2rem" }}>
+                    <p style={{ fontSize: "0.52rem", fontWeight: 500, letterSpacing: "0.3em", textTransform: "uppercase", color: isBronze ? "rgba(212,135,10,0.7)" : "rgba(10,10,10,0.22)", marginBottom: "0.6rem", fontFamily: "monospace" }}>
+                      {phase}
+                    </p>
                     {games.map((g, i) => {
                       const win = g.us > g.them;
-                      const isCanada = g.opponent === "Canada";
                       return (
-                        <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 80px 28px", alignItems: "center", gap: "0.5rem", padding: `${isCanada ? "0.85rem" : "0.7rem"} 1.4rem`, borderBottom: i < games.length - 1 ? "1px solid rgba(0,0,0,0.04)" : "none", background: g.final ? "rgba(255,170,51,0.03)" : isCanada ? "rgba(100,150,255,0.025)" : "transparent" }}>
-                          <div>
-                            <span style={{ fontSize: "0.8rem", color: g.final || isCanada ? "rgba(10,10,10,0.9)" : "rgba(10,10,10,0.65)", fontWeight: g.final || isCanada ? 400 : 300, display: "block" }}>{g.opponent}</span>
-                            {isCanada && <span style={{ fontSize: "0.56rem", letterSpacing: "0.1em", color: "rgba(255,170,51,0.55)", display: "block", marginTop: "2px" }}>Undefeated \u00b7 1 offensive turnover</span>}
-                          </div>
-                          <span style={{ fontFamily: "monospace", fontSize: "0.92rem", fontWeight: 500, color: g.final ? "#ffaa33" : win ? "#6699ff" : "rgba(10,10,10,0.3)", letterSpacing: "0.03em", textAlign: "right" }}>{g.us}\u2013{g.them}</span>
-                          <span style={{ fontSize: "0.58rem", fontWeight: 500, color: g.final ? "#ffaa33" : win ? "rgba(80,200,100,0.85)" : "rgba(255,70,70,0.55)", textAlign: "right", letterSpacing: "0.05em" }}>
-                            {g.final ? "\uD83E\uDD49" : win ? "W" : "L"}
+                        <div key={i} style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "baseline",
+                          padding: "0.5rem 0",
+                          borderBottom: "1px solid rgba(0,0,0,0.04)",
+                        }}>
+                          <span style={{ fontSize: "0.85rem", fontWeight: g.final ? 400 : 300, color: g.final ? "rgba(10,10,10,0.88)" : "rgba(10,10,10,0.6)" }}>
+                            {g.opponent}
+                          </span>
+                          <span style={{
+                            fontFamily: "monospace",
+                            fontSize: "0.88rem",
+                            fontWeight: g.final ? 500 : 400,
+                            letterSpacing: "0.04em",
+                            color: g.final ? "#d4870a" : win ? "rgba(10,10,10,0.75)" : "rgba(10,10,10,0.28)",
+                          }}>
+                            {g.us} – {g.them}
                           </span>
                         </div>
                       );
