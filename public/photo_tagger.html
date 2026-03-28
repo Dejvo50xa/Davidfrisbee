@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Tagger · Czech Mixed</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0a0a0a; color:#fff; font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif; }
+
+  #top { position:sticky; top:0; z-index:100; background:#111; border-bottom:1px solid #222; padding:10px 14px; }
+  #top h1 { font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#888; margin-bottom:8px; }
+
+  #players { display:flex; flex-wrap:wrap; gap:6px; }
+  .pbutton {
+    display:flex; align-items:center; gap:6px;
+    padding:5px 10px 5px 5px;
+    border-radius:4px; border:1px solid #333; cursor:pointer;
+    background:#1a1a1a; transition:all .15s; user-select:none;
+  }
+  .pbutton:hover { border-color:#555; }
+  .pbutton.active { border-color:var(--c); background:color-mix(in srgb, var(--c) 18%, #000); }
+  .pbutton .avatar {
+    width:28px; height:28px; border-radius:3px; object-fit:cover; object-position:top;
+    border:1px solid #333; flex-shrink:0;
+  }
+  .pbutton .label { font-size:11px; font-weight:500; white-space:nowrap; }
+  .pbutton .count { font-size:10px; color:#666; margin-left:2px; }
+  .pbutton.active .count { color:var(--c); }
+
+  #toolbar { display:flex; align-items:center; gap:10px; margin-top:8px; }
+  #filter-btns { display:flex; gap:4px; }
+  .fbtn { font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:4px 8px;
+    background:#1a1a1a; border:1px solid #333; color:#666; border-radius:3px; cursor:pointer; }
+  .fbtn.active { background:#333; color:#ccc; border-color:#555; }
+  #search { background:#1a1a1a; border:1px solid #333; border-radius:3px; padding:4px 8px;
+    color:#ccc; font-size:11px; width:130px; }
+  #export-btn { margin-left:auto; padding:6px 16px; background:#ffaa33; color:#000;
+    border:none; border-radius:4px; font-size:11px; font-weight:700; cursor:pointer;
+    letter-spacing:.1em; text-transform:uppercase; }
+  #export-btn:hover { background:#ffc066; }
+  #clear-btn { padding:5px 12px; background:transparent; color:#666;
+    border:1px solid #333; border-radius:4px; font-size:11px; cursor:pointer; }
+  #clear-btn:hover { color:#f55; border-color:#f55; }
+  #status { font-size:10px; color:#666; letter-spacing:.05em; }
+
+  #grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:3px; padding:10px; }
+
+  .tile { position:relative; cursor:pointer; border-radius:3px; overflow:hidden;
+    border:2px solid transparent; transition:border-color .1s, opacity .15s; aspect-ratio:2/3; background:#1a1a1a; }
+  .tile img { width:100%; height:100%; object-fit:cover; object-position:top; display:block;
+    transition:opacity .2s; }
+  .tile:hover { border-color:#555; }
+  .tile.tagged { border-color:var(--c); }
+  .tile.tagged img { opacity:.75; }
+  .tile.dimmed { opacity:.3; }
+
+  .badge {
+    position:absolute; top:4px; right:4px;
+    padding:2px 5px; border-radius:2px;
+    font-size:9px; font-weight:700; letter-spacing:.05em;
+    background:var(--c); color:#000;
+    pointer-events:none;
+  }
+  .fname {
+    position:absolute; bottom:0; left:0; right:0;
+    font-size:8px; color:rgba(255,255,255,.5); padding:2px 4px;
+    background:rgba(0,0,0,.6); letter-spacing:.04em;
+    pointer-events:none;
+  }
+
+  /* Modal / export */
+  #modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.9); z-index:200;
+    align-items:center; justify-content:center; }
+  #modal.open { display:flex; }
+  #modal-inner { background:#111; border:1px solid #333; border-radius:8px;
+    padding:24px; max-width:700px; width:95%; max-height:85vh; overflow:auto; }
+  #modal-inner h2 { font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#888; margin-bottom:16px; }
+  #modal-code { background:#0a0a0a; border:1px solid #222; border-radius:4px; padding:14px;
+    font-family:'Menlo','Courier New',monospace; font-size:11px; line-height:1.6;
+    white-space:pre; overflow-x:auto; color:#ccc; max-height:50vh; overflow-y:auto; }
+  #copy-btn { margin-top:12px; padding:8px 20px; background:#6699ff; color:#000;
+    border:none; border-radius:4px; font-size:11px; font-weight:700; cursor:pointer; letter-spacing:.1em; }
+  #copy-btn:hover { background:#88aaff; }
+  #close-btn { margin-top:12px; margin-left:10px; padding:7px 16px; background:transparent; color:#888;
+    border:1px solid #333; border-radius:4px; font-size:11px; cursor:pointer; }
+  #close-btn:hover { color:#fff; }
+  #modal-note { margin-top:10px; font-size:10px; color:#666; line-height:1.6; }
+</style>
+</head>
+<body>
+
+<div id="top">
+  <h1>Photo Tagger &middot; Czech Mixed &middot; <span id="total-count">0</span> tagged</h1>
+  <div id="players"></div>
+  <div id="toolbar">
+    <div id="filter-btns">
+      <button class="fbtn active" data-filter="all">All</button>
+      <button class="fbtn" data-filter="tagged">Tagged</button>
+      <button class="fbtn" data-filter="untagged">Untagged</button>
+    </div>
+    <input id="search" type="text" placeholder="Search filename…">
+    <span id="status"></span>
+    <button id="clear-btn" onclick="clearSelected()">Clear player tags</button>
+    <button id="export-btn" onclick="openExport()">Export code →</button>
+  </div>
+</div>
+
+<div id="grid"></div>
+
+<div id="modal">
+  <div id="modal-inner">
+    <h2>Copy this into App.jsx → replace the PLAYERS array</h2>
+    <div id="modal-code"></div>
+    <div>
+      <button id="copy-btn" onclick="copyCode()">Copy to clipboard</button>
+      <button id="close-btn" onclick="closeExport()">Close</button>
+    </div>
+    <div id="modal-note">
+      Paste this into App.jsx, replacing the existing <code>const PLAYERS = [...];</code> block.<br>
+      Then run <code>bash ~/Desktop/push_mix.sh</code> to deploy.
+    </div>
+  </div>
+</div>
+
+<script>
+const PLAYERS = [
+  { name:"Filip Halamka",    initials:"FH", photo:"_MG_1940.jpg", color:"#ff6b6b" },
+  { name:"Patrik Novak",     initials:"PN", photo:"_MG_2004.jpg", color:"#ff9f43" },
+  { name:"Jachym Hrusak",    initials:"JH", photo:"_MG_1561.jpg", color:"#ffd93d" },
+  { name:"Ondrej Rydlo",     initials:"OR", photo:"_MG_3543.jpg", color:"#6bcb77" },
+  { name:"Vojtech Rybka",    initials:"VR", photo:"_MG_2691.jpg", color:"#4d96ff" },
+  { name:"Michal Schvob",    initials:"MS", photo:"_MG_1469.jpg", color:"#c77dff" },
+  { name:"David Novak",      initials:"DN", photo:"_MG_2649.jpg", color:"#ff70a6" },
+  { name:"Sarah Nemeckova",  initials:"SN", photo:"_MG_2667.jpg", color:"#70d6ff" },
+  { name:"Tereza Mrazova",   initials:"TM", photo:"_MG_3480.jpg", color:"#e9c46a" },
+  { name:"Tereza Havelcova", initials:"TH", photo:"_MG_2685.jpg", color:"#f4a261" },
+  { name:"Bara Hrusakova",   initials:"BH", photo:"_MG_3629.jpg", color:"#a8dadc" },
+  { name:"Anicka Dvorakova", initials:"AD", photo:"_MG_3569.jpg", color:"#b5e48c" },
+  { name:"Klara Svecova",    initials:"KS", photo:"_MG_3482.jpg", color:"#ffb4a2" },
+  { name:"Maja Volkova",     initials:"MV", photo:"_MG_1516.jpg", color:"#d4a5a5" },
+];
+
+// All 454 photos
+const ALL_PHOTOS = ["_MG_1452.jpg","_MG_1453.jpg","_MG_1454.jpg","_MG_1456.jpg","_MG_1457.jpg","_MG_1459.jpg","_MG_1462.jpg","_MG_1469.jpg","_MG_1471.jpg","_MG_1472.jpg","_MG_1474.jpg","_MG_1476.jpg","_MG_1486.jpg","_MG_1488.jpg","_MG_1489.jpg","_MG_1495.jpg","_MG_1496.jpg","_MG_1497.jpg","_MG_1500.jpg","_MG_1502.jpg","_MG_1503.jpg","_MG_1505.jpg","_MG_1506.jpg","_MG_1509.jpg","_MG_1510.jpg","_MG_1513.jpg","_MG_1516.jpg","_MG_1518.jpg","_MG_1522.jpg","_MG_1523.jpg","_MG_1524.jpg","_MG_1533.jpg","_MG_1538.jpg","_MG_1539.jpg","_MG_1544.jpg","_MG_1547.jpg","_MG_1549.jpg","_MG_1550.jpg","_MG_1551.jpg","_MG_1552.jpg","_MG_1553.jpg","_MG_1554.jpg","_MG_1556.jpg","_MG_1557.jpg","_MG_1558.jpg","_MG_1560.jpg","_MG_1561.jpg","_MG_1562.jpg","_MG_1564.jpg","_MG_1565.jpg","_MG_1572.jpg","_MG_1577.jpg","_MG_1579.jpg","_MG_1580.jpg","_MG_1582.jpg","_MG_1585.jpg","_MG_1588.jpg","_MG_1589.jpg","_MG_1590.jpg","_MG_1592.jpg","_MG_1596.jpg","_MG_1600.jpg","_MG_1602.jpg","_MG_1603.jpg","_MG_1604.jpg","_MG_1605.jpg","_MG_1606.jpg","_MG_1607.jpg","_MG_1608.jpg","_MG_1609.jpg","_MG_1613.jpg","_MG_1622.jpg","_MG_1623.jpg","_MG_1624.jpg","_MG_1628.jpg","_MG_1629.jpg","_MG_1630.jpg","_MG_1632.jpg","_MG_1633.jpg","_MG_1634.jpg","_MG_1637.jpg","_MG_1641.jpg","_MG_1642.jpg","_MG_1646.jpg","_MG_1648.jpg","_MG_1653.jpg","_MG_1656.jpg","_MG_1658.jpg","_MG_1660.jpg","_MG_1662.jpg","_MG_1663.jpg","_MG_1665.jpg","_MG_1667.jpg","_MG_1669.jpg","_MG_1670.jpg","_MG_1674.jpg","_MG_1679.jpg","_MG_1680.jpg","_MG_1683.jpg","_MG_1686.jpg","_MG_1768.jpg","_MG_1770.jpg","_MG_1774.jpg","_MG_1778.jpg","_MG_1781.jpg","_MG_1783.jpg","_MG_1791.jpg","_MG_1792.jpg","_MG_1799.jpg","_MG_1806.jpg","_MG_1809.jpg","_MG_1810.jpg","_MG_1813.jpg","_MG_1814.jpg","_MG_1818.jpg","_MG_1832.jpg","_MG_1833.jpg","_MG_1835.jpg","_MG_1842.jpg","_MG_1845.jpg","_MG_1848.jpg","_MG_1854.jpg","_MG_1856.jpg","_MG_1857.jpg","_MG_1859.jpg","_MG_1861.jpg","_MG_1866.jpg","_MG_1868.jpg","_MG_1869.jpg","_MG_1872.jpg","_MG_1875.jpg","_MG_1878.jpg","_MG_1882.jpg","_MG_1884.jpg","_MG_1887.jpg","_MG_1890.jpg","_MG_1901.jpg","_MG_1903.jpg","_MG_1904.jpg","_MG_1907.jpg","_MG_1908.jpg","_MG_1915.jpg","_MG_1921.jpg","_MG_1925.jpg","_MG_1927.jpg","_MG_1928.jpg","_MG_1932.jpg","_MG_1934.jpg","_MG_1936.jpg","_MG_1937.jpg","_MG_1938.jpg","_MG_1940.jpg","_MG_1945.jpg","_MG_1950.jpg","_MG_1955.jpg","_MG_1958.jpg","_MG_1959.jpg","_MG_1961.jpg","_MG_1963.jpg","_MG_1969.jpg","_MG_1970.jpg","_MG_1971.jpg","_MG_1973.jpg","_MG_1975.jpg","_MG_1984.jpg","_MG_1985.jpg","_MG_1986.jpg","_MG_1989.jpg","_MG_1991.jpg","_MG_1992.jpg","_MG_1997.jpg","_MG_2001.jpg","_MG_2003.jpg","_MG_2004.jpg","_MG_2516.jpg","_MG_2525.jpg","_MG_2526.jpg","_MG_2529.jpg","_MG_2531.jpg","_MG_2533.jpg","_MG_2538.jpg","_MG_2542.jpg","_MG_2543.jpg","_MG_2544.jpg","_MG_2545.jpg","_MG_2549.jpg","_MG_2550.jpg","_MG_2552.jpg","_MG_2554.jpg","_MG_2555.jpg","_MG_2559.jpg","_MG_2561.jpg","_MG_2565.jpg","_MG_2575.jpg","_MG_2578.jpg","_MG_2580.jpg","_MG_2585.jpg","_MG_2589.jpg","_MG_2591.jpg","_MG_2592.jpg","_MG_2593.jpg","_MG_2598.jpg","_MG_2599.jpg","_MG_2601.jpg","_MG_2602.jpg","_MG_2605.jpg","_MG_2609.jpg","_MG_2611.jpg","_MG_2613.jpg","_MG_2620.jpg","_MG_2621.jpg","_MG_2623.jpg","_MG_2631.jpg","_MG_2635.jpg","_MG_2636.jpg","_MG_2637.jpg","_MG_2644.jpg","_MG_2645.jpg","_MG_2646.jpg","_MG_2649.jpg","_MG_2650.jpg","_MG_2651.jpg","_MG_2658.jpg","_MG_2659.jpg","_MG_2663.jpg","_MG_2665.jpg","_MG_2667.jpg","_MG_2670.jpg","_MG_2671.jpg","_MG_2672.jpg","_MG_2675.jpg","_MG_2676.jpg","_MG_2681.jpg","_MG_2685.jpg","_MG_2691.jpg","_MG_2693.jpg","_MG_2695.jpg","_MG_2706.jpg","_MG_2715.jpg","_MG_2730.jpg","_MG_2780.jpg","_MG_2798.jpg","_MG_2799.jpg","_MG_2846.jpg","_MG_2850.jpg","_MG_2853.jpg","_MG_2860.jpg","_MG_2869.jpg","_MG_2873.jpg","_MG_2917.jpg","_MG_2931.jpg","_MG_2938.jpg","_MG_2981.jpg","_MG_2987.jpg","_MG_3013.jpg","_MG_3043.jpg","_MG_3055.jpg","_MG_3056.jpg","_MG_3063.jpg","_MG_3110.jpg","_MG_3124.jpg","_MG_3143.jpg","_MG_3151.jpg","_MG_3199.jpg","_MG_3211.jpg","_MG_3215.jpg","_MG_3219.jpg","_MG_3249.jpg","_MG_3252.jpg","_MG_3254.jpg","_MG_3256.jpg","_MG_3261.jpg","_MG_3264.jpg","_MG_3265.jpg","_MG_3268.jpg","_MG_3272.jpg","_MG_3286.jpg","_MG_3288.jpg","_MG_3291.jpg","_MG_3292.jpg","_MG_3294.jpg","_MG_3296.jpg","_MG_3303.jpg","_MG_3304.jpg","_MG_3312.jpg","_MG_3316.jpg","_MG_3317.jpg","_MG_3321.jpg","_MG_3323.jpg","_MG_3324.jpg","_MG_3326.jpg","_MG_3334.jpg","_MG_3340.jpg","_MG_3344.jpg","_MG_3346.jpg","_MG_3351.jpg","_MG_3353.jpg","_MG_3355.jpg","_MG_3360.jpg","_MG_3362.jpg","_MG_3365.jpg","_MG_3366.jpg","_MG_3369.jpg","_MG_3374.jpg","_MG_3376.jpg","_MG_3380.jpg","_MG_3381.jpg","_MG_3383.jpg","_MG_3384.jpg","_MG_3385.jpg","_MG_3388.jpg","_MG_3389.jpg","_MG_3390.jpg","_MG_3393.jpg","_MG_3398.jpg","_MG_3400.jpg","_MG_3403.jpg","_MG_3406.jpg","_MG_3407.jpg","_MG_3410.jpg","_MG_3414.jpg","_MG_3417.jpg","_MG_3421.jpg","_MG_3422.jpg","_MG_3423.jpg","_MG_3429.jpg","_MG_3431.jpg","_MG_3433.jpg","_MG_3436.jpg","_MG_3440.jpg","_MG_3442.jpg","_MG_3445.jpg","_MG_3447.jpg","_MG_3450.jpg","_MG_3451.jpg","_MG_3453.jpg","_MG_3456.jpg","_MG_3461.jpg","_MG_3463.jpg","_MG_3465.jpg","_MG_3467.jpg","_MG_3469.jpg","_MG_3470.jpg","_MG_3471.jpg","_MG_3475.jpg","_MG_3477.jpg","_MG_3478.jpg","_MG_3480.jpg","_MG_3482.jpg","_MG_3483.jpg","_MG_3486.jpg","_MG_3487.jpg","_MG_3489.jpg","_MG_3490.jpg","_MG_3494.jpg","_MG_3497.jpg","_MG_3500.jpg","_MG_3502.jpg","_MG_3503.jpg","_MG_3506.jpg","_MG_3510.jpg","_MG_3513.jpg","_MG_3515.jpg","_MG_3517.jpg","_MG_3518.jpg","_MG_3520.jpg","_MG_3521.jpg","_MG_3522.jpg","_MG_3527.jpg","_MG_3528.jpg","_MG_3531.jpg","_MG_3532.jpg","_MG_3534.jpg","_MG_3537.jpg","_MG_3539.jpg","_MG_3543.jpg","_MG_3544.jpg","_MG_3546.jpg","_MG_3548.jpg","_MG_3549.jpg","_MG_3551.jpg","_MG_3553.jpg","_MG_3555.jpg","_MG_3559.jpg","_MG_3561.jpg","_MG_3562.jpg","_MG_3564.jpg","_MG_3565.jpg","_MG_3566.jpg","_MG_3569.jpg","_MG_3571.jpg","_MG_3572.jpg","_MG_3573.jpg","_MG_3576.jpg","_MG_3577.jpg","_MG_3583.jpg","_MG_3584.jpg","_MG_3586.jpg","_MG_3588.jpg","_MG_3589.jpg","_MG_3593.jpg","_MG_3594.jpg","_MG_3595.jpg","_MG_3597.jpg","_MG_3598.jpg","_MG_3600.jpg","_MG_3601.jpg","_MG_3603.jpg","_MG_3606.jpg","_MG_3607.jpg","_MG_3609.jpg","_MG_3610.jpg","_MG_3611.jpg","_MG_3612.jpg","_MG_3618.jpg","_MG_3619.jpg","_MG_3623.jpg","_MG_3625.jpg","_MG_3629.jpg","_MG_3632.jpg","_MG_3634.jpg","_MG_3635.jpg","_MG_3640.jpg","_MG_3643.jpg","_MG_3649.jpg","_MG_3650.jpg","_MG_3652.jpg","_MG_3654.jpg","_MG_3656.jpg","_MG_3657.jpg","_MG_3659.jpg","_MG_3660.jpg","_MG_3662.jpg","_MG_3663.jpg","_MG_3668.jpg","_MG_3670.jpg","_MG_3674.jpg","_MG_3678.jpg","_MG_3680.jpg","_MG_3681.jpg","_MG_3683.jpg","_MG_3684.jpg","_MG_3688.jpg","_MG_3690.jpg","_MG_3696.jpg","_MG_3700.jpg","_MG_3703.jpg","_MG_3704.jpg","_MG_3706.jpg","_MG_3707.jpg","_MG_3708.jpg","_MG_3709.jpg","_MG_3714.jpg","_MG_3717.jpg"];
+
+// Pre-load current assignments
+const DEFAULT = {
+  "Filip Halamka":    ["_MG_1940.jpg","_MG_1921.jpg","_MG_1936.jpg","_MG_1938.jpg","_MG_1945.jpg","_MG_1950.jpg"],
+  "Patrik Novak":     ["_MG_2004.jpg","_MG_1971.jpg","_MG_1975.jpg","_MG_1989.jpg"],
+  "Jachym Hrusak":    ["_MG_1561.jpg","_MG_1549.jpg","_MG_1550.jpg","_MG_1551.jpg","_MG_1554.jpg","_MG_1564.jpg"],
+  "Ondrej Rydlo":     ["_MG_3543.jpg","_MG_3534.jpg","_MG_3539.jpg","_MG_3546.jpg","_MG_3553.jpg"],
+  "Vojtech Rybka":    ["_MG_2691.jpg","_MG_2676.jpg","_MG_2681.jpg"],
+  "Michal Schvob":    ["_MG_1469.jpg","_MG_1462.jpg","_MG_1471.jpg","_MG_1472.jpg","_MG_1474.jpg"],
+  "David Novak":      ["_MG_2649.jpg","_MG_2644.jpg","_MG_2645.jpg","_MG_2646.jpg","_MG_2650.jpg"],
+  "Sarah Nemeckova":  ["_MG_2667.jpg","_MG_2663.jpg","_MG_2665.jpg","_MG_2670.jpg","_MG_2672.jpg"],
+  "Tereza Mrazova":   ["_MG_3480.jpg","_MG_3471.jpg","_MG_3478.jpg"],
+  "Tereza Havelcova": ["_MG_2685.jpg","_MG_2658.jpg","_MG_2663.jpg"],
+  "Bara Hrusakova":   ["_MG_3629.jpg","_MG_3632.jpg","_MG_3634.jpg","_MG_3640.jpg"],
+  "Anicka Dvorakova": ["_MG_3569.jpg","_MG_3559.jpg","_MG_3562.jpg","_MG_3565.jpg","_MG_3572.jpg","_MG_3576.jpg"],
+  "Klara Svecova":    ["_MG_3482.jpg","_MG_3490.jpg","_MG_3500.jpg","_MG_3510.jpg"],
+  "Maja Volkova":     ["_MG_1516.jpg","_MG_1495.jpg","_MG_1500.jpg","_MG_1502.jpg","_MG_1503.jpg","_MG_1518.jpg","_MG_1522.jpg"],
+};
+
+// State: photo → player name (or null)
+let assignments = {};
+let selectedPlayer = null;
+let filter = 'all';
+let searchQ = '';
+
+const STORE_KEY = 'czech_mixed_tags_v1';
+
+function load() {
+  try {
+    const saved = localStorage.getItem(STORE_KEY);
+    if (saved) { assignments = JSON.parse(saved); return; }
+  } catch(e) {}
+  // First run: load defaults
+  assignments = {};
+  Object.entries(DEFAULT).forEach(([name, photos]) => {
+    photos.forEach(p => { assignments[p] = name; });
+  });
+  save();
+}
+
+function save() {
+  localStorage.setItem(STORE_KEY, JSON.stringify(assignments));
+}
+
+function getPlayer(name) { return PLAYERS.find(p => p.name === name); }
+function playerColor(name) { const p = getPlayer(name); return p ? p.color : '#fff'; }
+
+// ── Render players bar ──
+function renderPlayers() {
+  const bar = document.getElementById('players');
+  bar.innerHTML = '';
+  PLAYERS.forEach(p => {
+    const count = Object.values(assignments).filter(v => v === p.name).length;
+    const btn = document.createElement('div');
+    btn.className = 'pbutton' + (selectedPlayer === p.name ? ' active' : '');
+    btn.style.setProperty('--c', p.color);
+    btn.innerHTML = `<img class="avatar" src="${p.photo}" onerror="this.style.background='#333';this.style.display='none'">
+      <span class="label">${p.name.split(' ')[0]}</span>
+      <span class="count">${count}</span>`;
+    btn.addEventListener('click', () => {
+      selectedPlayer = selectedPlayer === p.name ? null : p.name;
+      renderPlayers();
+      renderStatus();
+      updateGridDim();
+    });
+    bar.appendChild(btn);
+  });
+  document.getElementById('total-count').textContent = Object.keys(assignments).length;
+}
+
+// ── Render photo grid ──
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  const visPhotos = ALL_PHOTOS.filter(f => {
+    if (searchQ && !f.toLowerCase().includes(searchQ)) return false;
+    if (filter === 'tagged')   return assignments[f];
+    if (filter === 'untagged') return !assignments[f];
+    return true;
+  });
+  document.getElementById('status').textContent = `${visPhotos.length} photos`;
+
+  visPhotos.forEach(file => {
+    const owner = assignments[file];
+    const p = owner ? getPlayer(owner) : null;
+    const tile = document.createElement('div');
+    tile.className = 'tile' + (owner ? ' tagged' : '');
+    tile.dataset.file = file;
+    if (p) tile.style.setProperty('--c', p.color);
+    tile.innerHTML = `<img src="${file}" loading="lazy" onerror="this.parentElement.style.opacity='.3'">
+      ${p ? `<div class="badge">${p.initials}</div>` : ''}
+      <div class="fname">${file.replace('_MG_','').replace('.jpg','')}</div>`;
+    tile.addEventListener('click', () => toggleTag(file, tile));
+    grid.appendChild(tile);
+  });
+  updateGridDim();
+}
+
+function toggleTag(file, tile) {
+  if (!selectedPlayer) { alert('Select a player first (click their name above)'); return; }
+  if (assignments[file] === selectedPlayer) {
+    delete assignments[file];
+  } else {
+    assignments[file] = selectedPlayer;
+  }
+  save();
+  // Update tile in place
+  const owner = assignments[file];
+  const p = owner ? getPlayer(owner) : null;
+  tile.className = 'tile' + (owner ? ' tagged' : '');
+  tile.style.setProperty('--c', p ? p.color : 'transparent');
+  tile.querySelector('.badge')?.remove();
+  tile.querySelector('.fname')?.remove();
+  if (p) {
+    const b = document.createElement('div'); b.className = 'badge'; b.textContent = p.initials; tile.appendChild(b);
+  }
+  const fn = document.createElement('div'); fn.className = 'fname'; fn.textContent = file.replace('_MG_','').replace('.jpg',''); tile.appendChild(fn);
+  updateGridDim();
+  renderPlayers();
+}
+
+function updateGridDim() {
+  document.querySelectorAll('.tile').forEach(tile => {
+    const owner = assignments[tile.dataset.file];
+    if (!selectedPlayer) { tile.classList.remove('dimmed'); return; }
+    tile.classList.toggle('dimmed', owner && owner !== selectedPlayer);
+  });
+}
+
+function clearSelected() {
+  if (!selectedPlayer) { alert('Select a player first'); return; }
+  if (!confirm(`Remove all tags for ${selectedPlayer}?`)) return;
+  Object.keys(assignments).forEach(f => { if (assignments[f] === selectedPlayer) delete assignments[f]; });
+  save();
+  renderGrid();
+  renderPlayers();
+}
+
+// ── Export ──
+function openExport() {
+  const byPlayer = {};
+  PLAYERS.forEach(p => {
+    // Always include profile photo first
+    byPlayer[p.name] = [p.photo];
+  });
+  Object.entries(assignments).forEach(([file, name]) => {
+    if (!byPlayer[name]) return;
+    if (!byPlayer[name].includes(file)) byPlayer[name].push(file);
+  });
+
+  const lines = PLAYERS.map(p => {
+    const photos = byPlayer[p.name] || [p.photo];
+    const pArr = JSON.stringify(photos).replace(/,/g,', ');
+    return `  { name:"${p.name}", initials:"${p.initials}", photo:"${p.photo}", feelings:"",\n    photos:${pArr} }`;
+  });
+  const code = `const PLAYERS = [\n${lines.join(',\n')},\n];`;
+  document.getElementById('modal-code').textContent = code;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeExport() { document.getElementById('modal').classList.remove('open'); }
+
+function copyCode() {
+  const text = document.getElementById('modal-code').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copied!'; btn.style.background = '#6bcb77';
+    setTimeout(() => { btn.textContent = 'Copy to clipboard'; btn.style.background = '#6699ff'; }, 2000);
+  });
+}
+
+function renderStatus() {
+  const s = selectedPlayer ? `✏ Tagging: ${selectedPlayer}` : 'No player selected';
+  document.getElementById('status').textContent = s;
+}
+
+// ── Filter buttons ──
+document.querySelectorAll('.fbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    filter = btn.dataset.filter;
+    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGrid();
+  });
+});
+
+document.getElementById('search').addEventListener('input', e => {
+  searchQ = e.target.value.trim().toLowerCase();
+  renderGrid();
+});
+
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal')) closeExport();
+});
+
+// ── Init ──
+load();
+renderPlayers();
+renderGrid();
+renderStatus();
+</script>
+</body>
+</html>
